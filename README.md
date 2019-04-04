@@ -1,4 +1,4 @@
-# CAL-Proj
+# TripMate: Multimodal Travel Planner
 Code developed for the CAL project
 
 
