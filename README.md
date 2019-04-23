@@ -8,5 +8,8 @@ Code developed for the CAL project
 * **Contributors** : [Bernardo Santos](https://github.com/bernas670), [Vítor Gonçalves](https://github.com/torrinheira)
 * **License** : [MIT](LICENSE)
 
-## First Delivery
-* [First Report](https://docs.google.com/document/d/1sKDSdBhetOS91CgDa0tw8xdnZuE3Y1huWEobfepskms/edit)
+
+## Documents
+
+  ## First Delivery
+  * [First Report](https://docs.google.com/document/d/1sKDSdBhetOS91CgDa0tw8xdnZuE3Y1huWEobfepskms/edit)
