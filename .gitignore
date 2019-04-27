@@ -1,0 +1,13 @@
+# ignore all files
+*
+
+# unignore directories
+!src/
+!logos/
+
+# unignore files
+!.gitignore
+!*.cpp
+!*.h
+!LICENSE
+!README.md
