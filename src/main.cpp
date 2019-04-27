@@ -4,7 +4,9 @@
 
 int main(void) {
 
-    std::cout << "Hello\n";
+typedef unsigned short int vertexID;
+
+    std::cout << sizeof(vertexID);
 
     return 0;
 }

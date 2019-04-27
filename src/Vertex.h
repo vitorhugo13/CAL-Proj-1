@@ -4,21 +4,18 @@
 #include <vector>
 #include <string>
 
+#include "macros.h"
 #include "Edge.h"
 
-
-
-#define INF std::numeric_limits<int>::max()
 
 
 template <class T>
 class Vertex {
     
 private:
-    static unsigned int id;
+    static vertexID id;
     std::string info;
     std::vector<Edge<T>> paths;
-    unsigned int x, y;
     int cost = INF;
 
 public:
