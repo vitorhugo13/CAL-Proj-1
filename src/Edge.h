@@ -1,46 +1,72 @@
 #ifndef EDGE_H
 #define EDGE_H
 
+
 #include <vector>
 
 #include "Vertex.h"
+#include "Vehicle.h"
+#include "Time.h"
 
 
-
-template <class T>
 class Edge {
 
 protected:
-    Vertex<T> *srcVertex, *destVertex;
+    Vertex *srcVertex, *destVertex;
 
 public:
-    virtual int getTravelTime(int currTime);
+    Edge(Vertex *src, Vertex *dest) {
+        this->srcVertex = src;
+        this->destVertex = dest;
+    }
+    virtual Time getTravelTime(int startTime);
 
 };
 
 
-template <class T>
-class FootPath : public Edge<T> {
+class FootPath : public Edge {
 
 private:
-    int travelTime;
+    Time travelTime;
 
 public:
-    int getTravelTime(int currTime) { return travelTime; }
+    FootPath(Vertex *src, Vertex *dest, Time travelTime) : Edge(src, dest) {
+        this->travelTime = travelTime;
+    }
+    Time getTravelTime(int startTime) { return travelTime; }
 
 };
 
 
-template <class T>
-class VehiclePath : public Edge<T> {
+class VehiclePath : public Edge {
 
 private:
+
     std::vector<Vehicle *> vehicles;
+    unsigned int chosenVehicle;
+
 
 public:
-    int getTravelTime(int currTime) {
 
+    VehiclePath(Vertex *src, Vertex *dest) : Edge(src, dest) {
+        vehicles = {};
+        chosenVehicle = 0;
+    }
+
+    Time getTravelTime(int startTime) {
         
+        Time minTime(TIME_LIMIT);
+
+        for (size_t i = 0; i < vehicles.size(); i++) {
+            Time tmpTime = vehicles[i]->getTripTime(srcVertex->getID(), destVertex->getID(), startTime);
+
+            if (tmpTime < minTime) {
+                minTime = tmpTime;
+                chosenVehicle = i;
+            }
+        }
+
+        return minTime;
     }
 
 };

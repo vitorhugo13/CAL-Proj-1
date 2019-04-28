@@ -5,14 +5,15 @@
 
 #include "Vertex.h"
 
-template <class T>
 class Graph {
 
 private:
-    std::vector<Vertex<T> *> vertexSet;
+    std::vector<Vertex *> vertexSet;
 
 public:
-
+    bool addVertex(const Vertex &vertex);
+    bool addEdge(const Edge &edge);
+    bool addVehicle(const Vehicle &vehicle);
 
 };
 

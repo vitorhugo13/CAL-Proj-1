@@ -10,14 +10,13 @@
 #include "Time.h"
 
 
-
 struct timetable {
     std::vector<Time> forward;
     std::vector<Time> backwards;
 };
 
 /**
- * @brief 
+ * @brief   Vehicle class. A vehicle can be either a bus or an underground
  * 
  */
 class Vehicle {
