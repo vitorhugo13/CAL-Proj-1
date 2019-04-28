@@ -11,7 +11,7 @@
 class Vertex {
     
 private:
-    static vertexID id = 0;
+    static vertexID id = 0; // this might be removed if the stops have unique values ( info )
     std::string info;
     std::vector<Edge> paths;
     bool visited = false;
@@ -36,7 +36,9 @@ public:
     std::string getInfo() { return info; }
     Time getTime() { return time; }
     Vertex *getPath() { return path; }
-    
+
+    friend class Graph;
+    friend class MutablePriorityQueue;
 };
 
 

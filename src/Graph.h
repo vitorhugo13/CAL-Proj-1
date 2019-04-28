@@ -4,6 +4,8 @@
 #include <vector>
 
 #include "Vertex.h"
+#include "Edge.h"
+#include "MutablePriorityQueue.h"
 
 class Graph {
 
