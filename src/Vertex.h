@@ -6,6 +6,7 @@
 
 #include "macros.h"
 #include "Edge.h"
+#include "Coordinates.h"
 
 
 class Vertex {
@@ -13,6 +14,7 @@ class Vertex {
 private:
     static vertexID id = 0; // this might be removed if the stops have unique values ( info )
     std::string info;
+    Coordinates coords;
     std::vector<Edge> paths;
     bool visited = false;
     Time time = Time(0);
@@ -21,10 +23,11 @@ private:
 
 public:
 
-    Vertex(std::string info) {
+    Vertex(std::string info, long int x, long int y) {
         this->id++;
         this->info = info;
         this->paths = {};
+        this->coords = Coordinates(x, y);
     }
     
     vertexID getID() { return id; }
