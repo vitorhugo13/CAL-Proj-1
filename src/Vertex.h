@@ -15,7 +15,7 @@ private:
     std::string info;
     std::vector<Edge> paths;
     bool visited = false;
-    Time time(0);
+    Time time = Time(0);
     Vertex *path = NULL;
     int queueIndex = 0;
 
@@ -34,7 +34,9 @@ public:
     }
 
     std::string getInfo() { return info; }
-
+    Time getTime() { return time; }
+    Vertex *getPath() { return path; }
+    
 };
 
 
