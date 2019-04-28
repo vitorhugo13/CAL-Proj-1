@@ -26,7 +26,7 @@ public:
         time.erase(2, 1);
         this->time = stoi(time, nullptr, 10);
     }
-    
+
     Time(unsigned short int time) {
         //Quando se inicializa o objeto com recurso a um inteiro, o numero nao pode comecar com 0, ex 06:30 -> 0630   00:00 -> 0   22:30 -> 2230
         this->time = time;
@@ -97,6 +97,7 @@ public:
 
         return result;
     }
+
     Time operator+=(Time const &obj) {
         unsigned char carry = 0;
         unsigned short int thisHours, thisMinutes, objHours, objMinutes;
@@ -129,6 +130,7 @@ public:
 
         return this->time = result;
     }
+
     Time operator-=(Time const &obj) {
         unsigned char carry = 0;
         short int thisHours, thisMinutes, objHours, objMinutes;
@@ -159,8 +161,29 @@ public:
 
         return this->time = result;
     }
+
     void operator=(Time const &obj) {
         this->time = obj.time;
+    }
+
+    bool operator==(Time const &obj) {
+        return this->time == obj.time;
+    }
+
+    bool operator<(Time const &obj) {
+        return this->time < obj.time;
+    }
+
+    bool operator<=(Time const &obj) {
+        return this->time <= obj.time;
+    }
+
+    bool operator>(Time const &obj) {
+        return this->time > obj.time;
+    }
+
+    bool operator>=(Time const &obj) {
+        return this->time >= obj.time;
     }
 };
 
