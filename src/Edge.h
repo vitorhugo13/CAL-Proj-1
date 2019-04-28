@@ -12,14 +12,20 @@
 class Edge {
 
 protected:
+
     Vertex *srcVertex, *destVertex;
 
 public:
+
     Edge(Vertex *src, Vertex *dest) {
         this->srcVertex = src;
         this->destVertex = dest;
     }
+
     virtual Time getTravelTime(int startTime);
+
+    friend class Graph;
+    friend class Vertex;
 
 };
 
