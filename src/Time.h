@@ -28,6 +28,9 @@ public:
     Time operator-(Time const &obj);
     Time operator-=(Time const &obj);
     Time operator+=(Time const &obj);
+    Time operator=(Time const &obj) {
+        return obj;
+    }
 };
 
 
