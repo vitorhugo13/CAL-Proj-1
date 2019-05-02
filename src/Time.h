@@ -113,7 +113,6 @@ public:
             carry = 1;
             thisMinutes = thisMinutes - 60;
         }
-        std::cout << "soma dos minutos :" << thisMinutes << std::endl;
 
         if(carry == 1) {
             thisHours += objHours + 1;
@@ -122,7 +121,6 @@ public:
             thisHours += objHours;
             if(thisHours > 23)  thisHours = 0 + (thisHours - 24);
         }
-        std::cout << "soma das horas :" << thisHours << std::endl;
 
         unsigned short int result = thisHours * 100 + thisMinutes;
 
