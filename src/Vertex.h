@@ -12,7 +12,7 @@
 class Vertex {
     
 private:
-    static vertexID id = 0; // this might be removed if the stops have unique values ( info )
+
     std::string info;
     Coordinates coords;
     std::vector<Edge> paths;
@@ -24,7 +24,6 @@ private:
 public:
 
     Vertex(std::string info, long int x, long int y) {
-        this->id++;
         this->info = info;
         this->paths = {};
         this->coords = Coordinates(x, y);

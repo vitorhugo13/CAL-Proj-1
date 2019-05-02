@@ -23,10 +23,9 @@ class Vehicle {
 
 private:
 
-    static vehicleID id = 0;
-    std::string info;
-    std::vector<vertexID> route; // stop ids in the order the bus visits them
-    std::map<vertexID, struct timetable> timetable;
+    std::string info;   /** @brief  Unique ID for the vehicle (example : "305", "Line E", ...) */
+    std::vector<std::string> route; /** @brief Stop IDs ordered according to the vehicle's itenerary */
+    std::map<std::string, struct timetable> timetable; /** @brief Departure time for the vehicle in each stop, for both directions */
 
     /**
      * @brief Get the direction of a vehicle
@@ -37,7 +36,7 @@ private:
      * @return 0        In case the direction is backwards
      * @return -1       In case of error (srcID or destID don't exist)
      */
-    short int getDirection(const vertexID srcID, const vertexID destID) {
+    short int getDirection(const std::string srcID, const std::string destID) {
         // WARNING : if the direction is 1 2 3, and the bus tries to move directly from 1 to 3 an error will occur
 
         for (size_t i = 0; i < route.size(); i++) {
@@ -98,8 +97,7 @@ public:
      * @param route         Stops made by the vehicle, in the real order
      * @param timetable     Time of departure for each stop, in both directions of the route
      */
-    Vehicle(std::string info, std::vector<vertexID> route, std::map<vertexID, struct timetable> timetable) {
-        this->id++;
+    Vehicle(std::string info, std::vector<std::string> route, std::map<std::string, struct timetable> timetable) {
         this->info = info;
         this->route = route;
         this->timetable = timetable;
@@ -114,12 +112,12 @@ public:
      * @param currTime  Current time
      * @return Time     Duration of the trip
      */
-    Time getTripTime(const vertexID srcID, const vertexID destID, Time startTime) {
+    Time getTripTime(const std::string srcID, const std::string destID, Time startTime) {
         
         // get src and dest iterators
-        std::map<vertexID, struct timetable>::iterator src_it, dest_it;
+        std::map<std::string, struct timetable>::iterator src_it, dest_it;
         src_it = timetable.find(srcID);
-        dest_it = timetable.find(dest_it);
+        dest_it = timetable.find(destID);
         if (timetable.end() == src_it || timetable.end() == dest_it) {
             return Time(TIME_LIMIT);
         }
@@ -144,7 +142,7 @@ public:
         size_t index = findNearestTimeIndex(src_times, startTime);
 
         // returns wait time plus trip time
-        return (*src_times[index] - startTime) + (*dest_times[index]) - (*src_times[index]);
+        return ((*src_times)[index] - startTime) + (*dest_times)[index] - (*src_times)[index];
     }
 
 
