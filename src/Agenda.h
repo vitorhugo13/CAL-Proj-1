@@ -14,7 +14,7 @@ class Activity;
 class Agenda {
 
 private:
-    std::vector<Activity *> activities
+    std::vector<Activity *> activities;
 };
 
 class Activity {
