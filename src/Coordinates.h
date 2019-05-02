@@ -12,6 +12,7 @@ public:
         this->y = y;
     }
 
+    double getDistance(const Coordinates &coords) const;
 };
 
 
