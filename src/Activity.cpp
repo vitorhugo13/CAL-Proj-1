@@ -1,28 +1,34 @@
 #include "Activity.h"
+#include <string>
+#include "Coordinates.h"
+#include "Day.h"
+#include "Time.h"
 
-Activity::Activity(std::string info, Coordinates coords, Day day, Time startTime, Time endTime){
-    this.info = info;
-    this.coords = coords;
-    this.day = day;
-    this.startTime = startTime;
-    this.endTime = endTime;
+Activity::Activity(std::string info, Coordinates coord, Day day, Time startTime, Time endTime) :
+	info(info), coords(coord), day(day), startTime(startTime), endTime(endTime)
+{ }
+
+std::string Activity::getInfo()
+{
+    return info;
 }
 
-std::string Activity::getInfo(){
-   return info;
+Coordinates Activity::getCoords()
+{
+    return coords;
 }
 
-Coordinates Activity::getCoords(){
-   return coords;
+Day Activity::getDay()
+{
+    return day;
 }
 
- Day Activity::getDay(){
-        return day;
-    }
-    Time Activity::getStartTime(){
-        return startTime;
-    }
-    Time Activity::getEndTime(){
-        return endTime;
-    }
+Time Activity::getStartTime()
+{
+    return startTime;
+}
 
+Time Activity::getEndTime()
+{
+    return endTime;
+}

@@ -12,13 +12,25 @@
 #include <limits>
 
 /**
+ * Excepcao
+ */
+class DataInvalida { };
+
+/**
+ * Excepcao
+ */
+class FormatoStringInvalido { };
+
+/**
  * @brief Class that handles days in this project.
  * 
  */
-class Day {
-    unsigned int ano, mes, dia;
+class Day
+{
+	unsigned int ano, mes, dia;
+
 public:
-    Day() { }
+	Day() {}
 
 	/**
 	 * Contrutor de datas por inteiros
@@ -57,32 +69,25 @@ public:
 	double getTotalHours() const;
 
 	/**
-	 * Faz overload ao operador de saida para imprimir a data no formato(DD-MM-AAAA)\n
-	 * @param os Referencia para ofstream
-	 * @param d1 Referencia para data
-	 */
-	friend std::ostream& operator << (std::ostream &os, const Day &d1);
-
-	/**
 	 * Redefinicao do operador maior
 	 * @param d1 Referencia para a data com a qual se vai comparar
 	 * @return True se d1 e menor
 	 */
-	bool operator > (const Day &d1);
+	bool operator>(const Day &d1);
 
 	/**
 	 * Redefinicao do operador comparacao
 	 * @param d1 Referencia para a data com a qual se vai comparar
 	 * @return True se as duas datas sao iguais
 	 */
-	bool operator == (const Day &d1);
-    
+	bool operator==(const Day &d1);
+
 	/**
 	 * Redefinicao do operador menor
 	 * @param Referencia para a data com a qual se vai comparar
 	 * @return True se d1 e maior
 	 */
-	bool operator < (const Day &d1);
+	bool operator<(const Day &d1);
 };
 
 #endif

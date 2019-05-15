@@ -6,20 +6,21 @@
 #include "Day.h"
 #include "Time.h"
 
-class Activity {
+class Activity
+{
 private:
     std::string info;
     Coordinates coords;
     Day day;
     Time startTime, endTime;
+
 public:
-    Activity(std::string info, Coordinates coords, Day day, Time startTime, Time endTime);
+    Activity(std::string info, Coordinates coord, Day day, Time startTime, Time endTime);
     std::string getInfo();
     Coordinates getCoords();
     Day getDay();
     Time getStartTime();
     Time getEndTime();
 };
-
 
 #endif //ACTIVITY_H
