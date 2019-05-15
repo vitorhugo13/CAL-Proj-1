@@ -21,10 +21,10 @@ Day::Day(std::string d)
 	for (unsigned int i = 0; i < d.length(); i++)
 	{
 
-		if (d.at(i) < '0' && d.at(i) > '9' && d.at(i) != '-')
+		if (d.at(i) < '0' && d.at(i) > '9' && d.at(i) != '-'&& d.at(i) != '/')
 			throw FormatoStringInvalido();
 
-		if (d.at(i) == '-')
+		if (d.at(i) == '-' || d.at(i) == '/')
 		{
 			continue;
 		}
