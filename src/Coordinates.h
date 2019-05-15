@@ -13,6 +13,18 @@ public:
     }
 
     double getDistance(const Coordinates &coords) const;
+
+    long int getX() const{
+    	return x;
+    }
+
+    long int getY() const{
+        return y;
+     }
+
+    bool operator==(const Coordinates &c){
+    	return(this->x == c.getX() && this->y == c.getY());
+    }
 };
 
 

@@ -26,7 +26,7 @@ bool Agenda::isOverlap(Activity *activity)
 }
 
 bool Agenda::removeAtivity(Activity * activity){
-
+	return false;
 
 }
 
