@@ -7,7 +7,7 @@
 
 #include "Coordinates.h"
 #include "Time.h"
-
+#include "Day.h"
 
 class Activity;
 
@@ -22,7 +22,8 @@ class Activity {
 private:
     std::string info;
     Coordinates coords;
-    Time startTime, duration;
+    Day day;
+    Time startTime, endTime;
 
 public:
 

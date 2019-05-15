@@ -1,12 +1,9 @@
 #ifndef TIME_H
 #define TIME_H
 
-
 #include <string>
 
-
 #define TIME_LIMIT std::numeric_limits<unsigned short int>::max()
-
 
 /**
  * @brief Class that handles time in this project.

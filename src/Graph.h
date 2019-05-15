@@ -13,8 +13,7 @@ private:
     std::vector<Vertex *> vertexSet;
 
 public:
-    
-    
+       
     bool addVertex(const Vertex &vertex);
     bool addEdge(const Edge &edge);
     bool addVehicle(const Vehicle &vehicle);
