@@ -25,3 +25,31 @@ bool Agenda::isOverlap(Activity *activity)
     return false;
 }
 
+bool Agenda::removeAtivity(Activity * activity){
+
+
+}
+
+std::vector<Activity *> Agenda::ActivitiesOfTheDay(Day day){
+	std::vector<Activity *> activitiesOfDay;
+	for (Activity *activity : activities){
+		if(activity->getDay() == day){
+			activitiesOfDay.push_back(activity);
+		}
+	}
+	return activitiesOfDay;
+}
+
+bool Agenda::show(Day day){
+	std::vector<Activity *> activitiesOfDay = ActivitiesOfTheDay(day);
+	if(activitiesOfDay.size() == 0){
+		std::cout << "There's no activities in this day" << std::endl;
+		return false;
+	}
+
+	for (Activity *activity : activitiesOfDay){
+		std::cout << activity->getName()<< std::endl;
+	}
+	return true;
+}
+

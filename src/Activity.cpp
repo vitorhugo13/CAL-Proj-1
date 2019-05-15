@@ -8,6 +8,11 @@ Activity::Activity(std::string name,std::string info, Coordinates coord, Day day
 	name(name), info(info), coords(coord), day(day), startTime(startTime), endTime(endTime)
 { }
 
+std::string Activity::getName()
+{
+    return name;
+}
+
 std::string Activity::getInfo()
 {
     return info;
@@ -31,4 +36,10 @@ Time Activity::getStartTime()
 Time Activity::getEndTime()
 {
     return endTime;
+}
+
+bool Activity::operator==(Activity &A1){
+	return( this->startTime == A1.getStartTime() && this->endTime == A1.getEndTime()
+			&& this->name == A1.getName() );
+
 }

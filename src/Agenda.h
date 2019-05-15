@@ -20,6 +20,8 @@ public:
     bool addActivity(Activity *activity);
     bool isOverlap(Activity *activity);
     bool removeAtivity(Activity * activity);
+    bool show(Day day);
+    std::vector<Activity *> ActivitiesOfTheDay(Day day);
 };
 
 #endif
