@@ -1,15 +1,17 @@
 #include "Agenda.h"
 
-class Agenda {
-    Agenda(){ }
-    std::vector<Activity *> activities;
-    bool addActivity(Activity * activity){
-        activities.push_back(activity);
-        return true;
-    }
-    bool isOverlap(Activity * activity){
-       for(int i=0; i < activities.size(); i++){
-           //verificar sobreposições
+Agenda::Agenda(){ }
+
+bool Agenda::addActivity(Activity * activity){
+    activities.push_back(activity);
+    return true;
+}
+
+bool Agenda::isOverlap(Activity * activity){
+       for(Activity* activity1 : activities){
+           if(activity1->day == activity->day)
+               return true;
+           return false;
        }
     }
-};
+

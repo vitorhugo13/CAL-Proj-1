@@ -1,17 +1,12 @@
 #include "Day.h"
 
-class Day {
-    unsigned int ano, mes, dia;
-public:
-    Day() { }
-    
-	Day(unsigned int a, unsigned int m, unsigned int d){
-		if (d > 31 || d < 1 || m > 12 || m < 1)
+Day::Day(unsigned int a, unsigned int m, unsigned int d){
+	if (d > 31 || d < 1 || m > 12 || m < 1)
 			throw DataInvalida();
 		ano = a; mes = m; dia = d;
 	}
 	
-	Day(std::string d){
+	Day::Day(std::string d){
 
 		std::string tempDia = "";
 		std::string tempMes = "";
@@ -67,13 +62,13 @@ public:
 
 	}
 
-	unsigned int getAno() const {return ano;}
+	unsigned int Day::getAno() const {return ano;}
 
-	unsigned int getMes() const {return mes;}
+	unsigned int Day::getMes() const {return mes;}
 
-	unsigned int getDia() const {return dia;}
+	unsigned int Day::getDia() const {return dia;}
 
-	double getTotalHours() const{
+	double Day::getTotalHours() const{
 
 		double hours = (ano - 2000) * 365.2425;
 
@@ -129,13 +124,13 @@ public:
 	 */
 	class FormatoStringInvalido{};
 
-	friend std::ostream& operator << (std::ostream &os, const Day &d1){
+	friend std::ostream& Day::operator << (std::ostream &os, const Day &d1){
 		os << std::right << std::setw(2) << std::setfill('0') << d1.dia << "-"
 				<< std::setw(2) << std::setfill('0') << d1.mes << "-" << d1.ano;
 		return os;
 	}
 
-	bool operator > (const Day &d1){
+	bool Day::operator > (const Day &d1){
 
 		if (this->ano > d1.ano)
 			return true;
@@ -150,15 +145,14 @@ public:
 	return false;
 	}
 
-	bool operator == (const Day &d1){
+	bool Day::operator == (const Day &d1){
 		if ( this->ano == d1.ano && this->mes == d1.mes && this->dia == d1.dia)
 			return true;
 
 	return false;
 	}
     
-	bool operator < (const Day &d1){
-
+	bool Day::operator < (const Day &d1){
 		if (this->ano < d1.ano)
 			return true;
 		if (this->ano == d1.ano){
@@ -171,5 +165,5 @@ public:
 		}
 	return false;
 	}
-};
+
 

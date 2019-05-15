@@ -8,26 +8,15 @@
 #include "Coordinates.h"
 #include "Time.h"
 #include "Day.h"
-
-class Activity;
+#include "Activity.h"
 
 class Agenda {
 
 private:
     std::vector<Activity *> activities;
-};
-
-class Activity {
-
-private:
-    std::string info;
-    Coordinates coords;
-    Day day;
-    Time startTime, endTime;
-
 public:
-
+    bool addActivity(Activity * activity);
+    bool isOverlap(Activity * activity);
 };
-
 
 #endif

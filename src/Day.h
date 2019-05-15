@@ -18,6 +18,8 @@
 class Day {
     unsigned int ano, mes, dia;
 public:
+    Day() { }
+
 	/**
 	 * Contrutor de datas por inteiros
 	 * @param a Ano

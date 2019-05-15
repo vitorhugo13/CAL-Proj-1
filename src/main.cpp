@@ -3,7 +3,6 @@
 #include <vector>
 
 
-
 size_t find(std::vector<int> *timetable, int startTime) {
         size_t mid, left = 0;
         size_t right = (*timetable).size();
