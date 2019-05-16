@@ -1,16 +1,2 @@
-# ignore all files
-*
-
-# unignore directories
-!src/
-!logos/
-!maps/*/*.txt
-!bus_subway/*.txt
-
-# unignore files
-!.gitignore
-!*.cpp
-!*.h
-!LICENSE
-!README.md
-!Makefile
+Anotações.txt
+.vs/
