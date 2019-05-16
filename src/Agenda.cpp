@@ -4,6 +4,26 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+
+bool Agenda::addActivity(){
+	std::string name, info, Sday, startTime, endTime;
+	std::cout << "What큦 the activity name ? "<< std::endl;
+	std::cin >> name;
+	std::cout << "What큦 the activity info ? "<< std::endl;
+	std::cin >> info;
+	std::cout << "What큦 the activity day (day-month-year) ? "<< std::endl;
+	std::cin >> Sday;
+	std::cout << "What큦 the activity starting time (hous:minutes) ? "<< std::endl;
+	std::cin >> startTime;
+	std::cout << "What큦 the activity ending time (hous:minutes)  ? "<< std::endl;
+	std::cin >> endTime;
+	Day day(Sday);
+	Coordinates coordinates( 0 ,2);
+	Activity activity(name, "", coordinates, Sday, startTime, endTime);
+
+	return(addActivity(&activity));
+}
+
 bool Agenda::addActivity(Activity *activity)
 {
 	if(isOverlap(activity))

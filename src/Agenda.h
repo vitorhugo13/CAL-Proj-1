@@ -17,6 +17,7 @@ private:
 
 public:
     Agenda() {}
+    bool addActivity();
     bool addActivity(Activity *activity);
     bool isOverlap(Activity *activity);
     bool removeAtivity(Activity * activity);
