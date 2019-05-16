@@ -13,16 +13,16 @@ class Agenda
 {
 
 private:
-    std::vector<Activity *> activities;
+    std::vector<Activity> activities;
 
 public:
     Agenda() {}
     bool addActivity();
-    bool addActivity(Activity *activity);
-    bool isOverlap(Activity *activity);
-    bool removeAtivity(Activity * activity);
+    bool addActivity(Activity activity);
+    bool isOverlap(Activity activity);
+    bool removeAtivity(Activity activity);
     bool show(Day day);
-    std::vector<Activity *> ActivitiesOfTheDay(Day day);
+    std::vector<Activity> ActivitiesOfTheDay(Day day);
 };
 
 #endif
