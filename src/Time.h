@@ -32,7 +32,10 @@ public:
     unsigned short int getTime() const {
         return this->time;
     }
-
+    void setTime(std::string time){
+    	time.erase(2, 1);
+    	this->time = stoi(time, nullptr, 10);
+    }
     Time operator+(Time const &obj) {
         unsigned char carry = 0;
         unsigned short int thisHours, thisMinutes, objHours, objMinutes;

@@ -52,11 +52,40 @@ bool Agenda::isOverlap(Activity activity)
 
 //return true if remove with success, false otherwise.
 bool Agenda::removeActivity(std::string name, Day day){
+	bool in, duplicate;
+	Time time("01:00");
 	for(vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
-		if(name == it->getName() && day == it->getDay()){
-			activities.erase(it);
-			return true;
+			if(name == it->getName() && day == it->getDay()){
+				activities.erase(it);
+				if(!in){
+					in = true;
+				}
+				else{
+					duplicate = true;
+				}
+			}
+
 		}
+	if(duplicate){
+		string sTime;
+		cout << "What is the start hour of the activity?" << endl;
+		cin >> sTime;
+		time.setTime(sTime);
+	}
+	for(vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
+		if(duplicate){
+			if(name == it->getName() && day == it->getDay() && time == it->getStartTime()){
+				activities.erase(it);
+				return true;
+			}
+		}
+		else{
+			if(name == it->getName() && day == it->getDay()){
+				activities.erase(it);
+				return true;
+			}
+		}
+
 
 	}
 	return false;
