@@ -4,6 +4,8 @@
 # unignore directories
 !src/
 !logos/
+!maps/*/
+!bus_subway/
 
 # unignore files
 !.gitignore
