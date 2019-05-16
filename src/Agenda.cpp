@@ -7,15 +7,15 @@ using namespace std;
 
 bool Agenda::addActivity(){
 	std::string name, info, Sday, startTime, endTime;
-	std::cout << "What�s the activity name ? "<< std::endl;
+	std::cout << "What is the activity name ? "<< std::endl;
 	std::cin >> name;
-	std::cout << "What�s the activity info ? "<< std::endl;
+	std::cout << "What is the activity info ? "<< std::endl;
 	std::cin >> info;
-	std::cout << "What�s the activity day (day-month-year) ? "<< std::endl;
+	std::cout << "What is the activity day (day-month-year) ? "<< std::endl;
 	std::cin >> Sday;
-	std::cout << "What�s the activity starting time (hous:minutes) ? "<< std::endl;
+	std::cout << "What is the activity starting time (hh:mm) ? "<< std::endl;
 	std::cin >> startTime;
-	std::cout << "What�s the activity ending time (hous:minutes)  ? "<< std::endl;
+	std::cout << "What is the activity ending time (hh:mm)  ? "<< std::endl;
 	std::cin >> endTime;
 	Day day(Sday);
 	Coordinates coordinates( 0 ,2);
@@ -36,10 +36,10 @@ bool Agenda::isOverlap(Activity activity)
     for (Activity activity1 : activities)
     {
         if (activity1.getDay() == activity.getDay()){
-        	/* se activity come�a antes de activity1, mas n�o acaba a tempo */
+        	/* se activity comeca antes de activity1, mas nao acaba a tempo */
         	if(activity1.getStartTime() > activity.getEndTime() && activity1.getEndTime() < activity.getEndTime())
             	return true;
-        	/* se activity1 come�a antes de activity, mas n�o acaba a tempo */
+        	/* se activity1 come�a antes de activity, mas nao acaba a tempo */
         	if(activity.getStartTime() > activity1.getEndTime() && activity.getEndTime() < activity1.getEndTime())
         		return true;
         }
@@ -51,15 +51,13 @@ bool Agenda::isOverlap(Activity activity)
 
 
 //return true if remove with success, false otherwise.
-bool Agenda::removeAtivity(Activity activity){
-
-	for(vector<Activity>::iterator it; it = activities.begin(); ){
-		if(activity == activities[i]){
+bool Agenda::removeActivity(std::string name, Day day){
+	for(vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
+		if(name == it->getName() && day == it->getDay()){
 			activities.erase(it);
 			return true;
 		}
 
-		it++;
 	}
 	return false;
 

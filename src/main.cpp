@@ -60,8 +60,8 @@ int main(void) {
 			cout << "----- TripMate ----" << std::endl;
 			cout << "0 - See Agenda" << std::endl;
 			cout << "1 - Add activity" << std::endl;
-			cout << "2 - See paths" << std::endl;
-			cout << "3 - Remove Activity" << std:: endl;
+			cout << "2 - Remove Activity" << std:: endl;
+			cout << "3 - See paths" << std::endl;
 			cout << "4 - Leave " << std::endl;
 
 			menu = menuInput(4);
@@ -82,9 +82,17 @@ int main(void) {
 						menu = -2;
 						break;
 					}
-					case 2:
+					case 2:{
+						string name, date;
+						cout << "What's the activity name ?" << endl;
+						cin >> name;
+						cout << "In which day? " << endl;
+						cin >> date;
+						Day day(date);
+						agenda.removeActivity(name, date);
 						menu = -2;
 						break;
+					}
 					case 3:
 						menu = -2;
 						break;

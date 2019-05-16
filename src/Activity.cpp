@@ -45,8 +45,7 @@ Time Activity::getEndTime()
 }
 
 bool Activity::operator==(Activity &A1){
-	return( this->startTime == A1.getStartTime() && this->endTime == A1.getEndTime()
-			&& this->name == A1.getName() );
+	return( this->name == A1.getName() && this->name == A1.getName() );
 
 }
 
