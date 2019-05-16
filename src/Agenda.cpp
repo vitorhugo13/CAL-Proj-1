@@ -7,15 +7,15 @@ using namespace std;
 
 bool Agenda::addActivity(){
 	std::string name, info, Sday, startTime, endTime;
-	std::cout << "What´s the activity name ? "<< std::endl;
+	std::cout << "Whatï¿½s the activity name ? "<< std::endl;
 	std::cin >> name;
-	std::cout << "What´s the activity info ? "<< std::endl;
+	std::cout << "Whatï¿½s the activity info ? "<< std::endl;
 	std::cin >> info;
-	std::cout << "What´s the activity day (day-month-year) ? "<< std::endl;
+	std::cout << "Whatï¿½s the activity day (day-month-year) ? "<< std::endl;
 	std::cin >> Sday;
-	std::cout << "What´s the activity starting time (hous:minutes) ? "<< std::endl;
+	std::cout << "Whatï¿½s the activity starting time (hous:minutes) ? "<< std::endl;
 	std::cin >> startTime;
-	std::cout << "What´s the activity ending time (hous:minutes)  ? "<< std::endl;
+	std::cout << "Whatï¿½s the activity ending time (hous:minutes)  ? "<< std::endl;
 	std::cin >> endTime;
 	Day day(Sday);
 	Coordinates coordinates( 0 ,2);
@@ -36,10 +36,10 @@ bool Agenda::isOverlap(Activity activity)
     for (Activity activity1 : activities)
     {
         if (activity1.getDay() == activity.getDay()){
-        	/* se activity começa antes de activity1, mas não acaba a tempo */
+        	/* se activity comeï¿½a antes de activity1, mas nï¿½o acaba a tempo */
         	if(activity1.getStartTime() > activity.getEndTime() && activity1.getEndTime() < activity.getEndTime())
             	return true;
-        	/* se activity1 começa antes de activity, mas não acaba a tempo */
+        	/* se activity1 comeï¿½a antes de activity, mas nï¿½o acaba a tempo */
         	if(activity.getStartTime() > activity1.getEndTime() && activity.getEndTime() < activity1.getEndTime())
         		return true;
         }
@@ -48,10 +48,23 @@ bool Agenda::isOverlap(Activity activity)
     return false;
 }
 
+
+
+//return true if remove with success, false otherwise.
 bool Agenda::removeAtivity(Activity activity){
+
+	for(vector<Activity>::iterator it; it = activities.begin(); ){
+		if(activity == activities[i]){
+			activities.erase(it);
+			return true;
+		}
+
+		it++;
+	}
 	return false;
 
 }
+
 
 std::vector<Activity> Agenda::ActivitiesOfTheDay(Day day){
 	std::vector<Activity> activitiesOfDay;
