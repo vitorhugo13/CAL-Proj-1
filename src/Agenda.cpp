@@ -56,7 +56,6 @@ bool Agenda::removeActivity(std::string name, Day day){
 	Time time("01:00");
 	for(vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
 			if(name == it->getName() && day == it->getDay()){
-				activities.erase(it);
 				if(!in){
 					in = true;
 				}
@@ -64,14 +63,15 @@ bool Agenda::removeActivity(std::string name, Day day){
 					duplicate = true;
 				}
 			}
-
 		}
 	if(duplicate){
+		show(day);
 		string sTime;
-		cout << "What is the start hour of the activity?" << endl;
+		cout << endl << "What is the start hour of the activity?" << endl;
 		cin >> sTime;
 		time.setTime(sTime);
 	}
+
 	for(vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
 		if(duplicate){
 			if(name == it->getName() && day == it->getDay() && time == it->getStartTime()){
