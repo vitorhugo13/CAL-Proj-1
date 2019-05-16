@@ -41,7 +41,7 @@ std::vector<Activity *> Agenda::ActivitiesOfTheDay(Day day){
 			activitiesOfDay.push_back(activity);
 		}
 	}
-
+	sort(activitiesOfDay.begin(), activitiesOfDay.end());
 	return activitiesOfDay;
 }
 
@@ -53,9 +53,9 @@ bool Agenda::show(Day day){
 	}
 	cout << "Activities of the Day " << setw(10);
 	cout << day << endl;
-	cout << "Start Time " << setw(10) << "Name " << setw(10) << "End Time" << endl;
+	cout << "Start Time " << setw(10) << "Name " << setw(15) << "End Time" << endl;
 	for (Activity *activity : activitiesOfDay){
-		cout << activity->getStartTime() << setw(10) << activity->getName() << setw(10) << activity->getEndTime() << endl;
+		cout << activity->getStartTime() << setw(16) << activity->getName() << setw(10) << activity->getEndTime() << endl;
 	}
 	return true;
 }

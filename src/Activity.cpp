@@ -4,9 +4,15 @@
 #include "Day.h"
 #include "Time.h"
 
+class InvalidTime { };
+
 Activity::Activity(std::string name,std::string info, Coordinates coord, Day day, Time startTime, Time endTime) :
 	name(name), info(info), coords(coord), day(day), startTime(startTime), endTime(endTime)
-{ }
+{
+	if(startTime > endTime || startTime == endTime)
+		throw InvalidTime();
+
+}
 
 std::string Activity::getName()
 {
