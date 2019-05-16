@@ -166,3 +166,8 @@ bool Day::operator<(const Day &d1)
 	}
 	return false;
 }
+
+std::ostream& operator<< (std::ostream &os, const Day &d){
+	os << d.getDia() << "/"<< d.getMes() << "/" << d.getAno();
+	return os;
+}

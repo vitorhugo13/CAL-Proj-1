@@ -25,6 +25,8 @@ public:
     Time getEndTime();
     void show();
     bool operator==(Activity &A1);
+    bool operator<(Activity &A1);
+    bool operator>(Activity &A1);
 };
 
 #endif //ACTIVITY_H

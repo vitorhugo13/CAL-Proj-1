@@ -180,6 +180,14 @@ public:
     bool operator>=(Time const &obj) {
         return this->time >= obj.time;
     }
+    friend std::ostream& operator<< (std::ostream &os, const Time &t){
+    	int hour = t.getTime() % 100;
+    	int min = t.getTime() - (hour * 100);
+    	std::string hours = std::to_string(hour) + ":";
+    	std::string mins = std::to_string(min);
+    	os << hours << mins;
+    	return os;
+    }
 };
 
 

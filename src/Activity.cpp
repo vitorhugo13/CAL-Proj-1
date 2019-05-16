@@ -43,3 +43,13 @@ bool Activity::operator==(Activity &A1){
 			&& this->name == A1.getName() );
 
 }
+
+bool Activity::operator>(Activity &A1){
+	return( this->startTime > A1.getStartTime() );
+
+}
+
+bool Activity::operator<(Activity &A1){
+	return( this->startTime < A1.getStartTime() );
+
+}

@@ -1,5 +1,9 @@
 #include "Agenda.h"
+#include <iostream>
+#include <iomanip>
+#include <bits/stdc++.h>
 
+using namespace std;
 bool Agenda::addActivity(Activity *activity)
 {
 	if(isOverlap(activity))
@@ -37,18 +41,21 @@ std::vector<Activity *> Agenda::ActivitiesOfTheDay(Day day){
 			activitiesOfDay.push_back(activity);
 		}
 	}
+
 	return activitiesOfDay;
 }
 
 bool Agenda::show(Day day){
 	std::vector<Activity *> activitiesOfDay = ActivitiesOfTheDay(day);
 	if(activitiesOfDay.size() == 0){
-		std::cout << "There's no activities in this day" << std::endl;
+		cout << "There's no activities in this day" << std::endl;
 		return false;
 	}
-
+	cout << "Activities of the Day " << setw(10);
+	cout << day << endl;
+	cout << "Start Time " << setw(10) << "Name " << setw(10) << "End Time" << endl;
 	for (Activity *activity : activitiesOfDay){
-		std::cout << activity->getName()<< std::endl;
+		cout << activity->getStartTime() << setw(10) << activity->getName() << setw(10) << activity->getEndTime() << endl;
 	}
 	return true;
 }

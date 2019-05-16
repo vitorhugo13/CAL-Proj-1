@@ -88,6 +88,8 @@ public:
 	 * @return True se d1 e maior
 	 */
 	bool operator<(const Day &d1);
+
+	friend std::ostream& operator<< (std::ostream &os, const Day &d);
 };
 
 #endif
