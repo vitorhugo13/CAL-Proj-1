@@ -22,10 +22,15 @@ public:
     Vertex* findVertex(const std::string &v);
     
 
+
+
+    //dist é o time
+    //Implementação do algoritmo de dijsktra
+
     void dijsktraAlgorithm(const std::string &src, const std::string &dest){
 
 
-//dist é o time
+
         for(unsigned int i=0;i<vertexSet.size();i++){
 		    vertexSet[i]->path=NULL;    //o que esta parte do algoritmo faz é percorrer o vertexSet todo
 		    vertexSet[i]->time=TIME_LIMIT;		//mete o path a null, a distancia como infinito e visited a false
@@ -62,6 +67,7 @@ public:
     //quando for encontrado o vertex de destino o algoritmo não pode percorrer mais.
 
 };
+
 
 
 #endif
