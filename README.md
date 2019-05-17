@@ -13,3 +13,4 @@ Code developed for the CAL project
 
   ## First Delivery
   * [First Report](https://docs.google.com/document/d/1sKDSdBhetOS91CgDa0tw8xdnZuE3Y1huWEobfepskms/edit)
+  * [Second Report](https://docs.google.com/document/d/1pdXSAaRx_Cag6yGy2AvtNvCrKk5Dv-xR3cA2RiDkmBY/edit)
