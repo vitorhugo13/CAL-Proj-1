@@ -3,8 +3,6 @@
 #include <iomanip>
 #include <bits/stdc++.h>
 
-using namespace std;
-
 bool Agenda::addActivity(){
 	std::string name, info, Sday, startTime, endTime;
 	std::cout << "What is the activity name ? "<< std::endl;
@@ -19,7 +17,7 @@ bool Agenda::addActivity(){
 	std::cin >> endTime;
 	Day day(Sday);
 	Coordinates coordinates( 0 ,2);
-	Activity activity(name, "", coordinates, Sday, startTime, endTime);
+	Activity activity(name, info, coordinates, Sday, startTime, endTime);
 	return(addActivity(activity));
 }
 
@@ -54,7 +52,7 @@ bool Agenda::isOverlap(Activity activity)
 bool Agenda::removeActivity(std::string name, Day day){
 	bool in, duplicate;
 	Time time("01:00");
-	for(vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
+	for(std::vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
 			if(name == it->getName() && day == it->getDay()){
 				if(!in){
 					in = true;
@@ -66,13 +64,13 @@ bool Agenda::removeActivity(std::string name, Day day){
 		}
 	if(duplicate){
 		show(day);
-		string sTime;
-		cout << endl << "What is the start hour of the activity?" << endl;
-		cin >> sTime;
+		std::string sTime;
+		std::cout << std::endl << "What is the start hour of the activity?" << std::endl;
+		std::cin >> sTime;
 		time.setTime(sTime);
 	}
 
-	for(vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
+	for(std::vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
 		if(duplicate){
 			if(name == it->getName() && day == it->getDay() && time == it->getStartTime()){
 				activities.erase(it);
@@ -107,16 +105,16 @@ std::vector<Activity> Agenda::ActivitiesOfTheDay(Day day){
 bool Agenda::show(Day day){
 	std::vector<Activity> activitiesOfDay = ActivitiesOfTheDay(day);
 	if(activitiesOfDay.size() == 0){
-		cout << "There's no activities in this day" << std::endl;
+		std::cout << "There's no activities in this day" << std::endl << std::endl;
 		return false;
 	}
-	cout << "Activities of the Day " << setw(10);
-	cout << day << endl;
-	cout << "Start Time " << setw(10) << "Name " << setw(15) << "End Time" << endl;
+	std::cout << "Activities of the Day " << std::setw(10);
+	std::cout << day << std::endl << std::endl;
+	std::cout << "Start Time " << std::setw(10) << "Name " << std::setw(15) << "End Time" << std::setw(10) << "Info"<< std::endl;
 	for (Activity activity : activitiesOfDay){
-		cout << activity.getStartTime() << setw(16) << activity.getName() << setw(11) << activity.getEndTime() << endl;
+		std::cout << activity.getStartTime() << std::setw(16) << activity.getName() << std::setw(11) << activity.getEndTime() << std::setw(13) << activity.getInfo()<< std::endl;
 	}
-	cout << endl;
+	std::cout << std::endl;
 	return true;
 }
 

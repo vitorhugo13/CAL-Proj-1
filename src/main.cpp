@@ -48,9 +48,17 @@ int menuInput(int nOptions){
 	return menu;
 }
 
+Day seeAgenda(){
+	string day;
+	std::cout << "In which day?" << endl;
+	std::cin >> day;
+	Day day1(day);
+	return day1;
+}
+
 int main(void) {
-	std::vector<int> test = {625, 645, 700, 715, 730, 742};
-    std::cout << (*&test[3]) << std::endl;
+	/*std::vector<int> test = {625, 645, 700, 715, 730, 742};
+    std::cout << (*&test[3]) << std::endl;*/
 
 	Agenda agenda;
 
@@ -69,11 +77,7 @@ int main(void) {
 				cout << "Menu doesn't exist" << endl;
 			switch (menu){
 					case 0:{
-						string day;
-						cout << "In which day?" << endl;
-						cin >> day;
-						Day day1(day);
-						agenda.show(day1);
+						agenda.show(seeAgenda());
 						menu = -2;
 						break;
 						}
@@ -93,9 +97,12 @@ int main(void) {
 						menu = -2;
 						break;
 					}
-					case 3:
+					case 3:{
+						agenda.show(seeAgenda());
+						std::cout << "From which activity we want to see the path to the next activity ? " << std::endl;
 						menu = -2;
 						break;
+					}
 					case 4:
 						return 0;
 					default:
