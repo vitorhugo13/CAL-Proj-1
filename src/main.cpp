@@ -4,8 +4,6 @@
 #include "Day.h"
 #include "Agenda.h"
 
-using namespace std;
-
 size_t find(std::vector<int> *timetable, int startTime) {
         size_t mid, left = 0;
         size_t right = (*timetable).size();
@@ -33,24 +31,24 @@ size_t find(std::vector<int> *timetable, int startTime) {
 
 int menuInput(int nOptions){
 	int menu;
-	cin >> menu;
-	if (cin.fail()){
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "Only integral numbers." << endl;
+	std::cin >> menu;
+	if (std::cin.fail()){
+		std::cin.clear();
+		std::cin.std::ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Only integral numbers." << std::endl;
 		return -2;
 	}
 
 	if (menu > nOptions || menu < -1){
-		cout << "Option not valid! Try again." << endl;
+		std::cout << "Option not valid! Try again." << std::endl;
 		return -2;
 	}
 	return menu;
 }
 
 Day seeAgenda(){
-	string day;
-	std::cout << "In which day?" << endl;
+	std::string day;
+	std::cout << "In which day?" << std::endl;
 	std::cin >> day;
 	Day day1(day);
 	return day1;
@@ -65,16 +63,16 @@ int main(void) {
 	int menu = -2;
 	while(menu != 4){
 		while(menu == -2){
-			cout << "----- TripMate ----" << std::endl;
-			cout << "0 - See Agenda" << std::endl;
-			cout << "1 - Add activity" << std::endl;
-			cout << "2 - Remove Activity" << std:: endl;
-			cout << "3 - See paths" << std::endl;
-			cout << "4 - Leave " << std::endl;
+			std::cout << "----- TripMate ----" << std::endl;
+			std::cout << "0 - See Agenda" << std::endl;
+			std::cout << "1 - Add activity" << std::endl;
+			std::cout << "2 - Remove Activity" << std:: endl;
+			std::cout << "3 - See paths" << std::endl;
+			std::cout << "4 - Leave " << std::endl;
 
 			menu = menuInput(4);
 			if(menu == -1)
-				cout << "Menu doesn't exist" << endl;
+				std::cout << "Menu doesn't exist" << std::endl;
 			switch (menu){
 					case 0:{
 						agenda.show(seeAgenda());
@@ -87,11 +85,11 @@ int main(void) {
 						break;
 					}
 					case 2:{
-						string name, date;
-						cout << "What's the activity name ?" << endl;
-						cin >> name;
-						cout << "In which day? " << endl;
-						cin >> date;
+						std::string name, date;
+						std::cout << "What's the activity name ?" << std::endl;
+						std::cin >> name;
+						std::cout << "In which day? " << std::endl;
+						std::cin >> date;
 						Day day(date);
 						agenda.removeActivity(name, date);
 						menu = -2;
