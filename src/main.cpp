@@ -34,7 +34,7 @@ int menuInput(int nOptions){
 	std::cin >> menu;
 	if (std::cin.fail()){
 		std::cin.clear();
-		std::cin.std::ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Only integral numbers." << std::endl;
 		return -2;
 	}
@@ -90,7 +90,10 @@ int main(void) {
 						std::cout << "In which day? " << std::endl;
 						std::cin >> date;
 						Day day(date);
-						agenda.removeActivity(name, date);
+						if(agenda.removeActivity(name, date))
+							std::cout << "Activity removed with success! " << std::endl;
+						else
+							std::cout << "Activity can not be added" << std::endl;
 						menu = -2;
 						break;
 					}

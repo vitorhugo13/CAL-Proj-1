@@ -51,7 +51,7 @@ bool Agenda::isOverlap(Activity activity)
 
         if (activity1.getDay() == activity.getDay()){
 
-        	if(!((activity1.getStartTime() >= activity.getEndTime ) || (activity1.getEndTime <= activity.getStartTime))){
+        	if(!((activity1.getStartTime() >= activity.getEndTime() ) || (activity1.getEndTime() <= activity.getStartTime()))){
 				return true;
 				//means the dates overlap
 			}
@@ -64,13 +64,8 @@ bool Agenda::isOverlap(Activity activity)
 	//we do not have overlap on dates
 }
 
-
-
-//return true if remove with success, false otherwise.
-bool Agenda::removeActivity(std::string name, Day day){
-
+bool Agenda::duplicateActivities(std::string name,Day day){
 	bool in, duplicate;
-	Time time("01:00");
 
 	for(std::vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
 			if((name == it->getName()) && (day == it->getDay())){
@@ -82,6 +77,14 @@ bool Agenda::removeActivity(std::string name, Day day){
 				}
 			}
 	}
+	return duplicate;
+}
+
+
+bool Agenda::removeActivity(std::string name, Day day){
+
+	int duplicate = duplicateActivities(name, day);
+	Time time("01:00"); //can be init4ialized with any value
 
 	if(duplicate){
 		show(day);
