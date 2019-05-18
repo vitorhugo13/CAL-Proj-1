@@ -68,10 +68,12 @@ bool Agenda::isOverlap(Activity activity)
 
 //return true if remove with success, false otherwise.
 bool Agenda::removeActivity(std::string name, Day day){
+
 	bool in, duplicate;
 	Time time("01:00");
+
 	for(std::vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
-			if(name == it->getName() && day == it->getDay()){
+			if((name == it->getName()) && (day == it->getDay())){
 				if(!in){
 					in = true;
 				}
@@ -79,15 +81,15 @@ bool Agenda::removeActivity(std::string name, Day day){
 					duplicate = true;
 				}
 			}
-		}
+	}
+
 	if(duplicate){
 		show(day);
 		std::string sTime;
-		std::cout << std::endl << "What is the start hour of the activity?" << std::endl;
+		std::cout << std::endl << "Activity start hour?" << std::endl;
 		std::cin >> sTime;
 		time.setTime(sTime);
 	}
-
 
 	for(std::vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
 		if(duplicate){
@@ -102,9 +104,8 @@ bool Agenda::removeActivity(std::string name, Day day){
 				return true;
 			}
 		}
-
-
 	}
+
 	return false;
 
 }
@@ -125,10 +126,12 @@ std::vector<Activity> Agenda::ActivitiesOfTheDay(Day day){
 
 bool Agenda::show(Day day){
 	std::vector<Activity> activitiesOfDay = ActivitiesOfTheDay(day);
+
 	if(activitiesOfDay.size() == 0){
-		std::cout << "There's no activities in this day" << std::endl << std::endl;
+		std::cout << "There's no activities in this day!" << std::endl << std::endl;
 		return false;
 	}
+
 	std::cout << "Activities of the Day " << std::setw(10);
 	std::cout << day << std::endl << std::endl;
 	std::cout << "Start Time " << std::setw(10) << "Name " << std::setw(15) << "End Time" << std::setw(10) << "Info"<< std::endl;
