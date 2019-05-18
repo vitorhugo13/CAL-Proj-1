@@ -55,15 +55,14 @@ Day seeAgenda(){
 }
 
 int main(void) {
-	/*std::vector<int> test = {625, 645, 700, 715, 730, 742};
-    std::cout << (*&test[3]) << std::endl;*/
-
+	
 	Agenda agenda;
+
 
 	int menu = -2;
 	while(menu != 4){
 		while(menu == -2){
-			std::cout << "----- TripMate ----" << std::endl;
+			std::cout << "----- TripMate ----" << std::endl<< std::endl;
 			std::cout << "0 - See Agenda" << std::endl;
 			std::cout << "1 - Add activity" << std::endl;
 			std::cout << "2 - Remove activity" << std:: endl;

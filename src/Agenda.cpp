@@ -6,20 +6,26 @@
 
 bool Agenda::addActivity(){
 
-	std::string name, info, Sday, startTime, endTime;
+	std::string name, info, date, startTime, endTime;
 	std::cout << "Activity's name ? "<< std::endl;
 	std::cin >> name;
+
 	std::cout << "Activity's info ? "<< std::endl;
 	std::cin >> info;
+
 	std::cout << "Activity's date (day-month-year) ? "<< std::endl;
-	std::cin >> Sday;
+	std::cin >> date;
+
 	std::cout << "Activity's starting time (hh:mm) ? "<< std::endl;
 	std::cin >> startTime;
+	
 	std::cout << "Activity's ending time (hh:mm)  ? "<< std::endl;
 	std::cin >> endTime;
-	Day day(Sday);
+
+	Day day(date);
 	Coordinates coordinates( 0 ,2);
-	Activity activity(name, info, coordinates, Sday, startTime, endTime);
+	Activity activity(name, info, coordinates, date, startTime, endTime);
+
 	return(addActivity(activity));
 }
 
@@ -35,21 +41,27 @@ bool Agenda::addActivity(Activity activity)
 }
 
 
+
+
+
 bool Agenda::isOverlap(Activity activity)
 {
     for (Activity activity1 : activities)
     {
+
         if (activity1.getDay() == activity.getDay()){
-        	/* se activity comeca antes de activity1, mas nao acaba a tempo */
-        	if(activity1.getStartTime() > activity.getEndTime() && activity1.getEndTime() < activity.getEndTime())
-            	return true;
-        	/* se activity1 come�a antes de activity, mas nao acaba a tempo */
-        	if(activity.getStartTime() > activity1.getEndTime() && activity.getEndTime() < activity1.getEndTime())
-        		return true;
+
+        	if(!((activity1.getStartTime() >= activity.getEndTime ) || (activity1.getEndTime <= activity.getStartTime))){
+				return true;
+				//means the dates overlap
+			}
+
         }
 
     }
-    return false;
+
+    return false; 
+	//we do not have overlap on dates
 }
 
 
