@@ -72,7 +72,7 @@ int main(void) {
 
 			menu = menuInput(4);
 			if(menu == -1)
-				std::cout << "Menu doesn't exist" << std::endl;
+				std::cout << "Menu does not exist" << std::endl;
 			switch (menu){
 					case 0:{
 						agenda.show(seeAgenda());

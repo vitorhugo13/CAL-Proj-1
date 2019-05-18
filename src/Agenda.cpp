@@ -3,17 +3,19 @@
 #include <iomanip>
 #include <bits/stdc++.h>
 
+
 bool Agenda::addActivity(){
+
 	std::string name, info, Sday, startTime, endTime;
-	std::cout << "What is the activity name ? "<< std::endl;
+	std::cout << "Activity's name ? "<< std::endl;
 	std::cin >> name;
-	std::cout << "What is the activity info ? "<< std::endl;
+	std::cout << "Activity's info ? "<< std::endl;
 	std::cin >> info;
-	std::cout << "What is the activity day (day-month-year) ? "<< std::endl;
+	std::cout << "Activity's date (day-month-year) ? "<< std::endl;
 	std::cin >> Sday;
-	std::cout << "What is the activity starting time (hh:mm) ? "<< std::endl;
+	std::cout << "Activity's starting time (hh:mm) ? "<< std::endl;
 	std::cin >> startTime;
-	std::cout << "What is the activity ending time (hh:mm)  ? "<< std::endl;
+	std::cout << "Activity's ending time (hh:mm)  ? "<< std::endl;
 	std::cin >> endTime;
 	Day day(Sday);
 	Coordinates coordinates( 0 ,2);
@@ -21,13 +23,17 @@ bool Agenda::addActivity(){
 	return(addActivity(activity));
 }
 
+
 bool Agenda::addActivity(Activity activity)
 {
-	if(isOverlap(activity))
+	if(isOverlap(activity)){
 		return false;
+	}
+
     activities.push_back(activity);
     return true;
 }
+
 
 bool Agenda::isOverlap(Activity activity)
 {
@@ -70,6 +76,7 @@ bool Agenda::removeActivity(std::string name, Day day){
 		time.setTime(sTime);
 	}
 
+
 	for(std::vector<Activity>::iterator it= activities.begin(); it !=activities.end(); it++){
 		if(duplicate){
 			if(name == it->getName() && day == it->getDay() && time == it->getStartTime()){
@@ -91,6 +98,7 @@ bool Agenda::removeActivity(std::string name, Day day){
 }
 
 
+
 std::vector<Activity> Agenda::ActivitiesOfTheDay(Day day){
 	std::vector<Activity> activitiesOfDay;
 	for (Activity activity : activities){
@@ -101,6 +109,7 @@ std::vector<Activity> Agenda::ActivitiesOfTheDay(Day day){
 	sort(activitiesOfDay.begin(), activitiesOfDay.end());
 	return activitiesOfDay;
 }
+
 
 bool Agenda::show(Day day){
 	std::vector<Activity> activitiesOfDay = ActivitiesOfTheDay(day);
