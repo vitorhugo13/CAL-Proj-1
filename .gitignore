@@ -1,14 +1,3 @@
-# ignore all files
-*
-
-# unignore directories
-!src/
-!logos/
-
-# unignore files
-!.gitignore
-!*.cpp
-!*.h
-!LICENSE
-!README.md
-!Makefile
+﻿Anotações.txt
+.vscode/
+.idea/

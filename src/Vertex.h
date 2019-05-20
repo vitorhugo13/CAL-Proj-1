@@ -13,6 +13,7 @@ class Vertex {
     
 private:
 
+    int id;
     std::string info;
     Coordinates coords;
     std::vector<Edge> paths;
@@ -23,10 +24,13 @@ private:
 
 public:
 
-    Vertex(std::string info, long int x, long int y) {
+    Vertex(int id,std::string info, long int x, long int y) {
+
+        this->id=id;
         this->info = info;
         this->paths = {};
         this->coords = Coordinates(x, y);
+        
     }
     
     vertexID getID() { return id; }
