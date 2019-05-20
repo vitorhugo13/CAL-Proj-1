@@ -33,12 +33,15 @@ public:
 class FootPath : public Edge {
 
 private:
+
     Time travelTime;
 
 public:
+
     FootPath(Vertex *src, Vertex *dest, Time travelTime) : Edge(src, dest) {
         this->travelTime = travelTime;
     }
+
     Time getTravelTime(int startTime) { return travelTime; }
 
 };
@@ -73,6 +76,10 @@ public:
         }
 
         return minTime;
+    }
+
+    void addVehicle(Vehicle* vehicle) {
+        vehicles.push_back(vehicle);
     }
 
 };
