@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <bits/stdc++.h>
+#include <fstream>
 
 
 bool Agenda::addActivity(){
@@ -11,7 +12,8 @@ bool Agenda::addActivity(){
 	std::cin >> name;
 
 	std::cout << "Activity's info ? "<< std::endl;
-	std::cin >> info;
+	std::cin.ignore();
+	std::getline(std::cin, info);
 
 	std::cout << "Activity's date (day-month-year) ? "<< std::endl;
 	std::cin >> date;
@@ -39,9 +41,6 @@ bool Agenda::addActivity(Activity activity)
     activities.push_back(activity);
     return true;
 }
-
-
-
 
 
 bool Agenda::isOverlap(Activity activity)
@@ -144,4 +143,53 @@ bool Agenda::show(Day day){
 	std::cout << std::endl;
 	return true;
 }
+void Agenda::loadActivities(){
 
+	std::ifstream mfile;
+
+	mfile.open ("agenda.txt");
+
+	while (!mfile.eof()) {
+		long int x, y;
+		std::string name, info, date, Stime, Ftime;
+		mfile >> name;
+		if (name == "")
+			break;
+		mfile.ignore(1);
+		mfile >> x;
+		mfile.ignore(1);
+		mfile >> y;
+		mfile.ignore(1);
+		mfile >> date;
+		mfile.ignore(1);
+		mfile >> Stime;
+		mfile.ignore(1);
+		mfile >> Ftime;
+		mfile.ignore(1);
+		std::getline(mfile, info);
+		Coordinates c(x, y);
+		Day day(date);
+		Time startTime(Stime);
+		Time endTime(Ftime);
+		Activity a(name, info, c, day, startTime, endTime);
+		activities.push_back(a);
+	}
+	mfile.close();
+
+
+}
+
+void Agenda::saveActivities()const{
+
+	std::ofstream mfile;
+
+	mfile.open ("agenda.txt");
+
+	for (Activity activity : activities){
+		mfile << activity.getName() << " " << activity.getCoords().getX() << " " << activity.getCoords().getY() << " " <<
+				activity.getDay() << " " << activity.getStartTime() << " " << activity.getEndTime() << " " << activity.getInfo() << std::endl;
+	}
+
+	mfile.close();
+
+}

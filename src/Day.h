@@ -30,7 +30,7 @@ class Day
 	unsigned int ano, mes, dia;
 
 public:
-	Day() {}
+	Day() { }
 
 	/**
 	 * Contrutor de datas por inteiros

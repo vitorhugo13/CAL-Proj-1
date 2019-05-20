@@ -42,6 +42,8 @@ public:
     bool removeActivity(std::string name, Day day);
     bool show(Day day);
     std::vector<Activity> ActivitiesOfTheDay(Day day);
+    void loadActivities();
+    void saveActivities()const;
 };
 
 #endif

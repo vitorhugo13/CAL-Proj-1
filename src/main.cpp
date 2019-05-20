@@ -57,8 +57,7 @@ Day seeAgenda(){
 int main(void) {
 	
 	Agenda agenda;
-
-
+	agenda.loadActivities();
 	int menu = -2;
 	while(menu != 4){
 		while(menu == -2){
@@ -80,6 +79,7 @@ int main(void) {
 						}
 					case 1:{
 						agenda.addActivity();
+						agenda.saveActivities();
 						menu = -2;
 						break;
 					}
@@ -90,8 +90,10 @@ int main(void) {
 						std::cout << "In which day? " << std::endl;
 						std::cin >> date;
 						Day day(date);
-						if(agenda.removeActivity(name, date))
+						if(agenda.removeActivity(name, date)){
 							std::cout << "Activity removed with success! " << std::endl;
+							agenda.saveActivities();
+						}
 						else
 							std::cout << "Activity can not be added" << std::endl;
 						menu = -2;
