@@ -88,7 +88,7 @@ bool Agenda::removeActivity(std::string name, Day day){
 	if(duplicate){
 		show(day);
 		std::string sTime;
-		std::cout << std::endl << "Activity start hour?" << std::endl;
+		std::cout << std::endl << "Activity starting hour?" << std::endl;
 		std::cin >> sTime;
 		time.setTime(sTime);
 	}
@@ -150,11 +150,15 @@ void Agenda::loadActivities(){
 	mfile.open ("agenda.txt");
 
 	while (!mfile.eof()) {
+		
 		long int x, y;
 		std::string name, info, date, Stime, Ftime;
+
 		mfile >> name;
-		if (name == "")
+		if (name == ""){
 			break;
+		}
+
 		mfile.ignore(1);
 		mfile >> x;
 		mfile.ignore(1);
@@ -166,6 +170,8 @@ void Agenda::loadActivities(){
 		mfile.ignore(1);
 		mfile >> Ftime;
 		mfile.ignore(1);
+		mfile>>info;
+
 		std::getline(mfile, info);
 		Coordinates c(x, y);
 		Day day(date);
@@ -174,6 +180,7 @@ void Agenda::loadActivities(){
 		Activity a(name, info, c, day, startTime, endTime);
 		activities.push_back(a);
 	}
+
 	mfile.close();
 
 
