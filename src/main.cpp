@@ -60,7 +60,9 @@ int main(void) {
 	agenda.loadActivities();
 	int menu = -2;
 	while(menu != 4){
+
 		while(menu == -2){
+
 			std::cout << "----- TripMate ----" << std::endl<< std::endl;
 			std::cout << "0 - See Agenda" << std::endl;
 			std::cout << "1 - Add activity" << std::endl;
@@ -69,20 +71,29 @@ int main(void) {
 			std::cout << "4 - Exit " << std::endl;
 
 			menu = menuInput(4);
+
 			if(menu == -1)
 				std::cout << "Menu does not exist" << std::endl;
+
 			switch (menu){
 					case 0:{
 						agenda.show(seeAgenda());
 						menu = -2;
 						break;
 						}
+						
 					case 1:{
-						agenda.addActivity();
-						agenda.saveActivities();
+						if(agenda.addActivity()){
+							std::cout<< "Activity added with success!"<< std::endl;
+							agenda.saveActivities();
+						}
+						else{
+							std::cout<< "Activity can not be added!"<< std::endl;
+						}			
 						menu = -2;
 						break;
 					}
+
 					case 2:{
 						std::string name, date;
 						std::cout << "Activity's name ?" << std::endl;
@@ -95,18 +106,21 @@ int main(void) {
 							agenda.saveActivities();
 						}
 						else
-							std::cout << "Activity can not be added" << std::endl;
+							std::cout << "Activity can not be removed!" << std::endl;
 						menu = -2;
 						break;
 					}
+
 					case 3:{
 						agenda.show(seeAgenda());
 						std::cout << "From which activity we want to see the path to the next activity ? " << std::endl;
 						menu = -2;
 						break;
 					}
+
 					case 4:
 						return 0;
+						
 					default:
 						return 0;
 				}
