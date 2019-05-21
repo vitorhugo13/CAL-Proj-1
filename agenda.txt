@@ -1,6 +1,9 @@
-Study 0 2 11/02/2018 11:05 12:30 a lot
-Study 0 2 11/02/2018 19:05 20:50 a lot
-football 0 2 12/04/2019 10:00 12:00 with friends
-play_football 0 2 12/12/1980 12:90 13:40 dk
-comer 0 2 22/04/2019 00:20 01:59 em preserva
-ola 0 2 12/12/2011 12:00 13:00 ei nada
+Study 0 2 11/02/2018 11:05 12:30  a lot
+Study 0 2 11/02/2018 19:05 20:50  a lot
+football 0 2 12/04/2019 10:00 12:00  with friends
+play_football 0 2 12/12/1980 12:90 13:40  dk
+comer 0 2 22/04/2019 00:20 01:59  na foz
+ola 0 2 12/12/2011 12:00 13:00  ei nada
+oi 0 2 12/02/2020 12:30 19:09 ara testar
+comer 0 2 12/04/1990 12:00 23:59 quando for preciso
+ESTUDAR 0 2 21/05/2019 14:40 18:45 HOJE se Possivel

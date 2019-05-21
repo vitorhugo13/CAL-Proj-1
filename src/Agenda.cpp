@@ -13,7 +13,7 @@ bool Agenda::addActivity(){
 	getline(std::cin,name);
 
 	std::cout << "Activity's info ? "<< std::endl;
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::getline(std::cin, info);
 
 	std::cout << "Activity's date (day-month-year) ? "<< std::endl;
@@ -162,22 +162,14 @@ void Agenda::loadActivities(){
 	while (!mfile.eof()) {
 
 		long int x, y;
-		std::string name, info, date, Stime, Ftime,complex_name;
+		std::string name, info, date, Stime, Ftime;
 
 		mfile >> name;
-		
 		if (name == ""){
 			break;
 		}
 	
-		/*
-		mfile.ignore(1);
-		while(!isdigit(mfile.peek())){
-			mfile>>name;
-			mfile.ignore(1);
-		}
-		*/
-
+		
 		mfile.ignore(1);
 		mfile >> x;
 		mfile.ignore(1);
@@ -189,18 +181,22 @@ void Agenda::loadActivities(){
 		mfile.ignore(1);
 		mfile >> Ftime;
 		mfile.ignore(1);
-		
 		std::getline(mfile, info);
+
+		//create objects with the extract information from agenda.txt
 		Coordinates c(x, y);
 		Day day(date);
 		Time startTime(Stime);
 		Time endTime(Ftime);
+
+		
+
+		//create an activity with the previous objects
 		Activity a(name, info, c, day, startTime, endTime);
 		activities.push_back(a);
 	}
 
 	mfile.close();
-
 
 }
 
