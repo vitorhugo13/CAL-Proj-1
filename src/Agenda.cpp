@@ -148,9 +148,10 @@ bool Agenda::show(Day day){
 
 
 //TEMOS DE VERIFICAR AQUI UMA PEQUENA QUESTAO
-//O QUE TINHAMOS NESTE MOMENTO É QUE O NOME DA ATIVIDADE PODE TER APENAS UMAS PALAVRA
-//UMA VEZ QUE O NOME PODE SER (play football)/(play guitar) ou algo do genero temos de mudar esta função para conseguir ler o nome todo
-//se mantivermos assim irá aparecer erro de "FormatoStringInvalido"
+//O QUE TINHAMOS NESTE MOMENTO É QUE O NOME DA ATIVIDADE PODE TER APENAS UMA PALAVRA
+//UMA VEZ QUE O NOME DA ATIVIDADE PODE SER (play football)/(play guitar) ou algo do genero temos de mudar esta função para conseguir ler o nome todo
+//se mantivermos assim irá aparecer erro de "FormatoStringInvalido" mal ocorra o load inicial
+//a solução para manter a função assim é a atividade ter um só nome ou juntar palavras separadas por _ (play_football) -> como está neste momento no agenda.txt
 
 void Agenda::loadActivities(){
 
@@ -161,13 +162,14 @@ void Agenda::loadActivities(){
 	while (!mfile.eof()) {
 
 		long int x, y;
-		std::string name, info, date, Stime, Ftime;
+		std::string name, info, date, Stime, Ftime,complex_name;
 
 		mfile >> name;
+		
 		if (name == ""){
 			break;
 		}
-		
+	
 		/*
 		mfile.ignore(1);
 		while(!isdigit(mfile.peek())){
