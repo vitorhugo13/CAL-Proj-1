@@ -9,7 +9,8 @@ bool Agenda::addActivity(){
 
 	std::string name, info, date, startTime, endTime;
 	std::cout << "Activity's name ? "<< std::endl;
-	std::cin >> name;
+	std::cin.ignore();
+	getline(std::cin,name);
 
 	std::cout << "Activity's info ? "<< std::endl;
 	std::cin.ignore();
@@ -143,6 +144,12 @@ bool Agenda::show(Day day){
 	std::cout << std::endl;
 	return true;
 }
+
+
+//TEMOS DE VERIFICAR AQUI UMA PEQUENA QUESTAO
+//O QUE TINHAMOS NESTE MOMENTO É QUE O NOME DA ATIVIDADE PODE TER APENAS UMAS PALAVRA
+//UMA VEZ QUE O NOME PODE SER (play football)/(play guitar) ou algo do genero temos de mudar esta função para conseguir ler o nome todo
+//se mantivermos assim irá aparecer erro de "FormatoStringInvalido"
 void Agenda::loadActivities(){
 
 	std::ifstream mfile;
@@ -150,7 +157,7 @@ void Agenda::loadActivities(){
 	mfile.open ("agenda.txt");
 
 	while (!mfile.eof()) {
-		
+
 		long int x, y;
 		std::string name, info, date, Stime, Ftime;
 
@@ -170,8 +177,7 @@ void Agenda::loadActivities(){
 		mfile.ignore(1);
 		mfile >> Ftime;
 		mfile.ignore(1);
-		mfile>>info;
-
+		
 		std::getline(mfile, info);
 		Coordinates c(x, y);
 		Day day(date);
