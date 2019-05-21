@@ -17,6 +17,23 @@ template <class T> class Edge;
 template <class T> class Graph;
 template <class T> class Vertex;
 
+const constexpr double BUS_TIME_MULTIPLIER = 0.025;
+const constexpr double SUBWAY_TIME_MULTIPLIER = 0.02;
+const constexpr double WALK_TIME_MULTIPLIER = 0.1;
+
+const constexpr double BUS_PRICE = 1.20;
+const constexpr double SUBWAY_PRICE = 1.70;
+const constexpr double WALK_PRICE = 0.0;
+
+const constexpr double DEFAULT_TRANSBORD_TIME = 5.0;
+
+const string TIME_MODE = "time";
+const string PRICE_MODE = "price";
+
+const string BUS = "bus";
+const string WALK = "walk";
+const string SUBWAY = "subway";
+
 template <class T>
 class Graph {
 	vector<Vertex<T> *> vertexSet;    // vertex set

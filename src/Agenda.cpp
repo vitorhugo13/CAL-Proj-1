@@ -169,6 +169,8 @@ void Agenda::loadActivities(){
 
 	if(count_lines == 1){
 		std::getline(mfile,name);
+		if(name == "")
+			break;
 		count_lines++;
 	}
 	
