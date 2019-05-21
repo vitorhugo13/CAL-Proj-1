@@ -147,11 +147,12 @@ bool Agenda::show(Day day){
 }
 
 
-//TEMOS DE VERIFICAR AQUI UMA PEQUENA QUESTAO
-//O QUE TINHAMOS NESTE MOMENTO É QUE O NOME DA ATIVIDADE PODE TER APENAS UMA PALAVRA
-//UMA VEZ QUE O NOME DA ATIVIDADE PODE SER (play football)/(play guitar) ou algo do genero temos de mudar esta função para conseguir ler o nome todo
-//se mantivermos assim irá aparecer erro de "FormatoStringInvalido" mal ocorra o load inicial
-//a solução para manter a função assim é a atividade ter um só nome ou juntar palavras separadas por _ (play_football) -> como está neste momento no agenda.txt44
+//Solução encontrada: ao invés de colocarmos toda a informação de uma atividade numa só linha, será distribuida por 2
+//a primeira com o nome da atividade, o que vai fazer com que se consiga extrair facilmente atividades com nomes compostos por 2 ou mais palavras
+//a segunda com a restante informaçao conforme estava anteriormente
+//exemplo
+//go to the gym     <- line 1
+//0 2 22/05/2019 11:00 12:30 with friends <- line 2
 
 void Agenda::loadActivities(){
 
@@ -207,8 +208,8 @@ void Agenda::saveActivities()const{
 	mfile.open ("agenda.txt");
 
 	for (Activity activity : activities){
-		mfile << activity.getName() << " " << activity.getCoords().getX() << " " << activity.getCoords().getY() << " " <<
-				activity.getDay() << " " << activity.getStartTime() << " " << activity.getEndTime() << " " << activity.getInfo() << std::endl;
+		mfile << activity.getName() <<std::endl;
+		mfile<< activity.getCoords().getX() << " " << activity.getCoords().getY() << " " <<activity.getDay() << " " << activity.getStartTime() << " " << activity.getEndTime() << " " << activity.getInfo() << std::endl;
 	}
 
 	mfile.close();
