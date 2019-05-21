@@ -14,60 +14,42 @@ template <class T> class Vertex;
 
 template <class T>
 class Edge {
+	int id;
 	Vertex<T> * dest;      // destination vertex
 	double weight;         // edge weight
 public:
-	Edge(Vertex<T> *d, double w);
+	Edge(Vertex<T> *d, double w, int id);
 	virtual Time getTravelTime(int startTime);
 	friend class Graph<T>;
 	friend class Vertex<T>;
 };
-/*
-class FootPath : public Edge {
+
+template <class T>
+class FootPath : public Edge<T> {
 
 private:
-    Time travelTime;
 
 public:
-    FootPath(Vertex<T> *dest, double weigth, Time travelTime) : Edge(dest, weigth) {
-        this->travelTime = travelTime;
-    }
-    Time getTravelTime(int startTime) { return travelTime; }
+    FootPath(Vertex<T> *dest, double weigth, int id) : Edge<T>(dest, weigth, id) { }
+
 
 };
 
-
+template <class T>
 class VehiclePath : public Edge<T> {
 
 private:
-	int id;
     std::vector<Vehicle *> vehicles;
     unsigned int chosenVehicle;
 
 
 public:
 
-    VehiclePath(Vertex<T> *dest, double weigth) : Edge(dest, weigth) {
+    VehiclePath( Vertex<T> *dest, double weigth, int id) : Edge<T>(dest, weigth, id) {
         vehicles = {};
         chosenVehicle = 0;
     }
 
-    Time getTravelTime(int startTime) {
-        
-        Time minTime(TIME_LIMIT);
-
-        for (size_t i = 0; i < vehicles.size(); i++) {
-            Time tmpTime = vehicles[i]->getTripTime(id, destVertex->getID(), startTime);
-
-            if (tmpTime < minTime) {
-                minTime = tmpTime;
-                chosenVehicle = i;
-            }
-        }
-
-        return minTime;
-    }
-
-};*/
+};
 
 #endif
