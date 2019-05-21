@@ -200,8 +200,6 @@ void Agenda::loadActivities(){
 
 }
 
-//se a info tiver duas palavras ou mais come a 1º letra de todas
-//nao consegui mudar isto pq estava na feup e tive de ir embora xD
 void Agenda::saveActivities()const{
 
 	std::ofstream mfile;
