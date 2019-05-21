@@ -135,11 +135,12 @@ bool Agenda::show(Day day){
 		return false;
 	}
 
+	std:: cout << std::endl;
 	std::cout << "Activities of the Day " << std::setw(10);
-	std::cout << day << std::endl << std::endl;
+	std::cout << day << std::endl;
 	std::cout << "Start Time " << std::setw(10) << "Name " << std::setw(15) << "End Time" << std::setw(10) << "Info"<< std::endl;
 	for (Activity activity : activitiesOfDay){
-		std::cout << activity.getStartTime() << std::setw(16) << activity.getName() << std::setw(11) << activity.getEndTime() << std::setw(13) << activity.getInfo()<< std::endl;
+		std::cout << activity.getStartTime() << std::setw(18) << activity.getName() << std::setw(9) << activity.getEndTime() << std::setw(18) << activity.getInfo()<< std::endl;
 	}
 	std::cout << std::endl;
 	return true;
@@ -150,6 +151,7 @@ bool Agenda::show(Day day){
 //O QUE TINHAMOS NESTE MOMENTO É QUE O NOME DA ATIVIDADE PODE TER APENAS UMAS PALAVRA
 //UMA VEZ QUE O NOME PODE SER (play football)/(play guitar) ou algo do genero temos de mudar esta função para conseguir ler o nome todo
 //se mantivermos assim irá aparecer erro de "FormatoStringInvalido"
+
 void Agenda::loadActivities(){
 
 	std::ifstream mfile;
@@ -165,6 +167,14 @@ void Agenda::loadActivities(){
 		if (name == ""){
 			break;
 		}
+		
+		/*
+		mfile.ignore(1);
+		while(!isdigit(mfile.peek())){
+			mfile>>name;
+			mfile.ignore(1);
+		}
+		*/
 
 		mfile.ignore(1);
 		mfile >> x;
