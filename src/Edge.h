@@ -14,7 +14,6 @@ template <class T> class Vertex;
 
 template <class T>
 class Edge {
-	int id;
 	Vertex<T> * dest;      // destination vertex
 	double weight;         // edge weight
 public:
