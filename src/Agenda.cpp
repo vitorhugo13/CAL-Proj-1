@@ -151,7 +151,7 @@ bool Agenda::show(Day day){
 //O QUE TINHAMOS NESTE MOMENTO É QUE O NOME DA ATIVIDADE PODE TER APENAS UMA PALAVRA
 //UMA VEZ QUE O NOME DA ATIVIDADE PODE SER (play football)/(play guitar) ou algo do genero temos de mudar esta função para conseguir ler o nome todo
 //se mantivermos assim irá aparecer erro de "FormatoStringInvalido" mal ocorra o load inicial
-//a solução para manter a função assim é a atividade ter um só nome ou juntar palavras separadas por _ (play_football) -> como está neste momento no agenda.txt
+//a solução para manter a função assim é a atividade ter um só nome ou juntar palavras separadas por _ (play_football) -> como está neste momento no agenda.txt44
 
 void Agenda::loadActivities(){
 
