@@ -9,7 +9,8 @@ bool Agenda::addActivity(){
 
 	std::string name, info, date, startTime, endTime;
 	std::cout << "Activity's name ? "<< std::endl;
-	std::cin >> name;
+	std::cin.ignore();
+	getline(std::cin,name);
 
 	std::cout << "Activity's info ? "<< std::endl;
 	std::cin.ignore();
@@ -88,7 +89,7 @@ bool Agenda::removeActivity(std::string name, Day day){
 	if(duplicate){
 		show(day);
 		std::string sTime;
-		std::cout << std::endl << "Activity start hour?" << std::endl;
+		std::cout << std::endl << "Activity starting hour?" << std::endl;
 		std::cin >> sTime;
 		time.setTime(sTime);
 	}
@@ -134,15 +135,24 @@ bool Agenda::show(Day day){
 		return false;
 	}
 
+	std:: cout << std::endl;
 	std::cout << "Activities of the Day " << std::setw(10);
-	std::cout << day << std::endl << std::endl;
+	std::cout << day << std::endl;
 	std::cout << "Start Time " << std::setw(10) << "Name " << std::setw(15) << "End Time" << std::setw(10) << "Info"<< std::endl;
 	for (Activity activity : activitiesOfDay){
-		std::cout << activity.getStartTime() << std::setw(16) << activity.getName() << std::setw(11) << activity.getEndTime() << std::setw(13) << activity.getInfo()<< std::endl;
+		std::cout << activity.getStartTime() << std::setw(18) << activity.getName() << std::setw(9) << activity.getEndTime() << std::setw(18) << activity.getInfo()<< std::endl;
 	}
 	std::cout << std::endl;
 	return true;
 }
+
+
+//TEMOS DE VERIFICAR AQUI UMA PEQUENA QUESTAO
+//O QUE TINHAMOS NESTE MOMENTO É QUE O NOME DA ATIVIDADE PODE TER APENAS UMA PALAVRA
+//UMA VEZ QUE O NOME DA ATIVIDADE PODE SER (play football)/(play guitar) ou algo do genero temos de mudar esta função para conseguir ler o nome todo
+//se mantivermos assim irá aparecer erro de "FormatoStringInvalido" mal ocorra o load inicial
+//a solução para manter a função assim é a atividade ter um só nome ou juntar palavras separadas por _ (play_football) -> como está neste momento no agenda.txt44
+
 void Agenda::loadActivities(){
 
 	std::ifstream mfile;
@@ -150,11 +160,24 @@ void Agenda::loadActivities(){
 	mfile.open ("agenda.txt");
 
 	while (!mfile.eof()) {
+
 		long int x, y;
-		std::string name, info, date, Stime, Ftime;
+		std::string name, info, date, Stime, Ftime,complex_name;
+
 		mfile >> name;
-		if (name == "")
+		
+		if (name == ""){
 			break;
+		}
+	
+		/*
+		mfile.ignore(1);
+		while(!isdigit(mfile.peek())){
+			mfile>>name;
+			mfile.ignore(1);
+		}
+		*/
+
 		mfile.ignore(1);
 		mfile >> x;
 		mfile.ignore(1);
@@ -166,6 +189,7 @@ void Agenda::loadActivities(){
 		mfile.ignore(1);
 		mfile >> Ftime;
 		mfile.ignore(1);
+		
 		std::getline(mfile, info);
 		Coordinates c(x, y);
 		Day day(date);
@@ -174,11 +198,14 @@ void Agenda::loadActivities(){
 		Activity a(name, info, c, day, startTime, endTime);
 		activities.push_back(a);
 	}
+
 	mfile.close();
 
 
 }
 
+//se a info tiver duas palavras ou mais come a 1º letra de todas
+//nao consegui mudar isto pq estava na feup e tive de ir embora xD
 void Agenda::saveActivities()const{
 
 	std::ofstream mfile;
