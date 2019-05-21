@@ -7,19 +7,49 @@
 #include "Edge.h"
 #include "MutablePriorityQueue.h"
 
+#include <vector>
+#include <queue>
+#include <list>
+#include <limits>
+#include <cmath>
 
+template <class T> class Edge;
+template <class T> class Graph;
+template <class T> class Vertex;
+
+template <class T>
 class Graph {
-
-private:
-    std::vector<Vertex *> vertexSet;
+	vector<Vertex<T> *> vertexSet;    // vertex set
 
 public:
-       
-    bool addVertex(const Vertex &vertex);
-    bool addEdge(const Edge &edge);
-    bool addVehicle(const Vehicle &vehicle);
+	Vertex<T> *findVertex(const T &in) const;
+	bool addVertex(const T &in);
+	bool addEdge(const T &sourc, const T &dest, double w);
+	bool addVehicle(const Vehicle &vehicle);
+	int getNumVertex() const;
+	vector<Vertex<T> *> getVertexSet() const;
+	bool removeEdge(const T &sourc, const T &dest);
+	bool removeVertex(const T &in);
+	vector<T> dfs() const;
+	void dfsVisit(Vertex<T> *v, vector<T> & res) const;
+	vector<T> bfs(const T & source) const;
+	vector<T> topsort() const;
+	bool isDAG() const;
+	int maxNewChildren(const T & source, T &inf) const ;
+	Vertex<T> *initSingleSource(const T &origin);
+	bool dfsIsDAG(Vertex<T> *v) const;
+	bool relax(Vertex<T> *v, Vertex<T> *w, double weight);
+	void dijkstraShortestPath(const T &s);
+	void dijkstraShortestPathOld(const T &s);
+	void unweightedShortestPath(const T &s);
+	vector<T> getPath(const T &origin, const T &dest) const;
 
-    Vertex* findVertex(const std::string &v);
+};
+/*
+
+
+
+
     
 
 
@@ -68,6 +98,6 @@ public:
 
 };
 
-
+*/
 
 #endif

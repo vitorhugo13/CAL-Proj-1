@@ -2,6 +2,7 @@
 #define TIME_H
 
 #include <string>
+#include <limits>
 
 #define TIME_LIMIT std::numeric_limits<unsigned short int>::max()
 
