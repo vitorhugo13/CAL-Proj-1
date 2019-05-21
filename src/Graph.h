@@ -20,8 +20,9 @@ private:
 
 public:
     void loadVertexes(std::string filename);
+    void loadEdges(std::string filename);
     Vertex *findVertex(const Vertex &vertex) const;
-    Vertex *findVertex(const int id) const;
+    Vertex *findVertex(const int vertexID) const;
 	int getNumVertex() const;
 
     
@@ -30,13 +31,13 @@ public:
         std::fstream infile(filename);
         std::string line;
 
-        getline(infile, line);
+        std::getline(infile, line);
         unsigned int line_num = stoi(line);
 
         std::string delimiter = ",";
 
         for (unsigned int i = 0; i < line_num; i++) {
-            getline(infile, line);
+            std::sgetline(infile, line);
             line = line.substr(1, line.length - 2);
 
             std::string info[3];
@@ -46,15 +47,143 @@ public:
                 info[i++] = line.substr(0, pos);
             }
 
-            Vertex *v = new Vertex(stoi(info[0]), stod(info[1]), stod(info[2]));
+            Vertex *v = new Vertex(std::stoi(info[0]), std::stod(info[1]), std::stod(info[2]));
 
             addVertex(v);
         }
+
+        infile.close();
+
     }
 
-    void addVertex(const Vertex &vertex) {
-        vertexSet.insert(std::lower_bound(vertexSet.begin(), vertexSet.end(), vertex));
+    void loadBusStops(std::string filename) {
+        std::fstream infile(filename);
+        std::string line;
+
+        std::getline(infile, line);
+        unsigned int line_num = stoi(line);
+
+        std::string delimiter = ",";
+
+        for (unsigned int i = 0; i < line_num; i++) {
+            std::sgetline(infile, line);
+            line = line.substr(1, line.length - 2);
+
+            size_t pos = line.find(delimiter);
+            int vertexID = std::stoi(line.substr(0, pos));
+
+            std::string info[7];
+            size_t i = 0;
+            while ((pos = line.find(delimiter)) != std::string::npos) {
+                info[i] = line.substr(0, pos);
+                line.erase(0, pos + delimiter.length());
+                info[i] = info[i].substr(1, info[i].length() - 2);
+                i++;
+            }
+
+            BusStop *busStop = new BusStop(info[0], info[1], info[2], info[3], info[4], info[5], info[6]);
+
+            Vertex *vertex = findVertex(vertexID);
+
+            vertex->addBus(busStop);
+        }
+
+        infile.close();
     }
+
+    void loadSubwayStations(std::string filename) {
+        std::fstream infile(filename);
+        std::string line;
+
+        std::getline(infile, line);
+        unsigned int line_num = stoi(line);
+
+        std::string delimiter = ",";
+
+        for (unsigned int i = 0; i < line_num; i++) {
+            std::sgetline(infile, line);
+            line = line.substr(1, line.length - 2);
+
+            size_t pos = line.find(delimiter);
+            int vertexID = std::stoi(line.substr(0, pos));
+
+            std::string info[2];
+            size_t i = 0;
+            while ((pos = line.find(delimiter)) != std::string::npos) {
+                info[i] = line.substr(0, pos);
+                line.erase(0, pos + delimiter.length());
+                info[i] = info[i].substr(1, info[i].length() - 2);
+                i++;
+            }
+
+            std::string token;
+            std::vector<char> lines;
+            while ((pos = info[1].find(delimiter)) != std::string::npos) {
+                token = info[1].substr(0, pos);
+                info[1].erase(0, pos + delimiter.length());
+                lines.push_back(token[1]);
+            }
+
+            SubwayStation *subwayStation = new SubwayStation(info[0], lines);
+
+            Vertex *vertex = findVertex(vertexID);
+
+            vertex->addSubway(subwayStation);
+        }
+
+        infile.close();
+    }
+
+    void loadEdges(std::string filename) {
+
+        std::fstream infile(filename);
+        std::string line;
+
+        std::getline(infile, line);
+        unsigned int line_num = std::stoi(line);
+
+        std::string delimiter = ",";
+
+        for (unsigned int i = 0; i < line_num; i++) {
+            std::getline(infile, line);
+            line = line.substr(1, line.length - 2);
+
+            std::string info[2];
+            size_t i = 0;
+            size_t pos = 0;
+            while ((pos = line.find(delimiter)) != std::string::npos) {
+                info[i++] = line.substr(0, pos);
+            }
+
+            Edge *e = new Edge(std::stoi(info[0]), std::stoi(info[1]));
+
+            addEdge(e);
+        }
+
+        infile.close();
+    }
+
+
+    bool addVertex(const Vertex &vertex) {
+	    if (findVertex(vertex) != nullptr)
+		    return false;
+	    vertexSet.push_back(vertex);
+	    return true;
+    }
+
+    Vertex *findVertex(const Vertex &vertex) const {
+        return findVertex(vertex->getID());
+    }
+
+    Vertex *findVertex(const int vertexID) const {
+        for (size_t i = 0; i < vertexSet.size(); i++) {
+            if (vertexID == vertexSet[i]->getID()) {
+                return vertexSet[i];
+            }
+        }
+	    return nullptr;
+    }
+
 
     //dist é o time
     //Implementação do algoritmo de dijsktra
