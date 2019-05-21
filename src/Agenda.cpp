@@ -158,20 +158,22 @@ void Agenda::loadActivities(){
 
 	std::ifstream mfile;
 
+	int count_lines=1;
+
 	mfile.open ("agenda.txt");
+
+	long int x, y;
+	std::string name, info, date, Stime, Ftime;
 
 	while (!mfile.eof()) {
 
-		long int x, y;
-		std::string name, info, date, Stime, Ftime;
-
-		mfile >> name;
-		if (name == ""){
-			break;
-		}
+	if(count_lines == 1){
+		std::getline(mfile,name);
+		count_lines++;
+	}
 	
-		
-		mfile.ignore(1);
+
+	if(count_lines == 2){	
 		mfile >> x;
 		mfile.ignore(1);
 		mfile >> y;
@@ -195,6 +197,10 @@ void Agenda::loadActivities(){
 		//create an activity with the previous objects
 		Activity a(name, info, c, day, startTime, endTime);
 		activities.push_back(a);
+
+		count_lines=1;
+	}
+
 	}
 
 	mfile.close();
