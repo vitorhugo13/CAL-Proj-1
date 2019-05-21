@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
 
 #include "Vertex.h"
 #include "Edge.h"
@@ -14,17 +15,46 @@ class Graph {
 private:
     std::vector<Vertex *> vertexSet;
 
-public:
-    Vertex *findVertex(const Vertex &vertex) const;
-    bool addVertex(const Vertex &vertex);
+    void addVertex(const Vertex &vertex);
     bool addEdge(const Edge &edge);
-    bool addVehicle(const Vehicle &vehicle);
+
+public:
+    void loadVertexes(std::string filename);
+    Vertex *findVertex(const Vertex &vertex) const;
+    Vertex *findVertex(const int id) const;
 	int getNumVertex() const;
 
-    Vertex* findVertex(const std::string &v);
     
+    void loadVertexes(std::string filename) {
 
+        std::fstream infile(filename);
+        std::string line;
 
+        getline(infile, line);
+        unsigned int line_num = stoi(line);
+
+        std::string delimiter = ",";
+
+        for (unsigned int i = 0; i < line_num; i++) {
+            getline(infile, line);
+            line = line.substr(1, line.length - 2);
+
+            std::string info[3];
+            size_t i = 0;
+            size_t pos = 0;
+            while ((pos = line.find(delimiter)) != std::string::npos) {
+                info[i++] = line.substr(0, pos);
+            }
+
+            Vertex *v = new Vertex(stoi(info[0]), stod(info[1]), stod(info[2]));
+
+            addVertex(v);
+        }
+    }
+
+    void addVertex(const Vertex &vertex) {
+        vertexSet.insert(std::lower_bound(vertexSet.begin(), vertexSet.end(), vertex));
+    }
 
     //dist é o time
     //Implementação do algoritmo de dijsktra

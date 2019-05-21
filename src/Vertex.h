@@ -9,25 +9,25 @@
 #include "Coordinates.h"
 
 
+enum VertexType { FOOT_VERTEX, BUS_STOP, SUBWAY_STATION };
+
+
 class Vertex {
     
 private:
 
     int id;
-    std::string info;
     Coordinates coords;
     std::vector<Edge> paths;
     bool visited = false;
-    Time time = Time(0);
     Vertex *path = NULL;
     int queueIndex = 0;
 
 public:
 
-    Vertex(int id,std::string info, long int x, long int y) {
+    Vertex(int id, double x, double y) {
 
-        this->id=id;
-        this->info = info;
+        this->id = id;
         this->paths = {};
         this->coords = Coordinates(x, y);
         
