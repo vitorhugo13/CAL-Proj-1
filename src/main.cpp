@@ -48,7 +48,7 @@ int menuInput(int nOptions){
 
 Day seeAgenda(){
 	std::string day;
-	std::cout << "In which day?" << std::endl;
+	std::cout << "In which day? (dd-mm-yyyy)"<< std::endl;
 	std::cin >> day;
 	Day day1(day);
 	return day1;
@@ -70,7 +70,11 @@ int main(void) {
 			std::cout << "3 - See paths" << std::endl;
 			std::cout << "4 - Exit " << std::endl;
 
+			std::cout << "Option: ";
 			menu = menuInput(4);
+			
+			
+		
 
 			if(menu == -1)
 				std::cout << "Menu does not exist" << std::endl;

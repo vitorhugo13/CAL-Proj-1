@@ -8,43 +8,23 @@
 #include "Edge.h"
 #include "Coordinates.h"
 
+template <class T> class Edge;
+template <class T> class Graph;
+template <class T> class Vertex;
 
+template <class T>
 class Vertex {
-    
-private:
+	T info;                // contents
+	std::vector<Edge<T> > adj;  // list of outgoing edges
+	bool visited;          // auxiliary field used by dfs and bfs
+	bool processing;       // auxiliary field used by isDAG
+	int indegree;          // auxiliary field used by topsort
 
-    int id;
-    std::string info;
-    Coordinates coords;
-    std::vector<Edge> paths;
-    bool visited = false;
-    Time time = Time(0);
-    Vertex *path = NULL;
-    int queueIndex = 0;
-
+	void addEdge(Vertex<T> *dest, double w);
+	bool removeEdgeTo(Vertex<T> *d);
 public:
-
-    Vertex(int id,std::string info, long int x, long int y) {
-
-        this->id=id;
-        this->info = info;
-        this->paths = {};
-        this->coords = Coordinates(x, y);
-        
-    }
-    
-    vertexID getID() { return id; }
-
-    bool operator<(const Vertex &obj) {
-        return this->time < obj.time;
-    }
-
-    std::string getInfo() { return info; }
-    Time getTime() { return time; }
-    Vertex *getPath() { return path; }
-
-    friend class Graph;
-    friend class MutablePriorityQueue;
+	Vertex(T in);
+	friend class Graph<T>;
 };
 
 

@@ -8,80 +8,21 @@
 #include "Vehicle.h"
 #include "Time.h"
 
+template <class T> class Edge;
+template <class T> class Graph;
+template <class T> class Vertex;
 
+template <class T>
 class Edge {
-
-protected:
-
-    Vertex *srcVertex, *destVertex;
-
+	int id;
+	Vertex<T> * dest;      // destination vertex
+	double weight;         // edge weight
 public:
-
-    Edge(Vertex *src, Vertex *dest) {
-        this->srcVertex = src;
-        this->destVertex = dest;
-    }
-
-    virtual Time getTravelTime(int startTime);
-
-    friend class Graph;
-    friend class Vertex;
-
+	Edge(Vertex<T> *d, double w, int id);
+	virtual Time getTravelTime(int startTime);
+	friend class Graph<T>;
+	friend class Vertex<T>;
 };
 
-
-class FootPath : public Edge {
-
-private:
-
-    Time travelTime;
-
-public:
-
-    FootPath(Vertex *src, Vertex *dest, Time travelTime) : Edge(src, dest) {
-        this->travelTime = travelTime;
-    }
-
-    Time getTravelTime(int startTime) { return travelTime; }
-
-};
-
-
-class VehiclePath : public Edge {
-
-private:
-
-    std::vector<Vehicle *> vehicles;
-    unsigned int chosenVehicle;
-
-
-public:
-
-    VehiclePath(Vertex *src, Vertex *dest) : Edge(src, dest) {
-        vehicles = {};
-        chosenVehicle = 0;
-    }
-
-    Time getTravelTime(int startTime) {
-        
-        Time minTime(TIME_LIMIT);
-
-        for (size_t i = 0; i < vehicles.size(); i++) {
-            Time tmpTime = vehicles[i]->getTripTime(srcVertex->getID(), destVertex->getID(), startTime);
-
-            if (tmpTime < minTime) {
-                minTime = tmpTime;
-                chosenVehicle = i;
-            }
-        }
-
-        return minTime;
-    }
-
-    void addVehicle(Vehicle* vehicle) {
-        vehicles.push_back(vehicle);
-    }
-
-};
 
 #endif

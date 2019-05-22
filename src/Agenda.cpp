@@ -9,10 +9,11 @@ bool Agenda::addActivity(){
 
 	std::string name, info, date, startTime, endTime;
 	std::cout << "Activity's name ? "<< std::endl;
-	std::cin >> name;
+	std::cin.ignore();
+	getline(std::cin,name);
 
 	std::cout << "Activity's info ? "<< std::endl;
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::getline(std::cin, info);
 
 	std::cout << "Activity's date (day-month-year) ? "<< std::endl;
@@ -88,7 +89,7 @@ bool Agenda::removeActivity(std::string name, Day day){
 	if(duplicate){
 		show(day);
 		std::string sTime;
-		std::cout << std::endl << "Activity start hour?" << std::endl;
+		std::cout << std::endl << "Activity starting hour?" << std::endl;
 		std::cin >> sTime;
 		time.setTime(sTime);
 	}
@@ -134,28 +135,47 @@ bool Agenda::show(Day day){
 		return false;
 	}
 
+	std:: cout << std::endl;
 	std::cout << "Activities of the Day " << std::setw(10);
-	std::cout << day << std::endl << std::endl;
+	std::cout << day << std::endl;
 	std::cout << "Start Time " << std::setw(10) << "Name " << std::setw(15) << "End Time" << std::setw(10) << "Info"<< std::endl;
 	for (Activity activity : activitiesOfDay){
-		std::cout << activity.getStartTime() << std::setw(16) << activity.getName() << std::setw(11) << activity.getEndTime() << std::setw(13) << activity.getInfo()<< std::endl;
+		std::cout << activity.getStartTime() << std::setw(18) << activity.getName() << std::setw(9) << activity.getEndTime() << std::setw(18) << activity.getInfo()<< std::endl;
 	}
 	std::cout << std::endl;
 	return true;
 }
+
+
+//Solução encontrada: ao invés de colocarmos toda a informação de uma atividade numa só linha, será distribuida por 2
+//a primeira com o nome da atividade, o que vai fazer com que se consiga extrair facilmente atividades com nomes compostos por 2 ou mais palavras
+//a segunda com a restante informaçao conforme estava anteriormente
+//exemplo
+//go to the gym     <- line 1
+//0 2 22/05/2019 11:00 12:30 with friends <- line 2
+
 void Agenda::loadActivities(){
 
 	std::ifstream mfile;
 
+	int count_lines=1;
+
 	mfile.open ("agenda.txt");
 
+	long int x, y;
+	std::string name, info, date, Stime, Ftime;
+
 	while (!mfile.eof()) {
-		long int x, y;
-		std::string name, info, date, Stime, Ftime;
-		mfile >> name;
-		if (name == "")
+
+	if(count_lines == 1){
+		std::getline(mfile,name);
+		if(name == "")
 			break;
-		mfile.ignore(1);
+		count_lines++;
+	}
+	
+
+	if(count_lines == 2){	
 		mfile >> x;
 		mfile.ignore(1);
 		mfile >> y;
@@ -167,15 +187,25 @@ void Agenda::loadActivities(){
 		mfile >> Ftime;
 		mfile.ignore(1);
 		std::getline(mfile, info);
+
+		//create objects with the extract information from agenda.txt
 		Coordinates c(x, y);
 		Day day(date);
 		Time startTime(Stime);
 		Time endTime(Ftime);
+
+		
+
+		//create an activity with the previous objects
 		Activity a(name, info, c, day, startTime, endTime);
 		activities.push_back(a);
-	}
-	mfile.close();
 
+		count_lines=1;
+	}
+
+	}
+
+	mfile.close();
 
 }
 
@@ -186,8 +216,8 @@ void Agenda::saveActivities()const{
 	mfile.open ("agenda.txt");
 
 	for (Activity activity : activities){
-		mfile << activity.getName() << " " << activity.getCoords().getX() << " " << activity.getCoords().getY() << " " <<
-				activity.getDay() << " " << activity.getStartTime() << " " << activity.getEndTime() << " " << activity.getInfo() << std::endl;
+		mfile << activity.getName() <<std::endl;
+		mfile<< activity.getCoords().getX() << " " << activity.getCoords().getY() << " " <<activity.getDay() << " " << activity.getStartTime() << " " << activity.getEndTime() << " " << activity.getInfo() << std::endl;
 	}
 
 	mfile.close();
