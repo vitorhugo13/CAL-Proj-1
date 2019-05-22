@@ -17,13 +17,14 @@ private:
 
     int id;
     Coordinates coords;
-    std::vector<Edge> paths;
+    std::vector<Edge*> paths;
     bool visited = false;
     Vertex *path = NULL;
     int queueIndex = 0;
 
-    std::vector<BusStop*> busStops;
-    std::vector<SubwayStation*> subwayStations;
+
+    bool isBusStop;
+    SubwayStation* subway;
 
 public:
 
@@ -32,8 +33,8 @@ public:
         this->paths = {};
         this->coords = Coordinates(x, y);
 
-        busStops = {};
-        subwayStations = {};
+        isBusStop = false;
+        subway = nullptr;
     }
     
     vertexID getID() { return id; }
@@ -45,14 +46,27 @@ public:
 
     Vertex *getPath() { return path; }
 
-    void addBus(BusStation &bus) {
-        busStops.push_back(bus);
+    void addEdge(const Edge *edge) {
+        paths.push_back(edge);
     }
 
-    void addSubway(SubwayStation &subway) {
-        subwayStations.push_back(subway);
+    void setBusStop() {
+        isBusStop = true;
     }
 
+    bool isBusStop() {
+        return isBusStop;
+    }
+
+    void setSubway(SubwayStation *subway) {
+        this->subway = subway;
+    }
+
+    SubwayStation *getSubway() {
+        return subway;
+    }
+
+    friend class Edge;
     friend class Graph;
     friend class MutablePriorityQueue;
 };

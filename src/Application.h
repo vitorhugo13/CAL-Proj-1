@@ -10,6 +10,8 @@ private:
     Graph graph;
     Agenda agenda;
 
+    int loadGraph();
+
 public:
 
     Application() {

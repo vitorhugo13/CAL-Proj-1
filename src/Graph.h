@@ -15,17 +15,19 @@ class Graph {
 private:
     std::vector<Vertex *> vertexSet;
 
-    void addVertex(const Vertex &vertex);
-    bool addEdge(const Edge &edge);
+    bool addVertex(const Vertex *vertex);
+    bool addEdge(const Edge *edge);
 
 public:
+
     void loadVertexes(std::string filename);
     void loadEdges(std::string filename);
-    Vertex *findVertex(const Vertex &vertex) const;
+    void loadBusStops(std::string filename);
+    void loadSubwayStations(std::string filename);
+    Vertex *findVertex(const Vertex *vertex) const;
     Vertex *findVertex(const int vertexID) const;
 	int getNumVertex() const;
-
-    
+ 
     void loadVertexes(std::string filename) {
 
         std::fstream infile(filename);
@@ -34,7 +36,7 @@ public:
         std::getline(infile, line);
         unsigned int line_num = stoi(line);
 
-        std::string delimiter = ",";
+        std::string delimiter = ", ";
 
         for (unsigned int i = 0; i < line_num; i++) {
             std::sgetline(infile, line);
@@ -63,7 +65,7 @@ public:
         std::getline(infile, line);
         unsigned int line_num = stoi(line);
 
-        std::string delimiter = ",";
+        std::string delimiter = ", ";
 
         for (unsigned int i = 0; i < line_num; i++) {
             std::sgetline(infile, line);
@@ -72,6 +74,7 @@ public:
             size_t pos = line.find(delimiter);
             int vertexID = std::stoi(line.substr(0, pos));
 
+            /*
             std::string info[7];
             size_t i = 0;
             while ((pos = line.find(delimiter)) != std::string::npos) {
@@ -82,10 +85,11 @@ public:
             }
 
             BusStop *busStop = new BusStop(info[0], info[1], info[2], info[3], info[4], info[5], info[6]);
+            */
 
             Vertex *vertex = findVertex(vertexID);
 
-            vertex->addBus(busStop);
+            vertex->setBusStop();
         }
 
         infile.close();
@@ -98,7 +102,7 @@ public:
         std::getline(infile, line);
         unsigned int line_num = stoi(line);
 
-        std::string delimiter = ",";
+        std::string delimiter = ", ";
 
         for (unsigned int i = 0; i < line_num; i++) {
             std::sgetline(infile, line);
@@ -142,7 +146,7 @@ public:
         std::getline(infile, line);
         unsigned int line_num = std::stoi(line);
 
-        std::string delimiter = ",";
+        std::string delimiter = ", ";
 
         for (unsigned int i = 0; i < line_num; i++) {
             std::getline(infile, line);
@@ -163,15 +167,23 @@ public:
         infile.close();
     }
 
+    bool addEdge(const Edge *edge) {
+        Vertex *vertex;
+        if ((vertex = findVertex(edge->srcVertex)) == nullptr) {
+            return false;
+        }
+        vertex->addEdge(edge);
+        return true;
+    }
 
-    bool addVertex(const Vertex &vertex) {
+    bool addVertex(const Vertex *vertex) {
 	    if (findVertex(vertex) != nullptr)
 		    return false;
 	    vertexSet.push_back(vertex);
 	    return true;
     }
 
-    Vertex *findVertex(const Vertex &vertex) const {
+    Vertex *findVertex(const Vertex *vertex) const {
         return findVertex(vertex->getID());
     }
 

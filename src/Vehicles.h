@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+/*
 class BusStop {
 
 private:
@@ -36,6 +37,7 @@ public:
         this->type = "";
     }
 };
+*/
 
 class SubwayStation {
 
@@ -47,6 +49,24 @@ public:
     SubwayStation(std::string stationName, std::vector<char> lines) {
         this->stationName = stationName;
         this->lines = lines;
+    }
+
+    SubwayStation() {
+        this->stationName = "";
+        this->lines = {};
+    }
+
+    std::vector<char> getLines() {
+        return lines;
+    }
+
+    bool findLine(const char line) {
+        for (size_t i = 0; i < lines.size(); i++) {
+            if (line == lines[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 };
 
