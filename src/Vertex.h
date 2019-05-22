@@ -10,11 +10,7 @@
 #include "Vehicles.h"
 
 
-template <class T> class Edge;
-template <class T> class Graph;
-template <class T> class Vertex;
 
-template <class T>
 class Vertex {
     
 private:
@@ -43,10 +39,6 @@ public:
     
     vertexID getID() { return id; }
     Coordinates getCoordinates() { return coords; }
-
-    bool operator<(const Vertex &obj) {
-        return this->time < obj.time;
-    }
 
     Vertex *getPath() { return path; }
 

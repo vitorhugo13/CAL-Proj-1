@@ -15,7 +15,6 @@
 #include <limits>
 #include <cmath>
 
-<<<<<<< HEAD
 class Graph {
 
 private:
@@ -74,7 +73,7 @@ public:
         std::string delimiter = ", ";
 
         for (unsigned int i = 0; i < line_num; i++) {
-            std::sgetline(infile, line);
+            std::getline(infile, line);
             line = line.substr(1, line.length - 2);
 
             size_t pos = line.find(delimiter);
@@ -111,7 +110,7 @@ public:
         std::string delimiter = ", ";
 
         for (unsigned int i = 0; i < line_num; i++) {
-            std::sgetline(infile, line);
+            std::getline(infile, line);
             line = line.substr(1, line.length - 2);
 
             size_t pos = line.find(delimiter);
@@ -138,7 +137,7 @@ public:
 
             Vertex *vertex = findVertex(vertexID);
 
-            vertex->addSubway(subwayStation);
+            vertex->setSubway(subwayStation);
         }
 
         infile.close();
@@ -208,11 +207,6 @@ public:
 
     void dijsktraAlgorithm(const std::string &src, const std::string &dest){
 
-=======
-template <class T> class Edge;
-template <class T> class Graph;
-template <class T> class Vertex;
->>>>>>> 5c49f1d4f5d3a8caaf5db925c0dd9e10ac789254
 
 const constexpr double BUS_TIME_MULTIPLIER = 0.025;
 const constexpr double SUBWAY_TIME_MULTIPLIER = 0.02;
