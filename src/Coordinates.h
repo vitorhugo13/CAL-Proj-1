@@ -6,29 +6,19 @@
 class Coordinates {
 
 private:
-    double x, y;
+    double x;
+    double y;
 
 public:
-    Coordinates(double x, double y) {
-        this->x = x;
-        this->y = y;
-    }
+    Coordinates();
+    Coordinates(double x, double y);
 
-    double getDistance(const Coordinates &coords) const {
-        return sqrt(pow(this->y - coords.y, 2) + pow(this->x - coords.x, 2));
-    }
+    double getX() const;
+    double getY() const;
 
-    double getX() const{
-    	return x;
-    }
+    double getDistance(Coordinates coords) const;
 
-    double getY() const{
-        return y;
-     }
-
-    bool operator==(const Coordinates &c){
-    	return(this->x == c.getX() && this->y == c.getY());
-    }
+    bool operator==(const Coordinates &c);
 };
 
 

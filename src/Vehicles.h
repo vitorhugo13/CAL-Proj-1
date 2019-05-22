@@ -46,28 +46,12 @@ private:
     std::vector<char> lines;
 
 public:
-    SubwayStation(std::string stationName, std::vector<char> lines) {
-        this->stationName = stationName;
-        this->lines = lines;
-    }
+    SubwayStation();
+    SubwayStation(std::string stationName, std::vector<char> lines);
 
-    SubwayStation() {
-        this->stationName = "";
-        this->lines = {};
-    }
+    std::vector<char> getLines();
 
-    std::vector<char> getLines() {
-        return lines;
-    }
-
-    bool findLine(const char line) {
-        for (size_t i = 0; i < lines.size(); i++) {
-            if (line == lines[i]) {
-                return true;
-            }
-        }
-        return false;
-    }
+    bool findLine(const char line);
 };
 
 #endif

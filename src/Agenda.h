@@ -1,21 +1,23 @@
 #ifndef AGENDA_H
 #define AGENDA_H
 
-#include "Coordinates.h"
+#include <vector>
+#include <string>
+
+
 #include "Time.h"
 #include "Day.h"
 #include "Activity.h"
 
-#include <vector>
-#include <string>
 
-class Agenda
-{
+class Agenda {
 
 private:
+
     std::vector<Activity> activities;
 
 public:
+
     Agenda() {}
     bool addActivity();
     bool addActivity(Activity activity);
@@ -31,8 +33,8 @@ public:
 
     /*
      *  @brief - Remove uma atividade com aquele nome naquele dia
-     *  se existirem 2 atividades no mesmo dia com o mesmo nome pergunta a hora de começo da atividade, sendo que o
-     *  hoario de cada atividade em cada dia é unico (nao existem atividades sobrepostas)
+     *  se existirem 2 atividades no mesmo dia com o mesmo nome pergunta a hora de comeï¿½o da atividade, sendo que o
+     *  hoario de cada atividade em cada dia ï¿½ unico (nao existem atividades sobrepostas)
      *
      * @param - nome da atividade
      * @param - day of the activity
@@ -43,7 +45,8 @@ public:
     bool show(Day day);
     std::vector<Activity> ActivitiesOfTheDay(Day day);
     void loadActivities();
-    void saveActivities()const;
+    void saveActivities() const;
+
 };
 
 #endif

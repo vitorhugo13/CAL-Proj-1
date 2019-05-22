@@ -9,20 +9,20 @@ class Application {
 private:
     Graph graph;
     Agenda agenda;
-
+    
     int loadGraph();
+    int loadAgenda();
+
+    int menuInput(int nOptions);
+    Day seeAgenda();
+
+
 
 public:
 
-    Application() {
-        graph = Graph();
-        agenda = Agenda();
-    }
+    Application();
 
-    int startApplication();
-
-
-
+    int start();
 
 };
 

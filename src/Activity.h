@@ -6,9 +6,10 @@
 #include "Day.h"
 #include "Time.h"
 
-class Activity
-{
+class Activity {
+
 private:
+
 	std::string name;
     std::string info;
     Coordinates coords;
@@ -16,6 +17,7 @@ private:
     Time startTime, endTime;
 
 public:
+
     Activity(std::string name, std::string info, Coordinates coord, Day day, Time startTime, Time endTime);
     std::string getName();
     std::string getInfo();
@@ -27,6 +29,7 @@ public:
     bool operator==(Activity &A1);
     bool operator<(Activity &A1);
     bool operator>(Activity &A1);
+
 };
 
 #endif //ACTIVITY_H

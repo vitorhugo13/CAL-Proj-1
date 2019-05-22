@@ -1,5 +1,5 @@
 # Change to executable name.
-PROG := app
+PROG := TripPlanner
 
 # Add whatever compiler flags you want.
 CXXFLAGS := -std=c++14

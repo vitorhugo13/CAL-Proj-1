@@ -3,10 +3,16 @@
 
 
 #include <vector>
+#include <limits>
 
-#include "Vertex.h"
-#include "Vehicle.h"
-#include "macros.h"
+#include "Time.h"
+
+
+class Vertex;
+
+#define INT_INF     std::numeric_limits<int>::max()
+#define DOUBLE_INF  std::numeric_limits<double>::max()
+
 
 enum Transportation { WALKING, BUS, SUBWAY, UNDEFINED };
 
@@ -31,95 +37,31 @@ protected:
 
 public:
 
-    Edge(Vertex *src, Vertex *dest) {
-        this->srcVertex = src;
-        this->destVertex = dest;
+    Edge(Vertex *src, Vertex *dest);
+    
 
-        distance = src->getCoordinates().getDistance(dest->getCoordinates());
+    double getDistance();
 
-        tripTime[0] = distance * FOOT_MULTIPLIER;
-        tripTime[1] = DOUBLE_INF;
-        tripTime[2] = DOUBLE_INF;
+    double getWalkingTime();
 
-        if (src->isBusStop() && dest->isBusStop()) {
-            tripTime[1] = distance * BUS_MULTIPLIER;
-        }
+    double getBusTime();
 
-        if (src->getSubway() != nullptr && dest->getSubway() != nullptr) {
+    double getSubwayTime();
 
-            std::vector<char> srcLines = src->getSubway()->getLines();
+    double getBestTime();
 
-            for (size_t i = 0; i < srcLines.size(); i++) {
-                if(dest->getSubway()->findLine(srcLines[i])) {
-                    lines.push_back(srcLines[i]);
-                }
-            }
+    double getTime();
 
-            if (!lines.empty()) {
-                tripTime[2] = distance * SUBWAY_MULTIPLIER;
-            }
-        }
+    Transportation getChosenTransport();
 
-        chosenTransport = UNDEFINED;
-    }
-
-    double getDistance() {
-        return distance;
-    }
-
-    double getWalkingTime() {
-        chosenTransport = WALKING;
-        return tripTime[WALKING];
-    }
-
-    double getBusTime() {
-        chosenTransport = BUS;
-        return tripTime[BUS];
-    }
-
-    double getSubwayTime() {
-        chosenTransport = SUBWAY;
-        return tripTime[SUBWAY];
-    }
-
-    double getBestTime() {
-        double bestTime = DOUBLE_INF;
-
-        if (tripTime[WALKING] <= bestTime) {
-            bestTime = tripTime[WALKING];
-            chosenTransport = WALKING;
-        }
-        if (tripTime[BUS] <= bestTime) {
-            bestTime = tripTime[BUS];
-            chosenTransport = BUS;
-        }
-        if (tripTime[SUBWAY] <= bestTime) {
-            bestTime = tripTime[SUBWAY];
-            chosenTransport = SUBWAY;
-        }
-
-        return chosenTransport;
-    }
-
-    double getTime() {
-        return tripTime[chosenTransport];
-    }
-
-    Transportation getChosenTransport() {
-        return chosenTransport;
-    }
-
-
-    // TODO: implement funtions to get the best times
-    // TODO: implement funtion to get foot time
-    // TODO: implement funtion to get bus time
-    // TODO: implement funtion to get subway time
 
 
     friend class Graph;
     friend class Vertex;
-
 };
+
+
+
 
 
 #endif

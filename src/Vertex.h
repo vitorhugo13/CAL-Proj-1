@@ -4,10 +4,10 @@
 #include <vector>
 #include <string>
 
-#include "macros.h"
 #include "Edge.h"
 #include "Coordinates.h"
 #include "Vehicles.h"
+#include "MutablePriorityQueue.h"
 
 
 
@@ -21,37 +21,36 @@ private:
     bool visited = false;
     Vertex *path = NULL;
     int queueIndex = 0;
+    Time time;
 
 
-    bool isBusStop;
+    bool busStop;
     SubwayStation* subway;
 
 public:
 
-    Vertex(int id, double x, double y) {
-        this->id = id;
-        this->paths = {};
-        this->coords = Coordinates(x, y);
-
-        isBusStop = false;
-        subway = nullptr;
+    Vertex(int id, double x, double y);
+    
+    int getID() const {
+        return id;
     }
     
-    vertexID getID() { return id; }
-    Coordinates getCoordinates() { return coords; }
+    Coordinates getCoordinates() {
+        return coords;
+    }
 
     Vertex *getPath() { return path; }
 
-    void addEdge(const Edge *edge) {
+    void addEdge(Edge *edge) {
         paths.push_back(edge);
     }
 
     void setBusStop() {
-        isBusStop = true;
+        busStop = true;
     }
 
     bool isBusStop() {
-        return isBusStop;
+        return busStop;
     }
 
     void setSubway(SubwayStation *subway) {
@@ -62,9 +61,11 @@ public:
         return subway;
     }
 
+    bool operator<(Vertex const &vertex) const;
+
     friend class Edge;
     friend class Graph;
-    friend class MutablePriorityQueue;
+    friend class MutablePriorityQueue<Vertex>;
 };
 
 

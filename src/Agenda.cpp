@@ -1,8 +1,11 @@
-#include "Agenda.h"
 #include <iostream>
 #include <iomanip>
 #include <bits/stdc++.h>
 #include <fstream>
+
+
+#include "Agenda.h"
+
 
 
 bool Agenda::addActivity(){
@@ -160,7 +163,7 @@ void Agenda::loadActivities(){
 
 	int count_lines=1;
 
-	mfile.open ("agenda.txt");
+	mfile.open ("data/agenda.txt");
 
 	long int x, y;
 	std::string name, info, date, Stime, Ftime;
@@ -213,7 +216,7 @@ void Agenda::saveActivities()const{
 
 	std::ofstream mfile;
 
-	mfile.open ("agenda.txt");
+	mfile.open ("data/agenda.txt");
 
 	for (Activity activity : activities){
 		mfile << activity.getName() <<std::endl;
