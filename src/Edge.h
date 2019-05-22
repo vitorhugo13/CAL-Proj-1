@@ -16,7 +16,11 @@ const double BUS_MULTIPLIER = 0.025;
 const double SUBWAY_MULTIPLIER = 0.02;
 const double FOOT_MULTIPLIER = 0.1;
 
+template <class T> class Edge;
+template <class T> class Graph;
+template <class T> class Vertex;
 
+template <class T>
 class Edge {
 
 protected:
