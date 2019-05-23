@@ -144,8 +144,12 @@ int Application::start() {
 					}
 
 					case 4:{
-						agenda.show(seeAgenda());
-						std::cout << "From which activity we want to see the path to the next activity ? " << std::endl;
+						std::string date;
+						std::cout << "What day you want to see the path ? " << std::endl;
+						std::cin.ignore();
+						getline(std::cin,date);
+						//coord is a vector with the coordinates of all place in that day
+						std::vector<Coordinates> coord = agenda.getCoords(date);
 						menu = -2;
 						break;
 					}
