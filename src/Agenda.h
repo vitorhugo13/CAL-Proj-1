@@ -43,10 +43,10 @@ public:
      */
     bool removeActivity(std::string name, Day day);
     bool show(Day day);
-    std::vector<Activity> ActivitiesOfTheDay(Day day);
+    std::vector<Activity> activitiesOfTheDay(Day day) const;
     void loadActivities();
     void saveActivities() const;
-
+    std::vector<Coordinates> getCoords(Day day) const;
 };
 
 #endif

@@ -101,15 +101,18 @@ bool Agenda::removeActivity(std::string name, Day day){
 		if(duplicate){
 			if(name == it->getName() && day == it->getDay() && time == it->getStartTime()){
 				activities.erase(it);
+				saveActivities();
 				return true;
 			}
 		}
 		else{
 			if(name == it->getName() && day == it->getDay()){
 				activities.erase(it);
+				saveActivities();
 				return true;
 			}
 		}
+	
 	}
 
 	return false;
@@ -118,7 +121,7 @@ bool Agenda::removeActivity(std::string name, Day day){
 
 
 
-std::vector<Activity> Agenda::ActivitiesOfTheDay(Day day){
+std::vector<Activity> Agenda::activitiesOfTheDay(Day day) const {
 	std::vector<Activity> activitiesOfDay;
 	for (Activity activity : activities){
 		if(activity.getDay() == day){
@@ -131,7 +134,7 @@ std::vector<Activity> Agenda::ActivitiesOfTheDay(Day day){
 
 
 bool Agenda::show(Day day){
-	std::vector<Activity> activitiesOfDay = ActivitiesOfTheDay(day);
+	std::vector<Activity> activitiesOfDay = activitiesOfTheDay(day);
 
 	if(activitiesOfDay.size() == 0){
 		std::cout << "There's no activities in this day!" << std::endl << std::endl;
@@ -226,3 +229,12 @@ void Agenda::saveActivities()const{
 	mfile.close();
 
 }
+std::vector<Coordinates> Agenda::getCoords(Day day) const {
+	std::vector<Activity > act = activitiesOfTheDay(day); //activities are sorted by time
+	std::vector<Coordinates> coor;
+	for(Activity activity : act){
+		coor.push_back(activity.getCoords());
+	}
+	return coor;
+}
+

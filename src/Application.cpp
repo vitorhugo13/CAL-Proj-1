@@ -18,7 +18,6 @@ int Application::loadGraph() {
 	}
 	std::cout << "Loaded vertexes" << std::endl;
     
-
 	if (graph.loadBusStops("data/bus.txt")) {
 		return 2;
 	}
@@ -36,10 +35,12 @@ int Application::loadGraph() {
 	}
 	std::cout << "Loaded edges" << std::endl;
 
-	
+
+	/*
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {
         std::cout << std::setprecision(16) << graph.getVertex(i)->getX() << ", " << graph.getVertex(i)->getY() << std::endl;
 	}
+	*/
 	
 
     return 0;
@@ -129,7 +130,8 @@ int Application::start() {
 					case 3:{
 						std::string name, date;
 						std::cout << "Activity's name ?" << std::endl;
-						std::cin >> name;
+						std::cin.ignore();
+						getline(std::cin,name);
 						std::cout << "In which day? " << std::endl;
 						std::cin >> date;
 						Day day(date);
@@ -144,8 +146,12 @@ int Application::start() {
 					}
 
 					case 4:{
-						agenda.show(seeAgenda());
-						std::cout << "From which activity we want to see the path to the next activity ? " << std::endl;
+						std::string date;
+						std::cout << "What day you want to see the path ? " << std::endl;
+						std::cin.ignore();
+						getline(std::cin,date);
+						//coord is a vector with the coordinates of all place in that day
+						std::vector<Coordinates> coord = agenda.getCoords(date);
 						menu = -2;
 						break;
 					}
