@@ -1,6 +1,4 @@
-#include <iostream> // TODO: remove after debug
-#include <iomanip>
-
+#include <iostream>
 
 #include "Graph.h"
 #include "MutablePriorityQueue.h"
@@ -98,19 +96,6 @@ int Graph::loadVertexes(std::string filename) {
 
             size_t pos = line.find(delimiter);
             int vertexID = std::stoi(line.substr(0, pos));
-
-            /*
-            std::string info[7];
-            size_t i = 0;
-            while ((pos = line.find(delimiter)) != std::string::npos) {
-                info[i] = line.substr(0, pos);
-                line.erase(0, pos + delimiter.length());
-                info[i] = info[i].substr(1, info[i].length() - 2);
-                i++;
-            }
-
-            BusStop *busStop = new BusStop(info[0], line, info[2], info[3], info[4], info[5], info[6]);
-            */
 
             Vertex *vertex = findVertex(vertexID);
 
@@ -212,4 +197,18 @@ Vertex* Graph::getVertex(size_t index) {
         return vertexSet[index];
     }
     return nullptr;
+}
+
+Vertex* Graph::findNearestVertex(Coordinates coords) {
+    double distance = DOUBLE_INF;
+    Vertex *vertex = nullptr;
+
+    for (size_t i = 0; i < vertexSet.size(); i++) {
+        if (vertexSet[i]->coords.getDistance(coords) <= distance) {
+            vertex = vertexSet[i];
+            distance = vertexSet[i]->coords.getDistance(coords);
+        }
+    }
+
+    return vertex;
 }

@@ -38,7 +38,6 @@ public:
 	Vertex *findNearestVertex(Coordinates coords);
  
 
-
     // TODO: implement the dijkstra algorithm for the best possible time
     void dijsktraAlgorithm(const std::string &src, const std::string &dest);
 
