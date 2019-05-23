@@ -21,11 +21,11 @@ Edge::Edge(Vertex *src, Vertex *dest) {
 
         for (size_t i = 0; i < srcLines.size(); i++) {
             if(dest->getSubway()->findLine(srcLines[i])) {
-                lines.push_back(srcLines[i]);
+                subwayLines.push_back(srcLines[i]);
             }
         }
 
-        if (!lines.empty()) {
+        if (!subwayLines.empty()) {
             tripTime[2] = distance * SUBWAY_MULTIPLIER;
         }
     }

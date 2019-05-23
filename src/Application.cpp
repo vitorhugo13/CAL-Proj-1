@@ -1,4 +1,7 @@
 #include "Application.h"
+#include "GraphViewer/graphviewer.h"
+
+#include <iomanip>
 
 
 Application:: Application() {
@@ -15,6 +18,7 @@ int Application::loadGraph() {
 	}
 	std::cout << "Loaded vertexes" << std::endl;
     
+	/*
 	if (graph.loadBusStops("data/bus.txt")) {
 		return 2;
 	}
@@ -24,11 +28,18 @@ int Application::loadGraph() {
 		return 3;
 	}
 	std::cout << "Loaded subway stations" << std::endl;
+	*/
 
     if (graph.loadEdges("data/edges.txt")) {
 		return 4;
 	}
 	std::cout << "Loaded edges" << std::endl;
+
+	
+	for (size_t i = 0; i < graph.getNumVertex(); i++) {
+        std::cout << std::setprecision(16) << graph.getVertex(i)->getX() << ", " << graph.getVertex(i)->getY() << std::endl;
+	}
+	
 
     return 0;
 }
@@ -79,14 +90,15 @@ int Application::start() {
 		while(menu == -2){
 
 			std::cout << "----- TripMate ----" << std::endl<< std::endl;
-			std::cout << "0 - See Agenda" << std::endl;
-			std::cout << "1 - Add activity" << std::endl;
-			std::cout << "2 - Remove activity" << std:: endl;
-			std::cout << "3 - See paths" << std::endl;
-			std::cout << "4 - Exit " << std::endl;
+			std::cout << "1 - See Agenda" << std::endl;
+			std::cout << "2 - Add activity" << std::endl;
+			std::cout << "3 - Remove activity" << std:: endl;
+			std::cout << "4 - See paths" << std::endl;
+			std::cout << "5 - See Map" << std::endl;
+			std::cout << "0 - Exit " << std::endl;
 
 			std::cout << "Option: ";
-			menu = menuInput(4);
+			menu = menuInput(5);
 			
 			
 		
@@ -95,13 +107,13 @@ int Application::start() {
 				std::cout << "Menu does not exist" << std::endl;
 
 			switch (menu){
-					case 0:{
+					case 1:{
 						agenda.show(seeAgenda());
 						menu = -2;
 						break;
 						}
 						
-					case 1:{
+					case 2:{
 						if(agenda.addActivity()){
 							std::cout<< "Activity added with success!"<< std::endl;
 							agenda.saveActivities();
@@ -113,7 +125,7 @@ int Application::start() {
 						break;
 					}
 
-					case 2:{
+					case 3:{
 						std::string name, date;
 						std::cout << "Activity's name ?" << std::endl;
 						std::cin >> name;
@@ -130,14 +142,19 @@ int Application::start() {
 						break;
 					}
 
-					case 3:{
+					case 4:{
 						agenda.show(seeAgenda());
 						std::cout << "From which activity we want to see the path to the next activity ? " << std::endl;
 						menu = -2;
 						break;
 					}
 
-					case 4:
+					case 5:
+						viewMap();
+						menu = -2;
+						break;
+
+					case 0:
 						return 0;
 						
 					default:
@@ -146,5 +163,53 @@ int Application::start() {
 		}
 	}
     
+	return 0;
+}
+
+int Application::viewMap() {
+
+	GraphViewer *gv = new GraphViewer(600, 600, false);
+	gv->createWindow(600, 600);
+	gv->defineVertexColor("blue");
+	gv->defineEdgeColor("black");
+
+	
+	double minX = graph.getVertex(0)->getX();
+	double minY = graph.getVertex(0)->getY();
+	
+	for (size_t i = 0; i < graph.getNumVertex(); i++) {
+		if (graph.getVertex(i)->getX() < minX) {
+			minX = graph.getVertex(i)->getX();
+		}
+		if (graph.getVertex(i)->getY() < minY) {
+			minY = graph.getVertex(i)->getY();
+		}
+	}
+
+
+	for (size_t i = 0; i < graph.getNumVertex(); i++) {
+		gv->addNode(graph.getVertex(i)->getID(), graph.getVertex(i)->getX() - minX, graph.getVertex(i)->getY() - minY);
+	}
+	gv->rearrange();
+
+
+	size_t edgeID = 0;
+	for (size_t i = 0; i < graph.getNumVertex(); i++) {		
+		for (size_t j = 0; j < graph.getVertex(i)->getNumEdges(); j++) {
+			
+			gv->addEdge(edgeID, graph.getVertex(i)->getID(), graph.getVertex(i)->getEdge(j)->getDest()->getID(), EdgeType::DIRECTED);
+			edgeID++;
+			
+			//std::cout << graph.getVertex(i)->getID() << " , " << graph.getVertex(i)->getEdge(j)->getDest()->getID() << std::endl;
+		}
+		
+	}
+	gv->rearrange();
+
+	std::cout << std::endl << "Press ENTER to close the map" << std::endl;
+	std::cin.ignore();
+	std::cin.get();
+	gv->closeWindow();
+
 	return 0;
 }

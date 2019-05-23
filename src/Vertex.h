@@ -30,6 +30,14 @@ private:
 public:
 
     Vertex(int id, double x, double y);
+
+    double getX() const {
+        return coords.getX();
+    }
+
+    double getY() const {
+        return coords.getY();
+    }
     
     int getID() const {
         return id;
@@ -59,6 +67,17 @@ public:
 
     SubwayStation *getSubway() {
         return subway;
+    }
+
+    size_t getNumEdges() {
+        return paths.size();
+    }
+
+    Edge* getEdge(size_t index) {
+        if (index < paths.size()) {
+            return paths[index];
+        }
+        return nullptr;
     }
 
     bool operator<(Vertex const &vertex) const;

@@ -16,6 +16,8 @@ private:
     int menuInput(int nOptions);
     Day seeAgenda();
 
+    int viewMap();
+
 
 
 public:

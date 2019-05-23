@@ -30,7 +30,9 @@ public:
 
     Vertex *findVertex(const Vertex *vertex) const;
     Vertex *findVertex(const int vertexID) const;
-	int getNumVertex() const { return vertexSet.size(); }
+
+	Vertex *getVertex(size_t index);
+	size_t getNumVertex() const { return vertexSet.size(); }
  
 
 

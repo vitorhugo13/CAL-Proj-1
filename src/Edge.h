@@ -33,12 +33,17 @@ protected:
 
     Transportation chosenTransport;
 
-    std::vector<char> lines;
+    std::vector<std::string> busLines;
+    std::vector<char> subwayLines;
+
 
 public:
 
     Edge(Vertex *src, Vertex *dest);
-    
+
+    Vertex* getDest() {
+        return destVertex;
+    }    
 
     double getDistance();
 

@@ -66,7 +66,9 @@ int Graph::loadVertexes(std::string filename) {
         }
         info[j] = line;
 
-        Vertex *v = new Vertex(std::stoi(info[0]), std::stod(line), std::stod(info[2]));
+
+
+        Vertex *v = new Vertex(std::stoi(info[0]), std::stod(info[1]), std::stod(info[2]));
 
         addVertex(v);
     }
@@ -205,3 +207,10 @@ int Graph::loadVertexes(std::string filename) {
 
         return 0;
     }
+
+Vertex* Graph::getVertex(size_t index) {
+    if (index < vertexSet.size()) {
+        return vertexSet[index];
+    }
+    return nullptr;
+}

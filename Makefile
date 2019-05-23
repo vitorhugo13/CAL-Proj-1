@@ -15,7 +15,7 @@ LDLIBS :=
 LDFLAGS :=
 
 # Change 'src/' to where ever you hold src files relative to Makefile.
-SRCS := $(wildcard ./src/*.cpp)
+SRCS := $(wildcard ./src/*.cpp ./src/GraphViewer/*.cpp)
 
 # Generate .o and .d filenames for each .cpp file.
 # Doesn't generate the ACTUAL files (compiler does).
