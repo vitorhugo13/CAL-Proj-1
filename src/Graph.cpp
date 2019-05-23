@@ -212,3 +212,11 @@ Vertex* Graph::findNearestVertex(Coordinates coords) {
 
     return vertex;
 }
+
+void Graph::dijsktraAlgorithm(const std::string &src, const std::string &dest) {
+
+    for (size_t i = 0; i < vertexSet.size(); i++) {
+        
+    }
+}
+

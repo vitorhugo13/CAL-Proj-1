@@ -38,7 +38,12 @@ public:
 	Vertex *findNearestVertex(Coordinates coords);
  
 
-    // TODO: implement the dijkstra algorithm for the best possible time
+    /**
+     * @brief Implementation of the dijkstra algorithm to get the quickest path between two vertexes
+     * 
+     * @param src 	Pointer to the initial vertex
+     * @param dest 	Pointer to the final vertex
+     */
     void dijsktraAlgorithm(const std::string &src, const std::string &dest);
 
 };

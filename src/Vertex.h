@@ -18,11 +18,11 @@ private:
     int id;
     Coordinates coords;
     std::vector<Edge*> paths;
+    
     bool visited = false;
-    Vertex *path = NULL;
+    Vertex *lastVertex = nullptr;
     int queueIndex = 0;
     Time time;
-
 
     bool busStop;
     SubwayStation* subway;
@@ -31,57 +31,31 @@ public:
 
     Vertex(int id, double x, double y);
 
-    double getX() const {
-        return coords.getX();
-    }
+    double getX() const;
 
-    double getY() const {
-        return coords.getY();
-    }
+    double getY() const;
     
-    int getID() const {
-        return id;
-    }
+    int getID() const;
     
-    Coordinates getCoordinates() {
-        return coords;
-    }
+    Coordinates getCoordinates();
 
-    Vertex *getPath() { return path; }
-
-    void addEdge(Edge *edge) {
-        paths.push_back(edge);
-    }
-
-    void setBusStop() {
-        busStop = true;
-    }
-
-    bool isBusStop() {
-        return busStop;
-    }
+    Vertex* Vertex::getLastVertex();
 
 
-    void setSubway(SubwayStation *subway) {
-        this->subway = subway;
-    }
+    void addEdge(Edge *edge);
 
+    void setBusStop();
 
-    SubwayStation *getSubway() {
-        return subway;
-    }
+    bool isBusStop();
 
-    size_t getNumEdges() {
-        return paths.size();
-    }
+    void setSubway(SubwayStation *subway);
 
-    Edge* getEdge(size_t index) {
-        if (index < paths.size()) {
-            return paths[index];
-        }
-        return nullptr;
-    }
+    SubwayStation *getSubway();
 
+    size_t getNumEdges();
+
+    Edge* getEdge(size_t index);
+    
     bool operator<(Vertex const &vertex) const;
 
     friend class Edge;
