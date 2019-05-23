@@ -39,8 +39,7 @@ public:
     
     Coordinates getCoordinates();
 
-    Vertex* Vertex::getLastVertex();
-
+    Vertex* getLastVertex();
 
     void addEdge(Edge *edge);
 
