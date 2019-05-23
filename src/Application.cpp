@@ -18,17 +18,18 @@ int Application::loadGraph() {
 	}
 	std::cout << "Loaded vertexes" << std::endl;
     
-	/*
+
 	if (graph.loadBusStops("data/bus.txt")) {
 		return 2;
 	}
 	std::cout << "Loaded bus stops" << std::endl;
 
+
     if (graph.loadSubwayStations("data/subway.txt")) {
 		return 3;
 	}
 	std::cout << "Loaded subway stations" << std::endl;
-	*/
+	
 
     if (graph.loadEdges("data/edges.txt")) {
 		return 4;
@@ -188,6 +189,13 @@ int Application::viewMap() {
 
 
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {
+		if (graph.getVertex(i)->isBusStop() && graph.getVertex(i)->getSubway() != nullptr)
+  			gv->setVertexColor(graph.getVertex(i)->getID(), "green");
+		else if(graph.getVertex(i)->isBusStop())
+  			gv->setVertexColor(graph.getVertex(i)->getID(), "orange");
+		else if(graph.getVertex(i)->getSubway() != nullptr)
+  			gv->setVertexColor(graph.getVertex(i)->getID(), "red");
+
 		gv->addNode(graph.getVertex(i)->getID(), graph.getVertex(i)->getX() - minX, graph.getVertex(i)->getY() - minY);
 	}
 	gv->rearrange();

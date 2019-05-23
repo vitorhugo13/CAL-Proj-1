@@ -12,6 +12,11 @@ SubwayStation::SubwayStation() {
     this->lines = {};
 }
 
+std::string SubwayStation::getName() {
+    return stationName;
+}
+
+
 std::vector<char> SubwayStation::getLines() {
     return lines;
 }

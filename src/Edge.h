@@ -27,9 +27,9 @@ class Edge {
 
 protected:
 
-    Vertex *srcVertex, *destVertex;
+    Vertex *destVertex;
     double distance;        // distance between both vertices
-    double tripTime[3];     // 0: foot; 1: bus; 2: subway
+    Time tripTime[3];       // 0: foot; 1: bus; 2: subway
 
     Transportation chosenTransport;
 
@@ -47,15 +47,15 @@ public:
 
     double getDistance();
 
-    double getWalkingTime();
+    Time getWalkingTime();
 
-    double getBusTime();
+    Time getBusTime();
 
-    double getSubwayTime();
+    Time getSubwayTime();
 
-    double getBestTime();
+    Time getBestTime();
 
-    double getTime();
+    Time getTime();
 
     Transportation getChosenTransport();
 

@@ -21,6 +21,8 @@ public:
 
     Time();
 
+    Time(double time);
+
     /* String tem de ser sempre passada com quatro digitos, ex 00:00 21:30 ... */
     Time(std::string time);
 

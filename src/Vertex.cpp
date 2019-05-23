@@ -7,7 +7,7 @@ Vertex::Vertex(int id, double x, double y) {
     paths = {};
     coords = Coordinates(x, y);
 
-    time = Time(0);
+    time = Time(TIME_LIMIT);
     busStop = false;
     subway = nullptr;
 }

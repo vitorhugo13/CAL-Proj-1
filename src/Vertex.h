@@ -61,9 +61,11 @@ public:
         return busStop;
     }
 
+
     void setSubway(SubwayStation *subway) {
         this->subway = subway;
     }
+
 
     SubwayStation *getSubway() {
         return subway;

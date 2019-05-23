@@ -19,7 +19,7 @@ private:
     std::vector<Vertex *> vertexSet;
 
     bool addVertex(Vertex *vertex);
-    bool addEdge(Edge *edge);
+    bool addEdge(Vertex *vertex, Edge *edge);
 
 public:
 

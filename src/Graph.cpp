@@ -7,9 +7,8 @@
 
 
 
-bool Graph::addEdge(Edge *edge) {
-        Vertex *vertex;
-        if ((vertex = findVertex(edge->srcVertex)) == nullptr) {
+bool Graph::addEdge(Vertex* vertex, Edge *edge) {
+        if (findVertex(vertex) == nullptr) {
             return false;
         }
         vertex->addEdge(edge);
@@ -200,7 +199,7 @@ int Graph::loadVertexes(std::string filename) {
             
             Edge *e = new Edge(findVertex(srcID), findVertex(destID));
 
-            addEdge(e);
+            addEdge(findVertex(srcID), e);
         }
 
         infile.close();

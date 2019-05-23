@@ -1,7 +1,15 @@
+#include <cmath>
+
 #include "Time.h"
 
+
 Time::Time() {
-    time = 0;
+    time = TIME_LIMIT;
+}
+    
+Time::Time(double time) {
+    this->time = (short int) floor(time) * 100;
+    this->time += (short int) floor(60 * (time - floor(time)));
 }
 
 Time::Time(std::string time) {

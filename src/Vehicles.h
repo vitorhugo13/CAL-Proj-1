@@ -49,6 +49,8 @@ public:
     SubwayStation();
     SubwayStation(std::string stationName, std::vector<char> lines);
 
+    std::string getName();
+
     std::vector<char> getLines();
 
     bool findLine(const char line);

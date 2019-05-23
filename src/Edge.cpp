@@ -2,17 +2,16 @@
 #include "Graph.h"
 
 Edge::Edge(Vertex *src, Vertex *dest) {
-    this->srcVertex = src;
     this->destVertex = dest;
 
     distance = src->getCoordinates().getDistance(dest->getCoordinates());
 
-    tripTime[0] = distance * FOOT_MULTIPLIER;
-    tripTime[1] = DOUBLE_INF;
-    tripTime[2] = DOUBLE_INF;
+    tripTime[0] = Time(distance * FOOT_MULTIPLIER);
+    tripTime[1] = Time(TIME_LIMIT);
+    tripTime[2] = Time(TIME_LIMIT);
 
     if (src->isBusStop() && dest->isBusStop()) {
-        tripTime[1] = distance * BUS_MULTIPLIER;
+        tripTime[1] = Time(distance * BUS_MULTIPLIER);
     }
 
     if (src->getSubway() != nullptr && dest->getSubway() != nullptr) {
@@ -26,7 +25,7 @@ Edge::Edge(Vertex *src, Vertex *dest) {
         }
 
         if (!subwayLines.empty()) {
-            tripTime[2] = distance * SUBWAY_MULTIPLIER;
+            tripTime[2] = Time(distance * SUBWAY_MULTIPLIER);
         }
     }
 
@@ -38,23 +37,23 @@ double Edge::getDistance() {
     return distance;
 }
 
-double Edge::getWalkingTime() {
+Time Edge::getWalkingTime() {
     chosenTransport = WALKING;
     return tripTime[WALKING];
 }
 
-double Edge::getBusTime() {
+Time Edge::getBusTime() {
     chosenTransport = BUS;
     return tripTime[BUS];
 }
 
-double Edge::getSubwayTime() {
+Time Edge::getSubwayTime() {
     chosenTransport = SUBWAY;
     return tripTime[SUBWAY];
 }
 
-double Edge::getBestTime() {
-    double bestTime = DOUBLE_INF;
+Time Edge::getBestTime() {
+    Time bestTime(TIME_LIMIT);
 
     if (tripTime[WALKING] <= bestTime) {
         bestTime = tripTime[WALKING];
@@ -72,7 +71,7 @@ double Edge::getBestTime() {
     return bestTime;
 }
 
-double Edge::getTime() {
+Time Edge::getTime() {
     return tripTime[chosenTransport];
 }
 
