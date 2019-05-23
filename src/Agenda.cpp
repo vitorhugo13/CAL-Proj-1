@@ -101,15 +101,18 @@ bool Agenda::removeActivity(std::string name, Day day){
 		if(duplicate){
 			if(name == it->getName() && day == it->getDay() && time == it->getStartTime()){
 				activities.erase(it);
+				saveActivities();
 				return true;
 			}
 		}
 		else{
 			if(name == it->getName() && day == it->getDay()){
 				activities.erase(it);
+				saveActivities();
 				return true;
 			}
 		}
+	
 	}
 
 	return false;

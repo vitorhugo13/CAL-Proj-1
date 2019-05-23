@@ -128,7 +128,8 @@ int Application::start() {
 					case 3:{
 						std::string name, date;
 						std::cout << "Activity's name ?" << std::endl;
-						std::cin >> name;
+						std::cin.ignore();
+						getline(std::cin,name);
 						std::cout << "In which day? " << std::endl;
 						std::cin >> date;
 						Day day(date);
