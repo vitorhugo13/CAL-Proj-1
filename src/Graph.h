@@ -27,6 +27,7 @@ public:
     int loadEdges(std::string filename);
     int loadBusStops(std::string filename);
     int loadSubwayStations(std::string filename);
+	
 
     Vertex *findVertex(const Vertex *vertex) const;
     Vertex *findVertex(const int vertexID) const;

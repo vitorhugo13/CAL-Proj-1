@@ -18,7 +18,7 @@ int Application::loadGraph() {
 	}
 	std::cout << "Loaded vertexes" << std::endl;
     
-	/*
+	
 	if (graph.loadBusStops("data/bus.txt")) {
 		return 2;
 	}
@@ -28,17 +28,19 @@ int Application::loadGraph() {
 		return 3;
 	}
 	std::cout << "Loaded subway stations" << std::endl;
-	*/
+	
 
     if (graph.loadEdges("data/edges.txt")) {
 		return 4;
 	}
 	std::cout << "Loaded edges" << std::endl;
 
-	
+
+	/*
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {
         std::cout << std::setprecision(16) << graph.getVertex(i)->getX() << ", " << graph.getVertex(i)->getY() << std::endl;
 	}
+	*/
 	
 
     return 0;
