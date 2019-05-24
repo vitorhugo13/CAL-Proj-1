@@ -6,11 +6,10 @@
 
 #include "Agenda.h"
 
-
-
 bool Agenda::addActivity(){
 
 	std::string name, info, date, startTime, endTime;
+	double x, y;
 	std::cout << "Activity's name ? "<< std::endl;
 	std::cin.ignore();
 	getline(std::cin,name);
@@ -28,8 +27,14 @@ bool Agenda::addActivity(){
 	std::cout << "Activity's ending time (hh:mm)  ? "<< std::endl;
 	std::cin >> endTime;
 
+	std::cout << "What's the activity x coordinate ? " << std::endl;
+	std::cin >> x;
+
+	std::cout << "What's the activity x coordinate ? " << std::endl;
+	std::cin >> y;
+
 	Day day(date);
-	Coordinates coordinates( 0 ,2);
+	Coordinates coordinates(x ,y);
 	Activity activity(name, info, coordinates, date, startTime, endTime);
 
 	return(addActivity(activity));

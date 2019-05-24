@@ -95,9 +95,6 @@ int Application::start() {
 			std::cout << "Option: ";
 			menu = menuInput(5);
 			
-			
-		
-
 			if(menu == -1)
 				std::cout << "Menu does not exist" << std::endl;
 
@@ -143,8 +140,9 @@ int Application::start() {
 						std::cout << "What day you want to see the path ? " << std::endl;
 						std::cin.ignore();
 						getline(std::cin,date);
+						Day day(date);
 						//coord is a vector with the coordinates of all place in that day
-						std::vector<Coordinates> coord = agenda.getCoords(date);		// FIXME: it is supposed to be a Day not a string
+						std::vector<Coordinates> coord = agenda.getCoords(day);
 						menu = -2;
 						break;
 					}
