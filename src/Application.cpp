@@ -149,7 +149,7 @@ int Application::start() {
 						getline(std::cin,date);
 						Day day(date);
 						//coord is a vector with the coordinates of all place in that day
-						std::vector<Coordinates> coord = agenda.getCoords(day);		// FIXME: it is supposed to be a Day not a string
+						std::vector<Coordinates> coord = agenda.getCoords(day);
 						menu = -2;
 						break;
 					}
