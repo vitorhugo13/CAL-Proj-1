@@ -6,7 +6,6 @@
 
 #include "Edge.h"
 #include "Coordinates.h"
-#include "Vehicles.h"
 #include "MutablePriorityQueue.h"
 
 
@@ -24,33 +23,19 @@ private:
     int queueIndex = 0;
     Time time;
 
-    bool busStop;
-    SubwayStation* subway;
-
 public:
 
     Vertex(int id, double x, double y);
 
+    Coordinates getCoordinates() const;
     double getX() const;
-
     double getY() const;
     
     int getID() const;
     
-    Coordinates getCoordinates();
-
-    Vertex* Vertex::getLastVertex();
-
+    Vertex* getLastVertex() const;
 
     void addEdge(Edge *edge);
-
-    void setBusStop();
-
-    bool isBusStop();
-
-    void setSubway(SubwayStation *subway);
-
-    SubwayStation *getSubway();
 
     size_t getNumEdges();
 

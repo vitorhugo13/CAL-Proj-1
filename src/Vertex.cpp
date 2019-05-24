@@ -8,8 +8,6 @@ Vertex::Vertex(int id, double x, double y) {
     coords = Coordinates(x, y);
 
     time = Time(TIME_LIMIT);
-    busStop = false;
-    subway = nullptr;
 }
 
 bool Vertex::operator<(const Vertex &vertex) const {
@@ -28,33 +26,16 @@ int Vertex::getID() const {
     return id;
 }
     
-Coordinates Vertex::getCoordinates() {
+Coordinates Vertex::getCoordinates() const {
     return coords;
 }
 
-Vertex* Vertex::getLastVertex() {
+Vertex* Vertex::getLastVertex() const {
     return lastVertex;
 }
 
 void Vertex::addEdge(Edge *edge) {
     paths.push_back(edge);
-}
-
-void Vertex::setBusStop() {
-    busStop = true;
-}
-
-bool Vertex::isBusStop() {
-    return busStop;
-}
-
-void Vertex::setSubway(SubwayStation *subway) {
-    this->subway = subway;
-}
-
-
-SubwayStation* Vertex::getSubway() {
-    return subway;
 }
 
 size_t Vertex::getNumEdges() {

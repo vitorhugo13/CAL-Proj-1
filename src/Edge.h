@@ -14,13 +14,7 @@ class Vertex;
 #define DOUBLE_INF  std::numeric_limits<double>::max()
 
 
-enum Transportation { WALKING, BUS, SUBWAY, UNDEFINED };
-
-
-// TODO: change these values
-const double BUS_MULTIPLIER = 0.025;
-const double SUBWAY_MULTIPLIER = 0.02;
-const double FOOT_MULTIPLIER = 0.1;
+enum Type { WALKING, BUS, SUBWAY };
 
 
 class Edge {
@@ -28,38 +22,24 @@ class Edge {
 protected:
 
     Vertex *destVertex;
-    double distance;        // distance between both vertices
-    Time tripTime[3];       // 0: foot; 1: bus; 2: subway
+    
+    double distance;
+    Time time;
 
-    Transportation chosenTransport;
-
-    std::vector<std::string> busLines;
-    std::vector<char> subwayLines;
-
+    Type type;
 
 public:
 
-    Edge(Vertex *src, Vertex *dest);
+    Edge(Vertex *src, Vertex *dest, Type type);
 
     Vertex* getDest() {
         return destVertex;
     }    
 
     double getDistance();
-
-    Time getWalkingTime();
-
-    Time getBusTime();
-
-    Time getSubwayTime();
-
-    Time getBestTime();
-
     Time getTime();
 
-    Transportation getChosenTransport();
-
-
+    Type getEdgeType();
 
     friend class Graph;
     friend class Vertex;

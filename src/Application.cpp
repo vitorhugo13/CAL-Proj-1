@@ -17,31 +17,24 @@ int Application::loadGraph() {
 		return 1;
 	}
 	std::cout << "Loaded vertexes" << std::endl;
-    
-	if (graph.loadBusStops("data/bus.txt")) {
-		return 2;
+
+	// load walking edges
+    if (graph.loadEdges("data/edges.txt", WALKING)) {
+		return 1;
 	}
-	std::cout << "Loaded bus stops" << std::endl;
+	std::cout << "Loaded walking edges" << std::endl;
 
-
-    if (graph.loadSubwayStations("data/subway.txt")) {
-		return 3;
+	// load bus edges
+    if (graph.loadEdges("data/edges_bus.txt", BUS)) {
+		return 1;
 	}
-	std::cout << "Loaded subway stations" << std::endl;
-	
+	std::cout << "Loaded walking edges" << std::endl;
 
-    if (graph.loadEdges("data/edges.txt")) {
-		return 4;
+	// load subway edges
+    if (graph.loadEdges("data/edges_subway.txt", WALKING)) {
+		return 1;
 	}
-	std::cout << "Loaded edges" << std::endl;
-
-
-	/*
-	for (size_t i = 0; i < graph.getNumVertex(); i++) {
-        std::cout << std::setprecision(16) << graph.getVertex(i)->getX() << ", " << graph.getVertex(i)->getY() << std::endl;
-	}
-	*/
-	
+	std::cout << "Loaded walking edges" << std::endl;
 
     return 0;
 }
@@ -195,12 +188,14 @@ int Application::viewMap() {
 
 
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {
+		/*
 		if (graph.getVertex(i)->isBusStop() && graph.getVertex(i)->getSubway() != nullptr)
   			gv->setVertexColor(graph.getVertex(i)->getID(), "green");
 		else if(graph.getVertex(i)->isBusStop())
   			gv->setVertexColor(graph.getVertex(i)->getID(), "orange");
 		else if(graph.getVertex(i)->getSubway() != nullptr)
   			gv->setVertexColor(graph.getVertex(i)->getID(), "red");
+		*/
 
 		gv->addNode(graph.getVertex(i)->getID(), graph.getVertex(i)->getX() - minX, graph.getVertex(i)->getY() - minY);
 	}
@@ -211,12 +206,23 @@ int Application::viewMap() {
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {		
 		for (size_t j = 0; j < graph.getVertex(i)->getNumEdges(); j++) {
 			
+			switch (graph.getVertex(i)->getEdge(j)->getEdgeType()) {
+				case WALKING:
+					gv->setEdgeColor(edgeID, "black");
+					break;
+				case BUS:
+					gv->setEdgeColor(edgeID, "red");
+					break;
+				case SUBWAY:
+					gv->setEdgeColor(edgeID, "green");
+					break;
+				default:
+					break;
+			}
+
 			gv->addEdge(edgeID, graph.getVertex(i)->getID(), graph.getVertex(i)->getEdge(j)->getDest()->getID(), EdgeType::DIRECTED);
 			edgeID++;
-			
-			//std::cout << graph.getVertex(i)->getID() << " , " << graph.getVertex(i)->getEdge(j)->getDest()->getID() << std::endl;
-		}
-		
+		}	
 	}
 	gv->rearrange();
 
