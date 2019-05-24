@@ -132,11 +132,101 @@ Vertex* Graph::findNearestVertex(Coordinates coords) {
     return vertex;
 }
 
-void Graph::dijsktraAlgorithm(const Vertex* src, const Vertex* dest) {
+void Graph::dijsktraAlgorithm(Vertex* src, Vertex* dest) {
 
     for (size_t i = 0; i < vertexSet.size(); i++) {
-        vertexSet[i]->time = Time(TIME_LIMIT);
-        vertexSet[i]->lastVertex = nullptr;
-        vertexSet[i]->visited = false;
+        vertexSet[i]->setTime(Time(TIME_LIMIT));
+        vertexSet[i]->setLastVertex(nullptr);
+        vertexSet[i]->setVisited(false);
+        vertexSet[i]->setLastEdgeType(WALKING);
     }
+
+    src->setTime(Time("0"));
+    MutablePriorityQueue<Vertex> queue;
+
+    queue.insert(src);
+
+    Vertex *v, *w;
+
+    while (!queue.empty()) {
+        v = queue.extractMin();
+
+        if (v->getID() == dest->getID()) {
+            break;
+        }
+
+        Time oldTime, newTime;
+        for (size_t i = 0; i < v->getNumEdges(); i++) {
+            Edge edge = *v->getEdge(i);
+            w = edge.getDest();
+            oldTime = w->getTime();
+            newTime = v->getTime() + edge.getTime();
+
+            if (oldTime > newTime) {
+                w->setTime(newTime);
+                w->setLastVertex(v);
+                w->setLastEdgeType(edge.getEdgeType());
+
+                if (!w->getVisited())
+                    queue.insert(w);
+                else
+                    queue.decreaseKey(w);
+
+                w->setVisited(true);
+            }
+        }
+    }
+}
+
+std::stack<Vertex*> Graph::getPath(Vertex* lastVertex) {
+    
+    std::stack<Vertex *> path;
+
+    Vertex* vertex = lastVertex;
+
+    while (vertex != nullptr) {
+        path.push(vertex);
+        vertex = vertex->getLastVertex();
+    }
+
+    return path;
+}
+
+std::string Graph::getDirections(std::stack<Vertex*> &path) {
+
+    if (path.empty()) {
+        std::cerr << "No path is present!" << std::endl;
+        return "No path is present!";
+    }
+
+    Vertex *v = path.top();
+    Vertex *w;
+    path.pop();
+
+    std::string explainedPath = "";
+
+    while (!path.empty()) {
+        w = path.top();
+        path.pop();
+
+        explainedPath += std::to_string(v->getID()) + "---";
+
+        switch(v->getLastEdgeType()) {
+            case WALKING:
+                explainedPath += "WALKING";
+                break;
+            case BUS:
+                explainedPath += "BUS";
+                break;
+            case SUBWAY:
+                explainedPath += "SUBWAY";
+                break;
+            default:
+                break;
+        }
+
+        explainedPath += "--->" + std::to_string(w->getID()) + "\n";
+    }
+
+    return explainedPath;
 }

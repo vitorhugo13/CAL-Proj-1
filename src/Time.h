@@ -41,7 +41,7 @@ public:
 
     Time operator-=(Time const &obj);
     
-    void operator=(Time const &obj);
+    //void operator=(Time const &obj);
 
     bool operator==(Time const &obj) const;
 

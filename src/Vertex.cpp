@@ -34,6 +34,18 @@ Vertex* Vertex::getLastVertex() const {
     return lastVertex;
 }
 
+void Vertex::setLastVertex(Vertex* vertex) {
+    lastVertex = vertex;
+}
+    
+bool Vertex::getVisited() const {
+    return visited;
+}
+    
+void Vertex::setVisited(bool visited) {
+    this->visited = visited;
+}
+
 void Vertex::addEdge(Edge *edge) {
     paths.push_back(edge);
 }
@@ -49,3 +61,19 @@ Edge* Vertex::getEdge(size_t index) {
     return nullptr;
 }
 
+Time Vertex::getTime() const {
+    return time;
+}
+
+void Vertex::setTime(Time newTime) {
+    time = newTime;
+}
+
+
+Type Vertex::getLastEdgeType() const {
+    return lastEdgeType;
+}
+
+void Vertex::setLastEdgeType(Type edgeType) {
+    lastEdgeType = edgeType;
+}

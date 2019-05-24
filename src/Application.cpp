@@ -166,36 +166,43 @@ int Application::start() {
 
 int Application::viewMap() {
 
-	GraphViewer *gv = new GraphViewer(600, 600, false);
-	gv->createWindow(600, 600);
+	int width = 600;
+	int height = 600;
+
+	GraphViewer *gv = new GraphViewer(width, height, false);
+	gv->createWindow(width, height);
 	gv->defineVertexColor("blue");
 	gv->defineEdgeColor("black");
 
 	
 	double minX = graph.getVertex(0)->getX();
 	double minY = graph.getVertex(0)->getY();
+	double maxX = graph.getVertex(0)->getX();
+	double maxY = graph.getVertex(0)->getY();
 	
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {
 		if (graph.getVertex(i)->getX() < minX) {
 			minX = graph.getVertex(i)->getX();
 		}
+		else if (graph.getVertex(i)->getX() > maxX) {
+			maxX = graph.getVertex(i)->getX();
+		}
+
 		if (graph.getVertex(i)->getY() < minY) {
 			minY = graph.getVertex(i)->getY();
 		}
+		else if (graph.getVertex(i)->getY() > maxY) {
+			maxY = graph.getVertex(i)->getY();			
+		}
 	}
+
+	double medX = (maxX - minX) / 2;
+	double medY = (maxY - minY) / 2;
+	
 
 
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {
-		/*
-		if (graph.getVertex(i)->isBusStop() && graph.getVertex(i)->getSubway() != nullptr)
-  			gv->setVertexColor(graph.getVertex(i)->getID(), "green");
-		else if(graph.getVertex(i)->isBusStop())
-  			gv->setVertexColor(graph.getVertex(i)->getID(), "orange");
-		else if(graph.getVertex(i)->getSubway() != nullptr)
-  			gv->setVertexColor(graph.getVertex(i)->getID(), "red");
-		*/
-
-		gv->addNode(graph.getVertex(i)->getID(), graph.getVertex(i)->getX() - minX, graph.getVertex(i)->getY() - minY);
+		gv->addNode(graph.getVertex(i)->getID(), graph.getVertex(i)->getX() - minX - medX + width / 2, -graph.getVertex(i)->getY() + minY + medY + height / 2);
 	}
 	gv->rearrange();
 

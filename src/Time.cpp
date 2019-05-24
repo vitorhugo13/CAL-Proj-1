@@ -153,11 +153,11 @@ Time Time::operator-=(Time const &obj) {
 
         return this->time = result;
     }
-
+/*
 void Time::operator=(Time const &obj) {
         this->time = obj.time;
     }
-
+*/
 bool Time::operator==(Time const &obj) const {
         return this->time == obj.time;
     }

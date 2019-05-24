@@ -22,6 +22,8 @@ private:
     Vertex *lastVertex = nullptr;
     int queueIndex = 0;
     Time time;
+    Type lastEdgeType = WALKING;
+    
 
 public:
 
@@ -32,8 +34,18 @@ public:
     double getY() const;
     
     int getID() const;
+
+    Time getTime() const;
+    void setTime(Time newTime);
     
     Vertex* getLastVertex() const;
+    void setLastVertex(Vertex* vertex);
+
+    bool getVisited() const;
+    void setVisited(bool visited);
+
+    Type getLastEdgeType() const;
+    void setLastEdgeType(Type edgeType);
 
     void addEdge(Edge *edge);
 

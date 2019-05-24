@@ -9,7 +9,7 @@
 #include "Edge.h"
 
 #include <vector>
-#include <queue>
+#include <stack>
 #include <limits>
 #include <cmath>
 
@@ -35,14 +35,25 @@ public:
 	Vertex *findNearestVertex(Coordinates coords);
  
 
+	std::stack<Vertex*> getPath(Vertex* lastVertex);
+	std::string getDirections(std::stack<Vertex*> &path);
+
+
     /**
-     * @brief Implementation of the dijkstra algorithm to get the quickest path between two vertexes
+     * @brief Implementation of the dijkstra algorithm to claculate the quickest path between two vertexes
      * 
      * @param src 	Pointer to the initial vertex
      * @param dest 	Pointer to the final vertex
      */
-    void dijsktraAlgorithm(const Vertex* src, const Vertex* dest);
+    void dijsktraAlgorithm(Vertex* src, Vertex* dest);
 
+	/**
+	 * @brief Implementation of the A Star algorithm to calculate the quickest path between two vertexes
+	 * 
+	 * @param src 	Pointer to the initial vertex
+	 * @param dest 	Pointer to the final vertex
+	 */
+	void A_star(Vertex* src, Vertex* dest);
 };
 
 #endif
