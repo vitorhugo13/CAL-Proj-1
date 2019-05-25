@@ -47,6 +47,14 @@ public:
     Type getLastEdgeType() const;
     void setLastEdgeType(Type edgeType);
 
+    /**
+     * @brief Calculate the time that would take to travel from one vertex to another by subway and in a straight line
+     * 
+     * @param vertex    Pointer to the vertex to travel to
+     * @return Time     Time of the trip
+     */
+    Time getAverageTime(Vertex const *vertex) const;
+
     void addEdge(Edge *edge);
 
     size_t getNumEdges();

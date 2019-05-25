@@ -41,8 +41,6 @@ public:
 
     Time operator-=(Time const &obj);
     
-    //void operator=(Time const &obj);
-
     bool operator==(Time const &obj) const;
 
     bool operator<(Time const &obj) const;
@@ -52,6 +50,8 @@ public:
     bool operator>(Time const &obj) const;
 
     bool operator>=(Time const &obj) const;
+
+    std::string getTimeString() const;
 
     friend std::ostream& operator<< (std::ostream &os, const Time &t);
 };

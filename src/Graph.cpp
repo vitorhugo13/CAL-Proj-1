@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 #include "Graph.h"
 #include "MutablePriorityQueue.h"
@@ -230,3 +231,88 @@ std::string Graph::getDirections(std::stack<Vertex*> &path) {
 
     return explainedPath;
 }
+
+bool Graph::breadthFirstSearch(Vertex* src, Vertex* dest) {
+
+    // base case
+    if (src->getID() == dest->getID())
+        return true;
+
+    // mark all vertexes as not visited
+    for (size_t i = 0; i < vertexSet.size(); i++) {
+        vertexSet[i]->setVisited(false);
+    }
+
+    std::queue<Vertex*> queue;
+
+    src->setVisited(true);
+    queue.push(src);
+
+    while (!queue.empty()) {
+
+        Vertex *vertex = queue.front();
+        queue.pop();
+
+        for (size_t i = 0; i < vertex->getNumEdges(); i++) {
+            Vertex *adj = vertex->getEdge(i)->getDest();
+            
+            if (adj->getID() == dest->getID())
+                return true;
+
+            if (!adj->getVisited()) {
+                adj->setVisited(true);
+                queue.push(adj);
+            }
+        }
+    }
+    
+    return false;
+}
+
+void Graph::A_star(Vertex* src, Vertex* dest) {
+
+    for (size_t i = 0; i < vertexSet.size(); i++) {
+        vertexSet[i]->setTime(Time(TIME_LIMIT));
+        vertexSet[i]->setLastVertex(nullptr);
+        vertexSet[i]->setVisited(false);
+        vertexSet[i]->setLastEdgeType(WALKING);
+    }
+
+    src->setTime(Time("0"));
+    MutablePriorityQueue<Vertex> queue;
+
+    queue.insert(src);
+
+    Vertex *v, *w;
+    
+    while (!queue.empty()) {
+        v = queue.extractMin();
+
+        if (v->getID() == dest->getID()) {
+            dest->setTime(dest->getTime() + src->getAverageTime(dest));
+            break;
+        }
+
+        Time oldTime, newTime;
+        for (size_t i = 0; i < v->getNumEdges(); i++) {
+            Edge edge = *v->getEdge(i);
+            w = edge.getDest();
+            oldTime = w->getTime();
+            newTime = v->getTime() + edge.getTime() - v->getAverageTime(dest) + w->getAverageTime(dest);
+
+            if (oldTime > newTime) {
+                w->setTime(newTime);
+                w->setLastVertex(v);
+                w->setLastEdgeType(edge.getEdgeType());
+
+                if (!w->getVisited())
+                    queue.insert(w);
+                else
+                    queue.decreaseKey(w);
+
+                w->setVisited(true);
+            }
+        }
+    }
+}
+

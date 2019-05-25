@@ -153,11 +153,7 @@ Time Time::operator-=(Time const &obj) {
 
         return this->time = result;
     }
-/*
-void Time::operator=(Time const &obj) {
-        this->time = obj.time;
-    }
-*/
+
 bool Time::operator==(Time const &obj) const {
         return this->time == obj.time;
     }
@@ -178,18 +174,26 @@ bool Time::operator==(Time const &obj) const {
         return this->time >= obj.time;
     }
 
-std::ostream& operator<< (std::ostream &os, const Time &t){
-    	std::string hours, mins;
-    	int min = t.getTime() % 100;
-    	int hour = t.getTime() - min;
-    	if(hour/100 <10)
-    		hours = "0" + std::to_string(hour/100) + ":";
-    	else
-    		hours = std::to_string(hour/100) + ":";
-    	if(min < 10)
-    		mins = "0" + std::to_string(min);
-    	else
-    		mins = std::to_string(min);
-    	os << hours << mins;
-    	return os;
-    }
+
+std::string Time::getTimeString() const {
+    std::string result = "";
+    
+    int min = time % 100;
+    int hour = time - min;
+
+    if (hour / 100 < 10)
+        result += "0";
+    result += std::to_string(hour / 100) + ":";
+
+    if (min < 10)
+        result += "0";
+    result += std::to_string(min);
+    
+    return result;
+}
+
+
+std::ostream& operator<< (std::ostream &os, const Time &t) {
+    os << t.getTimeString();
+    return os;
+}

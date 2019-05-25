@@ -33,11 +33,13 @@ public:
 	size_t getNumVertex() const { return vertexSet.size(); }
 
 	Vertex *findNearestVertex(Coordinates coords);
+	
  
-
 	std::stack<Vertex*> getPath(Vertex* lastVertex);
 	std::string getDirections(std::stack<Vertex*> &path);
 
+	bool depthFirstSearch(Vertex* src, Vertex* dest);
+	bool breadthFirstSearch(Vertex* src, Vertex* dest);
 
     /**
      * @brief Implementation of the dijkstra algorithm to claculate the quickest path between two vertexes

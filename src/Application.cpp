@@ -198,8 +198,6 @@ int Application::viewMap() {
 
 	double medX = (maxX - minX) / 2;
 	double medY = (maxY - minY) / 2;
-	
-
 
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {
 		gv->addNode(graph.getVertex(i)->getID(), graph.getVertex(i)->getX() - minX - medX + width / 2, -graph.getVertex(i)->getY() + minY + medY + height / 2);

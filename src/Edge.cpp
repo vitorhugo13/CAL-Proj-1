@@ -4,13 +4,6 @@
 #include "Graph.h"
 
 
-// TODO: change these values
-const double BUS_MULTIPLIER = 0.025;
-const double SUBWAY_MULTIPLIER = 0.02;
-const double WALKING_MULTIPLIER = 0.1;
-
-
-
 Edge::Edge(Vertex *src, Vertex *dest, Type type) {
     this->destVertex = dest;
     this->type = type;
