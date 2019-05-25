@@ -79,5 +79,5 @@ void Vertex::setLastEdgeType(Type edgeType) {
 }
 
 Time Vertex::getAverageTime(Vertex const *vertex) const {
-    return Time(this->coords.getDistance(vertex->getCoordinates) * SUBWAY_MULTIPLIER);
+    return Time(this->coords.getDistance(vertex->getCoordinates()) * SUBWAY_MULTIPLIER);
 }
