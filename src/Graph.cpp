@@ -193,6 +193,7 @@ std::stack<Vertex*> Graph::getPath(Vertex* lastVertex) {
     return path;
 }
 
+// TODO: get travel time
 std::string Graph::getDirections(std::stack<Vertex*> &path) {
 
     if (path.empty()) {
