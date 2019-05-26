@@ -143,6 +143,21 @@ int Application::start() {
 						Day day(date);
 						//coord is a vector with the coordinates of all place in that day
 						std::vector<Coordinates> coord = agenda.getCoords(day);
+						if(coord.size()> 1){
+							std::vector< Vertex*> vertexs;
+							Graph newGraph;
+							for(Coordinates coordinates : coord){
+								Vertex* newVertex = new Vertex();
+								newVertex = newGraph.findNearestVertex(coordinates);													
+								vertexs.push_back(newVertex);
+							}
+							for(unsigned int i = 0; i < (vertexs.size() - 2); i++){				
+								newGraph.dijsktraAlgorithm(vertexs.at(i), vertexs.at(i+1) );
+								std::cout << "path made! " << std::endl;
+							}
+						} else{
+							std::cout << std::endl << " No paths to see!" << std::endl << std::endl ;
+						}					
 						menu = -2;
 						break;
 					}
