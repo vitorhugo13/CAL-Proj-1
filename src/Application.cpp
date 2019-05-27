@@ -153,7 +153,7 @@ int Application::start() {
 								newVertex = newGraph.findNearestVertex(coordinates);													
 								vertexs.push_back(newVertex);
 							}
-							for(unsigned int i = 0; i < (vertexs.size() - 2); i++){		
+							for(unsigned int i = 0; i < (vertexs.size() - 1); i++){		
 								Graph* nGraph = new Graph();		
 								nGraph->dijsktraAlgorithm(vertexs.at(i), vertexs.at(i+1) );
 								std::stack<Vertex*> sVer = nGraph->getPath(vertexs.at(i));
@@ -162,6 +162,7 @@ int Application::start() {
 								graphs.push_back(nGraph);
 								std::cout << "path made! " << std::endl;
 							}
+							/* table that shows if we going to be on time to the next event */
 							agenda.show(agenda.onTime(travelTimes, day),day);
 						} else{
 							std::cout << std::endl << " No paths to see!" << std::endl << std::endl ;
