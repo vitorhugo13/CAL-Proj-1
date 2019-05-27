@@ -137,22 +137,29 @@ int Application::start() {
 
 					case 4:{
 						std::string date;
+
 						std::cout << "What day you want to see the path ? " << std::endl;
 						std::cin.ignore();
 						getline(std::cin,date);
+
 						Day day(date);
 						//coord is a vector with the coordinates of all place in that day
+
 						std::vector<Coordinates> coord = agenda.getCoords(day);
+
 						if(coord.size()> 1){
+							
 							std::vector< Vertex*> vertexs;
 							std::vector<Graph* > graphs; //vector with paths
 							std::vector<Time> travelTimes;
 							Graph newGraph;
+
 							for(Coordinates coordinates : coord){
 								Vertex* newVertex = new Vertex();
 								newVertex = newGraph.findNearestVertex(coordinates);													
 								vertexs.push_back(newVertex);
 							}
+
 							for(unsigned int i = 0; i < (vertexs.size() - 1); i++){		
 								Graph* nGraph = new Graph();		
 								nGraph->dijsktraAlgorithm(vertexs.at(i), vertexs.at(i+1) );
@@ -162,9 +169,13 @@ int Application::start() {
 								graphs.push_back(nGraph);
 								std::cout << "path made! " << std::endl;
 							}
+
 							/* table that shows if we going to be on time to the next event */
 							agenda.show(agenda.onTime(travelTimes, day),day);
-						} else{
+
+						} 
+						else{
+
 							std::cout << std::endl << " No paths to see!" << std::endl << std::endl ;
 						}					
 						menu = -2;
