@@ -28,13 +28,13 @@ int Application::loadGraph() {
     if (graph.loadEdges("data/edges_bus.txt", BUS)) {
 		return 1;
 	}
-	std::cout << "Loaded walking edges" << std::endl;
+	std::cout << "Loaded bus edges" << std::endl;
 
 	// load subway edges
     if (graph.loadEdges("data/edges_subway.txt", WALKING)) {
 		return 1;
 	}
-	std::cout << "Loaded walking edges" << std::endl;
+	std::cout << "Loaded subway edges" << std::endl;
 
     return 0;
 }
