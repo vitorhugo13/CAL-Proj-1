@@ -17,6 +17,7 @@ class Graph {
 
 private:
     std::vector<Vertex *> vertexSet;
+    Time travelTime;
 
     bool addVertex(Vertex *vertex);
     bool addEdge(Vertex *vertex, Edge *edge);
@@ -37,6 +38,7 @@ public:
  
 	std::stack<Vertex*> getPath(Vertex* lastVertex);
 	std::string getDirections(std::stack<Vertex*> &path);
+    Time getTime(){ return travelTime; }
 
 	bool depthFirstSearch(Vertex* src, Vertex* dest);
 	bool breadthFirstSearch(Vertex* src, Vertex* dest);

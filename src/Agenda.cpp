@@ -204,9 +204,7 @@ void Agenda::loadActivities(){
 		Day day(date);
 		Time startTime(Stime);
 		Time endTime(Ftime);
-
-		
-
+	
 		//create an activity with the previous objects
 		Activity a(name, info, c, day, startTime, endTime);
 		activities.push_back(a);
@@ -242,4 +240,45 @@ std::vector<Coordinates> Agenda::getCoords(Day day) const {
 	}
 	return coor;
 }
+
+bool Agenda::onTime(Activity a, Activity b, Time travel) const{
+	return (a.getEndTime () - b.getStartTime() > travel );
+}
+
+std::vector<bool> Agenda::onTime(std::vector<Time> travelTime, Day day) const{
+	std::vector<bool> notLate;
+	std::vector<Activity> activities = activitiesOfTheDay(day);
+	for(size_t i = 0; i < activities.size()-1; i++){
+		notLate.push_back(onTime(activities.at(i), activities.at(i+1), travelTime.at(i)));
+	}
+	return notLate;
+}
+
+void Agenda::show(std::vector<bool> onTime, Day day ) const{
+	
+	std::vector<Activity> activities = activitiesOfTheDay(day);
+
+	if(activities.size() < 2){
+		std::cout << "There's not enought activities in this day!" << std::endl << std::endl;
+		return;
+	}
+	if(activities.size() > onTime.size() + 1){
+		std::cout << "An error occurred " << std::endl;
+		return;
+	}
+	std:: cout << std::endl;
+	std::cout << "On this day: " << std::setw(10);
+	std::cout << day << std::endl;
+	
+	for(size_t i = 0; i < activities.size(); i++){
+		std::cout << activities.at(i).getName() << std::setw(10);
+		if(onTime.at(i)){
+			std::cout << "Going to be on time"<< std::endl;
+		} else{
+			std::cout << "Going to be on late "<< std::endl;
+		}
+	}
+}
+
+
 

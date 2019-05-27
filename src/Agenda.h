@@ -47,6 +47,15 @@ public:
     void loadActivities();
     void saveActivities() const;
     std::vector<Coordinates> getCoords(Day day) const;
+    bool onTime(Activity a, Activity b, Time travel) const;
+    /**
+     * @brief - See if we going to be on time
+     * 
+     * @param - vetor com todos os tempos de viagem
+     * @param - day be analized
+     */
+    std::vector<bool> onTime(std::vector<Time> travelTime, Day day) const;
+    void show(std::vector<bool> onTime, Day day ) const;
 };
 
 #endif

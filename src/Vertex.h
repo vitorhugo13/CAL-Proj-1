@@ -28,7 +28,7 @@ private:
 public:
 
     Vertex(int id, double x, double y);
-
+    Vertex() { }
     Coordinates getCoordinates() const;
     double getX() const;
     double getY() const;

@@ -7,12 +7,12 @@
 
 
 bool Graph::addEdge(Vertex* vertex, Edge *edge) {
-        if (findVertex(vertex) == nullptr) {
-            return false;
-        }
-        vertex->addEdge(edge);
-        return true;
+    if (findVertex(vertex) == nullptr) {
+        return false;
     }
+    vertex->addEdge(edge);
+    return true;
+}
 
     bool Graph::addVertex(Vertex *vertex) {
 	    if (findVertex(vertex) != nullptr)
@@ -193,15 +193,17 @@ std::stack<Vertex*> Graph::getPath(Vertex* lastVertex) {
     return path;
 }
 
-// TODO: get travel time
+// TODO: get travel time - DONE
 std::string Graph::getDirections(std::stack<Vertex*> &path) {
-
+    
     if (path.empty()) {
         std::cerr << "No path is present!" << std::endl;
         return "No path is present!";
     }
 
+    travelTime.setTime("0");
     Vertex *v = path.top();
+    travelTime += v->getAverageTime(v);
     Vertex *w;
     path.pop();
 
