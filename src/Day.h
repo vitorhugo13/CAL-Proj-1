@@ -12,78 +12,92 @@
 #include <limits>
 
 /**
- * Excepcao
+ * @brief exception class
+ * 
  */
 class DataInvalida { };
 
 /**
- * Excepcao
+ * @brief exception class
+ * 
  */
 class FormatoStringInvalido { };
 
-/**
- * @brief Class that handles days in this project.
- * 
- */
+
 class Day
-{
+{	
+	/**
+	 * @brief day's attribute
+	 * 
+	 */
 	unsigned int ano, mes, dia;
 
 public:
+	
 	/**
-	 * Contrutor de datas por inteiros
-	 * @param a Ano
-	 * @param m Mes
-	 * @param d Dia
+	 * @brief Construct a new Day object
+	 * 
+	 * @param a year
+	 * @param m month
+	 * @param d day
 	 */
 	Day(unsigned int a, unsigned int m, unsigned int d);
 
 	/**
-	 * Construtor de datas por strings\n
-	 * Faz parse a string tem excepcoes para formatos errados
-	 * @param d String com data no formato DD-MM-AAAA
+	 * @brief Construct a new Day object
+	 * 
+	 * @param d date's string
 	 */
 	Day(std::string d);
 
 	/**
-	 * @return Ano
+	 * @brief Gets the year of the object
+	 * 
+	 * @return unsigned int date's year
 	 */
 	unsigned int getAno() const;
 
 	/**
-	 * @return Mes
+	 * @brief Gets the month of the object
+	 * 
+	 * @return unsigned int date's month
 	 */
 	unsigned int getMes() const;
 
 	/**
-	 * @return Dia
+	 * @brief Gets the day of the object
+	 * 
+	 * @return unsigned int date's day
 	 */
 	unsigned int getDia() const;
 
 	/**
-	 * @return Numero de horas totais desde o ano 2000, util para comparacao direta
-	 * de um momento especifico
+	 * @brief Get the Total Hours object
+	 * 
+	 * @return double 
 	 */
 	double getTotalHours() const;
 
 	/**
-	 * Redefinicao do operador maior
-	 * @param d1 Referencia para a data com a qual se vai comparar
-	 * @return True se d1 e menor
+	 * @brief Overload of operand greater
+	 * 
+	 * @param d1 reference to the day that we going to compare
+	 *
+	 * @return True if d1 is lower and false otherwise
 	 */
 	bool operator>(const Day &d1);
 
 	/**
-	 * Redefinicao do operador comparacao
-	 * @param d1 Referencia para a data com a qual se vai comparar
-	 * @return True se as duas datas sao iguais
+	 * @brief Overload of operand equal
+	 * @param d1 reference to the day that we going to compare
+	 * @return True if days are equal and false otherwise
 	 */
 	bool operator==(const Day &d1);
 
 	/**
-	 * Redefinicao do operador menor
-	 * @param Referencia para a data com a qual se vai comparar
-	 * @return True se d1 e maior
+	 * @brief Overload of the operand less
+	 * @param d1 reference to the day that we going to compare
+	 * @return True se d1 is greater and false otherwise
 	 */
 	bool operator<(const Day &d1);
 
