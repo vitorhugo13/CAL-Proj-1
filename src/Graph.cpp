@@ -69,7 +69,7 @@ int Graph::loadVertexes(std::string filename)
         while ((pos = line.find(delimiter)) != std::string::npos)
         {
             info[j++] = line.substr(0, pos);
-            line.erase(0, pos + delimiter.length());
+            line.erase(0, pos + delimiter.length());//ver 
         }
         info[j] = line;
 
