@@ -161,12 +161,16 @@ void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
         vertexSet[i]->setLastEdgeType(WALKING);
     }
 
+    std::cout << "1" << std::endl;
+
     src->setTime(Time("00:00"));
     MutablePriorityQueue<Vertex> queue;
 
     queue.insert(src);
 
     Vertex *v, *w;
+
+    std::cout << "2" << std::endl;
 
     while (!queue.empty())
     {
@@ -199,6 +203,9 @@ void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
                 w->setVisited(true);
             }
         }
+
+        std::cout << v->getID() << std::endl;
+
     }
 
     /*
@@ -227,6 +234,7 @@ std::stack<Vertex *> Graph::getPath(Vertex *lastVertex)
 std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
 {
 
+    int somaVE = 0;
     if (path.empty())
     {
         std::cerr << "No path is present!" << std::endl;
@@ -234,14 +242,17 @@ std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
     }
 
     Vertex *v = path.top();
+    somaVE += 1 + v->getNumEdges();
     Vertex *w;
     path.pop();
+
 
     std::string explainedPath = "";
 
     while (!path.empty())
     {
         w = path.top();
+        somaVE += 1 + w->getNumEdges();
         path.pop();
 
         explainedPath += std::to_string(v->getID()) + "---";
@@ -266,7 +277,7 @@ std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
         v = w;
     }
     travelTime = w->getTime();
-
+    std::cout << "Numer Of |V| + |E| : " << somaVE << std::endl;
     return explainedPath;
 }
 

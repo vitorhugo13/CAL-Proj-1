@@ -159,11 +159,12 @@ int Application::start() {
 							}
 
 							for(size_t i = 0; i < vertexs.size() - 1; i++) {		
-								
-								auto begin = std::chrono::high_resolution_clock::now();	
-								graph.dijsktraAlgorithm(vertexs[i], vertexs[i + 1]);
-								auto end = std::chrono::high_resolution_clock::now();  
-    							std::cout << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count()  << "ns" << std::endl;
+								if(graph.breadthFirstSearch(vertexs[i], vertexs[i+1])){
+									auto begin = std::chrono::high_resolution_clock::now();	
+									graph.dijsktraAlgorithm(vertexs[i], vertexs[i + 1]);
+									//graph.A_star(vertexs[i], vertexs[i + 1]);
+									auto end = std::chrono::high_resolution_clock::now();  
+    								std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "  ms " << std::endl;
 								
 								Time travelTime;
 								stack<Vertex*> path = graph.getPath(vertexs[i + 1]);
@@ -172,6 +173,10 @@ int Application::start() {
 
 								std::cout << directions << std::endl;
 								std::cout << travelTime << std::endl;
+								}
+								else{
+									std::cout << "There isn't path to the vertexs  " << std::endl;
+								}
 							}
 							/* table that shows if we going to be on time to the next event */
 							agenda.show(agenda.onTime(travelTimes, day),day);		
