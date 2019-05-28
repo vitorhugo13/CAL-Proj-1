@@ -31,7 +31,7 @@ int Application::loadGraph() {
 	std::cout << "Loaded bus edges" << std::endl;
 
 	// load subway edges
-    if (graph.loadEdges("data/edges_subway.txt", WALKING)) {
+    if (graph.loadEdges("data/edges_subway.txt", SUBWAY)) {
 		return 1;
 	}
 	std::cout << "Loaded subway edges" << std::endl;
@@ -162,16 +162,18 @@ int Application::start() {
 								
 								auto begin = std::chrono::high_resolution_clock::now();	
 								graph.dijsktraAlgorithm(vertexs[i], vertexs[i + 1]);
+
+								//graph.A_star(vertexs[i], vertexs[i + 1]);
 								auto end = std::chrono::high_resolution_clock::now();  
-    							std::cout << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count()  << "ns" << std::endl;
+    							std::cout << "Time of execution :  " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count()  << "ns" << std::endl;
 								
 								Time travelTime;
 								stack<Vertex*> path = graph.getPath(vertexs[i + 1]);
 								std::string directions = graph.getDirections(path, travelTime);
 								travelTimes.push_back(travelTime);
 
-								std::cout << directions << std::endl;
-								std::cout << travelTime << std::endl;
+								std::cout << "Travel time to Destiny :   " << travelTime << std::endl << std::endl;
+								std::cout << directions << std::endl;				
 							}
 							/* table that shows if we going to be on time to the next event */
 							agenda.show(agenda.onTime(travelTimes, day),day);		

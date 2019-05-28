@@ -9,187 +9,86 @@ Time::Time() {
 }
     
 Time::Time(double time) {
-    this->time = (short int) floor(time) * 100;
-    this->time += (short int) floor(60 * (time - floor(time)));
+    this->time = time;
 }
 
 Time::Time(std::string time) {
-    time.erase(std::remove(time.begin(), time.end(), ':'), time.end());
-	this->time = stoi(time, nullptr, 10);
+
+    std::string delimiter = ":";
+
+    size_t pos = time.find(delimiter);
+    this->time = std::stoi(time.substr(0, pos));  //hours
+    time.erase(0, pos + delimiter.length());
+
+    pos = time.find(delimiter);
+    this->time += std::stoi(time.substr(0, pos)) / 60.0;
+    time.erase(0, pos + delimiter.length());
+
+    this->time += std::stoi(time) / 3600;
 }
 
-Time::Time(unsigned short int time) {
-	this->time = time;
-}
-
-unsigned short int Time::getTime() const {
+double Time::getTime() const {
 	return this->time;
 }
 
 void Time::setTime(std::string time){
-	time.erase(std::remove(time.begin(), time.end(), ':'), time.end());
-	this->time = stoi(time, nullptr, 10);
+    
+    std::string delimiter = ":";
+
+    size_t pos = time.find(delimiter);
+    this->time = std::stoi(time.substr(0, pos));  //hours
+    time.erase(0, pos + delimiter.length());
+
+    pos = time.find(delimiter);
+    this->time += std::stoi(time.substr(0, pos)) / 60.0;
+    time.erase(0, pos + delimiter.length());
+
+    this->time += std::stoi(time) / 3600;
 }
 
 Time Time::operator+(Time const &obj) const {
-        unsigned char carry = 0;
-        unsigned short int thisHours, thisMinutes, objHours, objMinutes;
-
-        thisHours = this->time / 100;
-        thisMinutes = this->time % 100;
-
-        objHours = obj.getTime() / 100;
-        objMinutes = obj.getTime() % 100;
-
-        thisMinutes += objMinutes;
-        if(thisMinutes > 59) {
-            carry = 1;
-            thisMinutes = thisMinutes - 60;
-        }
-
-        if(carry == 1) {
-            thisHours += objHours + 1;
-            if(thisHours > 23)  thisHours = 0 + (thisHours - 24);
-        }else {
-            thisHours += objHours;
-            if(thisHours > 23)  thisHours = 0 + (thisHours - 24);
-        }
-
-        unsigned short int result = thisHours * 100 + thisMinutes;
-
-        if(result == 2400)  result = 0;
-
-        return result;
-    }
+    return this->time + obj.time;
+}
 
 Time Time::operator-(Time const &obj) const {
-        unsigned char carry = 0;
-        short int thisHours, thisMinutes, objHours, objMinutes;
+    return (this->time - obj.time >= 0) ? this->time - obj.time : 0;
+}
 
-        thisHours = this->time / 100;
-        thisMinutes = this->time % 100;
-
-        objHours = obj.getTime() / 100;
-        objMinutes = obj.getTime() % 100;
-
-        thisMinutes -= objMinutes;
-        if(thisMinutes < 0) {
-            carry = 1;
-            thisMinutes = 60 + thisMinutes;
-        }
-
-        if(carry == 1) {
-            thisHours -= objHours - 1;
-            if(thisHours < 0)  thisHours = 24 + (thisHours - 24);
-        }else {
-            thisHours -= objHours;
-            if(thisHours < 0)  thisHours = 24 + thisHours;
-        }
-
-        unsigned short int result = thisHours * 100 + thisMinutes;
-
-        if(result == 2400)  result = 0;
-
-        return result;
-    }
-
-    Time Time::operator+=(Time const &obj) {
-        unsigned char carry = 0;
-        unsigned short int thisHours, thisMinutes, objHours, objMinutes;
-
-        thisHours = this->time / 100;
-        thisMinutes = this->time % 100;
-
-        objHours = obj.getTime() / 100;
-        objMinutes = obj.getTime() % 100;
-
-        thisMinutes += objMinutes;
-        if(thisMinutes > 59) {
-            carry = 1;
-            thisMinutes = thisMinutes - 60;
-        }
-
-        if(carry == 1) {
-            thisHours += objHours + 1;
-            if(thisHours > 23)  thisHours = 0 + (thisHours - 24);
-        }else {
-            thisHours += objHours;
-            if(thisHours > 23)  thisHours = 0 + (thisHours - 24);
-        }
-
-        unsigned short int result = thisHours * 100 + thisMinutes;
-
-        if(result == 2400)  this->time = result = 0;
-
-        return this->time = result;
-    }
+Time Time::operator+=(Time const &obj) {
+    return this->time += obj.time;
+}
 
 Time Time::operator-=(Time const &obj) {
-        unsigned char carry = 0;
-        short int thisHours, thisMinutes, objHours, objMinutes;
-
-        thisHours = this->time / 100;
-        thisMinutes = this->time % 100;
-
-        objHours = obj.getTime() / 100;
-        objMinutes = obj.getTime() % 100;
-
-        thisMinutes -= objMinutes;
-        if(thisMinutes < 0) {
-            carry = 1;
-            thisMinutes = 60 + thisMinutes;
-        }
-
-        if(carry == 1) {
-            thisHours -= objHours - 1;
-            if(thisHours < 0)  thisHours = 24 + (thisHours - 24);
-        }else {
-            thisHours -= objHours;
-            if(thisHours < 0)  thisHours = 24 + thisHours;
-        }
-
-        unsigned short int result = thisHours * 100 + thisMinutes;
-
-        if(result == 2400)  result = 0;
-
-        return this->time = result;
-    }
+    return this->time -= obj.time;
+}
 
 bool Time::operator==(Time const &obj) const {
-        return this->time == obj.time;
-    }
+    return this->time == obj.time;
+}
 
-    bool Time::operator<(Time const &obj) const {
-        return this->time < obj.time;
-    }
+bool Time::operator<(Time const &obj) const {
+    return this->time < obj.time;
+}
 
-    bool Time::operator<=(Time const &obj) const {
-        return this->time <= obj.time;
-    }
+bool Time::operator<=(Time const &obj) const {
+    return this->time <= obj.time;
+}
 
-    bool Time::operator>(Time const &obj) const {
-        return this->time > obj.time;
-    }
+bool Time::operator>(Time const &obj) const {
+    return this->time > obj.time;
+}
 
-    bool Time::operator>=(Time const &obj) const {
-        return this->time >= obj.time;
-    }
+bool Time::operator>=(Time const &obj) const {
+    return this->time >= obj.time;
+}
 
 
 std::string Time::getTimeString() const {
-    std::string result = "";
-    
-    int min = time % 100;
-    int hour = time - min;
+    int hours = floor(time);
+    int mins = floor(time - hours * 60);
+    int secs = floor(time * 3600 - hours * 3600 - mins * 60);
 
-    if (hour / 100 < 10)
-        result += "0";
-    result += std::to_string(hour / 100) + ":";
-
-    if (min < 10)
-        result += "0";
-    result += std::to_string(min);
-    
+    std::string result = std::to_string(hours) + ":" + std::to_string(mins) + ":" + std::to_string(secs);
     return result;
 }
 

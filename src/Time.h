@@ -4,7 +4,7 @@
 #include <string>
 #include <limits>
 
-#define TIME_LIMIT std::numeric_limits<unsigned short int>::max()
+#define TIME_LIMIT std::numeric_limits<double>::max()
 
 /**
  * @brief Class that handles time in this project.
@@ -15,7 +15,7 @@ class Time {
     
 private:
 
-    unsigned short int time;
+    double time;
 
 public:
 
@@ -23,15 +23,18 @@ public:
 
     Time(double time);
 
-    /* String tem de ser sempre passada com quatro digitos, ex 00:00 21:30 ... */
+    /* String tem de ser sempre passada com quatro digitos, ex 00:00:00 21:30:00 ... */
     Time(std::string time);
-
-    /* Quando se inicializa o objeto com recurso a um inteiro, o numero nao pode comecar com 0, ex 06:30 -> 0630   00:00 -> 0   22:30 -> 2230 */
+    
+    /* Quando se inicializa o objeto com recurso a um inteiro, o numero nao pode comecar com 0, ex 06:30 -> 0630   00:00 -> 0   22:30 -> 2230 
     Time(unsigned short int time);
+    */
 
-    unsigned short int getTime() const;
+    double getTime() const;
 
     void setTime(std::string time);
+
+    void setTime(double time);
 
     Time operator+(Time const &obj) const;
 

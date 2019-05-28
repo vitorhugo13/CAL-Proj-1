@@ -264,11 +264,10 @@ void Agenda::show(std::vector<bool> onTime, Day day ) const{
 	std::cout << day << std::endl;
 	
 	for(size_t i = 1; i < activities.size(); i++){
-		std::cout << activities.at(i).getName() << std::setw(10);
 		if(onTime.at(i-1)){
-			std::cout << std::setw(10) << "Going to be on time "<< std::endl;
+			std::cout<< activities.at(i).getName() <<  std::setw(20) << "Going to be on time "<< std::endl;
 		} else{
-			std::cout << std::setw(10) << "Going to be on late "<< std::endl;
+			std::cout<< activities.at(i).getName() << std::setw(20) << "Going to be late "<< std::endl;
 		}
 	}
 }
