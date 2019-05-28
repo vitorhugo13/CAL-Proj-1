@@ -1,3 +1,0 @@
-﻿Anotações.txt
-.vscode/
-.idea/

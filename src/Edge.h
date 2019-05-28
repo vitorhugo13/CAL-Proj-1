@@ -35,15 +35,42 @@ protected:
 
 public:
 
+    /**
+	 * @brief Construct a new Edge object
+	 * 
+	 * @param src  the source vertex
+	 * @param dest the vertex of destiny
+	 * @param type the type of transporter of the edge
+	 */
     Edge(Vertex *src, Vertex *dest, Type type);
 
+    /**
+     * @brief Get the Dest object
+     * 
+     * @return Vertex* 
+     */
     Vertex* getDest() {
         return destVertex;
     }    
 
+    /**
+     * @brief Get the Distance object
+     * 
+     * @return double 
+     */
     double getDistance();
+    /**
+     * @brief Get the Time object
+     * 
+     * @return Time 
+     */
     Time getTime();
 
+    /**
+     * @brief Get the Edge Type object
+     * 
+     * @return Type
+     */
     Type getEdgeType();
 
     friend class Graph;
