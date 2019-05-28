@@ -8,6 +8,7 @@ Edge::Edge(Vertex *src, Vertex *dest, Type type) {
     this->srcVertex = src;
     this->destVertex = dest;
     this->type = type;
+    draw = false;
 
     distance = src->getCoordinates().getDistance(dest->getCoordinates());
 
@@ -27,6 +28,13 @@ Edge::Edge(Vertex *src, Vertex *dest, Type type) {
     }
 }
 
+void Edge::setDraw(bool draw) {
+    this->draw = draw;
+}
+
+bool Edge::getDraw() {
+    return draw;
+}
 
 double Edge::getDistance() {
     return distance;

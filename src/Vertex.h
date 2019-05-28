@@ -21,7 +21,10 @@ private:
     bool visited = false;
     Edge *lastEdge = nullptr;
     int queueIndex = 0;
-    Time time;    
+    Time time;
+
+    // used to display the paths
+    bool draw;
 
 public:
     /**
@@ -59,6 +62,21 @@ public:
      * @return double  Y coordinate
      */
     double getY() const;
+
+    /**
+     * @brief Set the draw flag used in the path display
+     * 
+     * @param draw
+     */
+    void setDraw(bool draw);
+
+    /**
+     * @brief Get the draw flag used in the path display
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool getDraw();
     
     /**
      * @brief Get the id of the vertex

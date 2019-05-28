@@ -6,8 +6,5 @@ METRO:
 (ID nó mais próximo, Nome Paragem, Lista de Linhas)
 (698819576, 'Estádio do Dragão', ['A', 'B', 'E', 'F'])
 
-
-TODO: remove duplicate edges from the subway
-
 NOTAS:
     - no ficheiro edges.txt foram adicionadas 46 arestas correspondentes aos caminhos dos metros

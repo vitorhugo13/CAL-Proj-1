@@ -32,6 +32,7 @@ protected:
     Time time;
 
     Type type;
+    bool draw;
 
 public:
 
@@ -43,6 +44,22 @@ public:
 	 * @param type the type of transporter of the edge
 	 */
     Edge(Vertex *src, Vertex *dest, Type type);
+
+    /**
+     * @brief Set the draw flag used in the path display
+     * 
+     * @param draw
+     */
+    void setDraw(bool draw);
+
+    /**
+     * @brief Get the draw flag used in the path display
+     * 
+     * @return true 
+     * @return false 
+     */
+    bool getDraw();
+
 
     /**
      * @brief Get a pointer to the source vertex of the edge

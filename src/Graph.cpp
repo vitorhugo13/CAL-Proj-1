@@ -207,6 +207,7 @@ std::stack<Vertex *> Graph::getPath(Vertex *lastVertex)
     std::stack<Vertex *> path;
 
     Vertex *vertex = lastVertex;
+    vertex->setDraw(true);
 
     while (vertex != nullptr)
     {
@@ -214,7 +215,9 @@ std::stack<Vertex *> Graph::getPath(Vertex *lastVertex)
         if (vertex->getLastEdge() == nullptr) {
             break;
         }
+        vertex->getLastEdge()->setDraw(true);
         vertex = vertex->getLastEdge()->getSrc();
+        vertex->setDraw(true);
     }
 
     return path;

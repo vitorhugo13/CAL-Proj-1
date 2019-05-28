@@ -7,6 +7,7 @@ Vertex::Vertex(int id, double x, double y) {
     coords = Coordinates(x, y);
 
     time = Time(TIME_LIMIT);
+    draw = false;
 }
 
 bool Vertex::operator<(const Vertex &vertex) const {
@@ -14,7 +15,7 @@ bool Vertex::operator<(const Vertex &vertex) const {
 }
 
 double Vertex::getX() const {
-        return coords.getX();
+    return coords.getX();
 }
 
 double Vertex::getY() const {
@@ -70,4 +71,12 @@ void Vertex::setTime(Time newTime) {
 
 Time Vertex::getAverageTime(Vertex const *vertex) const {
     return Time(this->coords.getDistance(vertex->getCoordinates()) * SUBWAY_MULTIPLIER);
+}
+
+void Vertex::setDraw(bool draw) {
+    this->draw = draw;
+}
+
+bool Vertex::getDraw() {
+    return draw;
 }

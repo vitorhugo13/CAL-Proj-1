@@ -159,85 +159,83 @@ int Application::start() {
 }
 
 int Application::seePaths() {
+	
 	std::string date;
+	std::cout << "What day you want to see the path ? " << std::endl;
+	std::cin.ignore();
+	getline(std::cin,date);
 
-						std::cout << "What day you want to see the path ? " << std::endl;
-						std::cin.ignore();
-						getline(std::cin,date);
+	Day day(date);
+	//coord is a vector with the coordinates of all place in that day
 
-						Day day(date);
-						//coord is a vector with the coordinates of all place in that day
+	std::vector<Coordinates> coord = agenda.getCoords(day);
 
-						std::vector<Coordinates> coord = agenda.getCoords(day);
+	if (coord.size()> 1) {
 
-						if (coord.size()> 1) {
+		std::vector< Vertex*> vertexs;
+		std::vector<Time> travelTimes;
 
-							std::vector< Vertex*> vertexs;
-							std::vector<Time> travelTimes;
+		for (Coordinates coordinates : coord) {
+			Vertex* newVertex = graph.findNearestVertex(coordinates);
+			vertexs.push_back(newVertex);
+		}
 
-							for (Coordinates coordinates : coord) {
-								Vertex* newVertex = graph.findNearestVertex(coordinates);
-								std::cout << newVertex->getID() << std::endl;										
-								vertexs.push_back(newVertex);
-							}
+		std::cout << "Choose the algorithm : " << std::endl;
+		std::cout << "	1. Dijkstra" << std::endl;
+		std::cout << "	2. A*" << std::endl;
+		std::cout << "Option : ";
 
-							for(size_t i = 0; i < vertexs.size() - 1; i++) {		
-								if(graph.breadthFirstSearch(vertexs[i], vertexs[i+1])){
-									
-									std::cout << "Choose the algorithm : " << std::endl;
-									std::cout << "	1. Dijkstra" << std::endl;
-									std::cout << "	2. A*" << std::endl;
-									std::cout << "Option : ";
+		int option;
+		std::cin >> option;
+		std::cin.ignore();
 
-									int option;
-									std::cin >> option;
-									std::cin.ignore();
+		for(size_t i = 0; i < vertexs.size() - 1; i++) {		
+			if (graph.breadthFirstSearch(vertexs[i], vertexs[i+1])) {
+				switch (option) {
+					case 1:
+					{
+						auto begin = std::chrono::high_resolution_clock::now();
+						graph.dijsktraAlgorithm(vertexs[i], vertexs[i + 1]);
+						auto end = std::chrono::high_resolution_clock::now();  
+    					std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "  ms " << std::endl;
+						break;
+					}
+					case 2:
+					{
+						auto begin = std::chrono::high_resolution_clock::now();
+						graph.A_star(vertexs[i], vertexs[i + 1]);
+						auto end = std::chrono::high_resolution_clock::now();  
+    					std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "  ms " << std::endl;
+						break;
+					}
+					default:
+						std::cerr << "Invalid option!" << std::endl;
+						return 1;
+				}
+					
+				Time travelTime = Time(0);
+				stack<Vertex*> path = graph.getPath(vertexs[i + 1]);
+				std::string directions = graph.getDirections(path, travelTime);
+				travelTimes.push_back(travelTime);
 
-									switch (option) {
-										case 1:
-										{
-											auto begin = std::chrono::high_resolution_clock::now();
-											graph.dijsktraAlgorithm(vertexs[i], vertexs[i + 1]);
-											auto end = std::chrono::high_resolution_clock::now();  
-    										std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "  ms " << std::endl;
-											break;
-										}
-										case 2:
-										{
-											auto begin = std::chrono::high_resolution_clock::now();
-											graph.A_star(vertexs[i], vertexs[i + 1]);
-											auto end = std::chrono::high_resolution_clock::now();  
-    										std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "  ms " << std::endl;
-											break;
-										}
-										default:
-											std::cerr << "Invalid option!" << std::endl;
-											return 1;
-									}
+				std::cout << directions << std::endl;
+				std::cout << travelTime << std::endl;
 
-									
-									
-									Time travelTime = Time(0);
-									stack<Vertex*> path = graph.getPath(vertexs[i + 1]);
-									std::string directions = graph.getDirections(path, travelTime);
-									travelTimes.push_back(travelTime);
+				viewMap();
+			}
+			else{
+				std::cout << "There isn't path to the vertexs  " << std::endl;
+			}
+			
+		}
+		/* table that shows if we going to be on time to the next event */
+		agenda.show(agenda.onTime(travelTimes, day),day);		
 
-									std::cout << directions << std::endl;
-									std::cout << travelTime << std::endl;
-								}
-								else{
-									std::cout << "There isn't path to the vertexs  " << std::endl;
-								}
-								
-							}
-							/* table that shows if we going to be on time to the next event */
-							agenda.show(agenda.onTime(travelTimes, day),day);		
-
-						} 
-						else{
-							std::cout << std::endl << " No paths to see!" << std::endl << std::endl;
-							return 1;
-						}
+	} 
+	else{
+		std::cout << std::endl << " No paths to see!" << std::endl << std::endl;
+		return 1;
+	}
 	return 0;
 }
 
@@ -277,6 +275,13 @@ int Application::viewMap() {
 	double medY = (maxY - minY) / 2;
 
 	for (size_t i = 0; i < graph.getNumVertex(); i++) {
+		
+		if (graph.getVertex(i)->getDraw()) {
+			gv->setVertexColor(graph.getVertex(i)->getID(), "yellow");
+
+			graph.getVertex(i)->setDraw(false);
+		}
+
 		gv->addNode(graph.getVertex(i)->getID(), graph.getVertex(i)->getX() - minX - medX + width / 2, -graph.getVertex(i)->getY() + minY + medY + height / 2);
 	}
 	gv->rearrange();
@@ -298,6 +303,26 @@ int Application::viewMap() {
 					break;
 				default:
 					break;
+			}
+
+			if (graph.getVertex(i)->getEdge(j)->getDraw()) {
+				gv->setEdgeColor(edgeID, "yellow");
+				
+				switch (graph.getVertex(i)->getEdge(j)->getEdgeType()) {
+				case WALKING:
+					gv->setEdgeLabel(edgeID, "WALKING");
+					break;
+				case BUS:
+					gv->setEdgeLabel(edgeID, "BUS");
+					break;
+				case SUBWAY:
+					gv->setEdgeLabel(edgeID, "SUBWAY");
+					break;
+				default:
+					break;
+				}
+
+				graph.getVertex(i)->getEdge(j)->setDraw(false);
 			}
 
 			gv->addEdge(edgeID, graph.getVertex(i)->getID(), graph.getVertex(i)->getEdge(j)->getDest()->getID(), EdgeType::DIRECTED);
