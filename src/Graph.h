@@ -35,7 +35,6 @@ public:
 
 	Vertex *findNearestVertex(Coordinates coords);
 	
- 
 	std::stack<Vertex*> getPath(Vertex* lastVertex);
 	std::string getDirections(std::stack<Vertex*> &path);
     Time getTime(){ return travelTime; }

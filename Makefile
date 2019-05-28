@@ -3,7 +3,7 @@ PROG := TripPlanner
 
 # Add whatever compiler flags you want.
 CXXFLAGS := -std=c++14
-CXXFLAGS += -Wall -Wextra -Werror
+CXXFLAGS += -Wall -Wextra -Werror #-Fsanitize=address
 
 # You MUST keep this for auto-dependency generation.
 CXXFLAGS += -MMD
@@ -12,7 +12,7 @@ CXXFLAGS += -MMD
 LDLIBS := 
 
 # Not sure when you will really need this. Can leave blank usually.
-LDFLAGS :=
+LDFLAGS := #-Fsanitize=address
 
 # Change 'src/' to where ever you hold src files relative to Makefile.
 SRCS := $(wildcard ./src/*.cpp ./src/GraphViewer/*.cpp)

@@ -2,7 +2,7 @@
 #include "GraphViewer/graphviewer.h"
 
 #include <iomanip>
-
+#include <chrono>
 
 Application:: Application() {
     graph = Graph();
@@ -161,17 +161,26 @@ int Application::start() {
 							}
 
 							for(unsigned int i = 0; i < (vertexs.size() - 1); i++){		
-								Graph* nGraph = new Graph();		
+								Graph* nGraph = new Graph();
+								auto begin = std::chrono::high_resolution_clock::now();			
 								nGraph->dijsktraAlgorithm(vertexs.at(i), vertexs.at(i+1) );
+								auto end = std::chrono::high_resolution_clock::now();  
+    							std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "ms" << std::endl;
 								std::stack<Vertex*> sVer = nGraph->getPath(vertexs.at(i));
 								nGraph->getDirections(sVer);
 								travelTimes.push_back(nGraph->getTime());
 								graphs.push_back(nGraph);
 								std::cout << "path made! " << std::endl;
 							}
-
 							/* table that shows if we going to be on time to the next event */
 							agenda.show(agenda.onTime(travelTimes, day),day);
+							
+							for(Graph* gr :graphs){ //free memory
+								delete gr;
+							}
+							for(Vertex* vr : vertexs){
+								delete vr;
+							}				
 
 						} 
 						else{
