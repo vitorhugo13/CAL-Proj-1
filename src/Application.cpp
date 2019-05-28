@@ -178,7 +178,6 @@ int Application::start() {
 
 						} 
 						else{
-
 							std::cout << std::endl << " No paths to see!" << std::endl << std::endl ;
 						}					
 						menu = -2;

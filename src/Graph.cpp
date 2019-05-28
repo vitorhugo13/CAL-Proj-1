@@ -1,6 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <chrono>
+#include <iomanip>
 
 #include "Graph.h"
 #include "MutablePriorityQueue.h"
@@ -237,7 +238,6 @@ std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
     path.pop();
 
     std::string explainedPath = "";
-    travelTime = v->getTime();
 
     while (!path.empty())
     {
@@ -262,7 +262,10 @@ std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
         }
 
         explainedPath += "--->" + std::to_string(w->getID()) + "\n";
+        
+        v = w;
     }
+    travelTime = w->getTime();
 
     return explainedPath;
 }
