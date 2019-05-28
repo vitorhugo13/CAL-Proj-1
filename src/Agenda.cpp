@@ -32,7 +32,7 @@ bool Agenda::addActivity(){
 	std::cout << "What's the activity x coordinate ? " << std::endl;
 	std::cin >> x;
 
-	std::cout << "What's the activity x coordinate ? " << std::endl;
+	std::cout << "What's the activity y coordinate ? " << std::endl;
 	std::cin >> y;
 
 	Day day(date);
@@ -267,15 +267,15 @@ void Agenda::show(std::vector<bool> onTime, Day day ) const{
 		return;
 	}
 	std:: cout << std::endl;
-	std::cout << "On this day: " << std::setw(10);
+	std::cout << "On this day: " ;
 	std::cout << day << std::endl;
 	
 	for(size_t i = 1; i < activities.size(); i++){
 		std::cout << activities.at(i).getName() << std::setw(10);
 		if(onTime.at(i-1)){
-			std::cout << "Going to be on time"<< std::endl;
+			std::cout << std::setw(10) << "Going to be on time "<< std::endl;
 		} else{
-			std::cout << "Going to be on late "<< std::endl;
+			std::cout << std::setw(10) << "Going to be on late "<< std::endl;
 		}
 	}
 }

@@ -13,10 +13,10 @@ class Vertex;
 #define INT_INF     std::numeric_limits<int>::max()
 #define DOUBLE_INF  std::numeric_limits<double>::max()
 
-// TODO: change these values
-const double BUS_MULTIPLIER = 0.025;
-const double SUBWAY_MULTIPLIER = 0.02;
-const double WALKING_MULTIPLIER = 0.1;
+
+const double BUS_MULTIPLIER = 0.00975;
+const double SUBWAY_MULTIPLIER = 0.0078;
+const double WALKING_MULTIPLIER = 0.00019841;
 
 
 enum Type { WALKING, BUS, SUBWAY };
