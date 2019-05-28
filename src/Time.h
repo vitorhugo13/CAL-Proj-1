@@ -7,55 +7,152 @@
 #define TIME_LIMIT std::numeric_limits<double>::max()
 
 /**
- * @brief Class that handles time in this project.
- *  For example 06:35 is stored has 635 to make computing easier
+ * @brief Class that handles time in this project
  * 
  */
 class Time {
     
 private:
 
+    /**
+     * @brief number of hours
+     * 
+     */
     double time;
 
 public:
-
+    /**
+     * @brief Construct a new Time object
+     * 
+     */
     Time();
-
+     
+    /**
+     * @brief Construct a new Time object
+     * 
+     * @param time number of hours
+     */
     Time(double time);
 
-    /* String tem de ser sempre passada com quatro digitos, ex 00:00:00 21:30:00 ... */
+    /**
+     * @brief Construct a new Time object
+     * 
+     * @param time string that correspondes a time
+     */
     Time(std::string time);
-    
-    /* Quando se inicializa o objeto com recurso a um inteiro, o numero nao pode comecar com 0, ex 06:30 -> 0630   00:00 -> 0   22:30 -> 2230 
-    Time(unsigned short int time);
-    */
 
+    /**
+     * @brief Get the Time object
+     * 
+     * @return double returns time
+     */
     double getTime() const;
 
+    /**
+     * @brief Set the Time object
+     * 
+     * @param time time to be set
+     */
     void setTime(std::string time);
 
+    /**
+     * @brief Set the Time object
+     * 
+     * @param time time to be set
+     */
     void setTime(double time);
 
+    /**
+     * @brief overload + operator for the time class
+     * 
+     * @param obj 
+     * @return Time time after operation
+     */
     Time operator+(Time const &obj) const;
 
+    /**
+     * @brief overload - operator for the time class
+     * 
+     * @param obj 
+     * @return Time time after operation
+     */
     Time operator-(Time const &obj) const;
 
+    /**
+     * @brief overload += operator for the time class
+     * 
+     * @param obj 
+     * @return Time time after operation
+     */
     Time operator+=(Time const &obj);
 
+    /**
+     * @brief overload -= operator for the time class
+     * 
+     * @param obj 
+     * @return Time time after operation
+     */
     Time operator-=(Time const &obj);
     
+    /**
+     * @brief overload == operator for the time class
+     * 
+     * @param obj time that will be compared against
+     * @return true objects are equal
+     * @return false objects are not equal
+     */
     bool operator==(Time const &obj) const;
 
+    /**
+     * @brief overload < operator for the time class
+     * 
+     * @param obj time that will be compared against 
+     * @return true this object is previous to obj
+     * @return false this object is not previous to obj
+     */
     bool operator<(Time const &obj) const;
 
+    /**
+     * @brief overload <= operator for the time class
+     * 
+     * @param obj time that will be compared against 
+     * @return true this object is previous or equal to obj
+     * @return false this object is not previous to obj
+     */
     bool operator<=(Time const &obj) const;
 
+    /**
+     * @brief overload > operator for the time class
+     * 
+     * @param obj time that will be compared against
+     * @return true this object is posterior to obj
+     * @return false this object is not posterior to obj 
+     */
     bool operator>(Time const &obj) const;
 
+    /**
+     * @brief overload >= operator for the time class
+     * 
+     * @param obj time that will be compared against
+     * @return true this object is posterior or equal to obj
+     * @return false this object is not posterior or equal to obj
+     */
     bool operator>=(Time const &obj) const;
 
+    /**
+     * @brief Get the Time String object
+     * 
+     * @return std::string time string
+     */
     std::string getTimeString() const;
 
+    /**
+	 * @brief Outstream operator overload for class Time
+	 * 
+	 * @param os Output stream
+	 * @param t time wanted
+	 * @return ostream& Output stream
+	 */
     friend std::ostream& operator<< (std::ostream &os, const Time &t);
 };
 

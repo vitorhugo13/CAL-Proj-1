@@ -74,7 +74,7 @@ public:
 	/**
 	 * @brief Get the Total Hours object
 	 * 
-	 * @return double 
+	 * @return double total hours
 	 */
 	double getTotalHours() const;
 
@@ -97,10 +97,17 @@ public:
 	/**
 	 * @brief Overload of the operand less
 	 * @param d1 reference to the day that we going to compare
-	 * @return True se d1 is greater and false otherwise
+	 * @return True if d1 is greater and false otherwise
 	 */
 	bool operator<(const Day &d1);
 
+	/**
+	 * @brief Outstream operator overload for class Day
+	 * 
+	 * @param os Output stream
+	 * @param d day wanted
+	 * @return ostream& Output stream
+	 */
 	friend std::ostream& operator<< (std::ostream &os, const Day &d);
 };
 
