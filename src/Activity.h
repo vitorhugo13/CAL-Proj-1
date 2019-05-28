@@ -14,98 +14,98 @@ class Activity {
 
 private:
    /**
-    *@brief activity's name
+    * @brief activity's name
     * 
     */
 	std::string name;
 
    /**
-    *@brief activity's information
+    * @brief activity's information
     * 
     */
     std::string info;
 
    /**
-    *@brief activity's coordinates
+    * @brief activity's coordinates
     * 
     */
     Coordinates coords;
 
    /**
-    *@brief activity's day
+    * @brief activity's day
     * 
     */
     Day day;
 
    /**
-    *@brief activity's start time
+    * @brief activity's start time
     * 
     */
     Time startTime;
 
    /**
-    *@brief activity's end time
+    * @brief activity's end time
     * 
     */
     Time endTime;
 
 public:
     /**
-     *@brief construct a new activity object
+     * @brief construct a new activity object
      * 
-     *@param name activity's name
-     *@param info activity's info
-     *@param coord activity's coordinates
-     *@param day activity's day
-     *@param startTime activity's start time
-     *@param endTime activity's end time
+     * @param name activity's name
+     * @param info activity's info
+     * @param coord activity's coordinates
+     * @param day activity's day
+     * @param startTime activity's start time
+     * @param endTime activity's end time
      */
     Activity(std::string name, std::string info, Coordinates coord, Day day, Time startTime, Time endTime);
 
     /**
-     *@brief gets activity's name
+     * @brief gets activity's name
      * 
-     *@return activity's name
+     * @return activity's name
      */
     std::string getName();
 
     /**
-     *@brief gets activity's info
+     * @brief gets activity's info
      * 
-     *@return activity's info
+     * @return activity's info
      */
     std::string getInfo();
 
     /**
-     *@brief gets activity's coordinates
+     * @brief gets activity's coordinates
      * 
-     *@return activity's coordinates
+     * @return activity's coordinates
      */
     Coordinates getCoords();
 
     /**
-     *@brief gets activity's day
+     * @brief gets activity's day
      * 
-     *@return activity's day
+     * @return activity's day
      */
     Day getDay();
 
     /**
-     *@brief gets activity's start time
+     * @brief gets activity's start time
      * 
-     *@return activity's start time
+     * @return activity's start time
      */
     Time getStartTime();
 
     /**
-     *@brief gets activity's end time
+     * @brief gets activity's end time
      * 
-     *@return activity's end time
+     * @return activity's end time
      */
     Time getEndTime();
 
     /**
-     *@brief shows activities
+     * @brief shows activities
      * 
      */
     void show();

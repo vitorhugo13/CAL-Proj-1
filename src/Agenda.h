@@ -22,39 +22,52 @@ public:
     bool addActivity();
     bool addActivity(Activity activity);
     bool isOverlap(Activity activity);
+
     /*
-     * @brief - Verifica se existem 2 actividades no mesmo dia
+     * @brief verify if the activity's duplicate
+     * 
      *
-     * @param - nome da atividade
-     * @param - day of the activity
-     *
+     * @param name activity's name
+     * @param day activity's day
+     * 
+     * @return true if it's duplicated
+     * @return false if it isn't duplicated
      */
     bool duplicateActivities(std::string name,Day day);
 
     /*
-     *  @brief - Remove uma atividade com aquele nome naquele dia
-     *  se existirem 2 atividades no mesmo dia com o mesmo nome pergunta a hora de come�o da atividade, sendo que o
-     *  hoario de cada atividade em cada dia � unico (nao existem atividades sobrepostas)
+     *  @brief removes an activity
      *
-     * @param - nome da atividade
-     * @param - day of the activity
+     * @param name activity's name
+     * @param day activity's day
      *
-     * @return - true if removed with success, false otherwise.
+     * @return true if removed with success
+     * @return false if not removed with success
      */
     bool removeActivity(std::string name, Day day);
+
     bool show(Day day);
+
     std::vector<Activity> activitiesOfTheDay(Day day) const;
+
     void loadActivities();
+
     void saveActivities() const;
+
     std::vector<Coordinates> getCoords(Day day) const;
+
     bool onTime(Activity a, Activity b, Time travel) const;
+
     /**
-     * @brief - See if we going to be on time
+     * @brief Sees if we are going to be on time
      * 
-     * @param - vetor com todos os tempos de viagem
-     * @param - day be analized
+     * @param travelTime vector with all the travel's time
+     * @param day day to be analized
+     * 
+     * @return vector with boolean values saying if we are or not in time
      */
     std::vector<bool> onTime(std::vector<Time> travelTime, Day day) const;
+
     void show(std::vector<bool> onTime, Day day ) const;
 };
 

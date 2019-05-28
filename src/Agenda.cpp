@@ -254,7 +254,7 @@ void Agenda::show(std::vector<bool> onTime, Day day ) const{
 	if(activities.size() < 2){ //if there aren't activities or only one
 		std::cout << "There's not enought activities in this day!" << std::endl << std::endl;
 		return;
-	}
+	} //vetor com todos os tempos vetor com todos os tempos de viagemde viagem
 	if(activities.size() > onTime.size() + 1){
 		std::cout << "An error occurred " << std::endl;
 		return;
