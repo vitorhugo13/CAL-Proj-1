@@ -31,7 +31,7 @@ int Application::loadGraph() {
 	std::cout << "Loaded bus edges" << std::endl;
 
 	// load subway edges
-    if (graph.loadEdges("data/edges_subway.txt", WALKING)) {
+    if (graph.loadEdges("data/edges_subway.txt", SUBWAY)) {
 		return 1;
 	}
 	std::cout << "Loaded subway edges" << std::endl;

@@ -158,7 +158,7 @@ void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
         vertexSet[i]->setTime(Time(TIME_LIMIT));
         vertexSet[i]->setLastVertex(nullptr);
         vertexSet[i]->setVisited(false);
-        vertexSet[i]->setLastEdgeType(WALKING);
+        vertexSet[i]->setLastEdgeType(UNDEFINED);
     }
 
     std::cout << "1" << std::endl;
@@ -273,7 +273,7 @@ std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
         }
 
         explainedPath += "--->" + std::to_string(w->getID()) + "\n";
-        
+
         v = w;
     }
     travelTime = w->getTime();

@@ -18,7 +18,8 @@ const double BUS_MULTIPLIER = 0.00975;
 const double SUBWAY_MULTIPLIER = 0.0078;
 const double WALKING_MULTIPLIER = 0.00019841;
 
-enum Type { WALKING, BUS, SUBWAY };
+
+enum Type { WALKING, BUS, SUBWAY, UNDEFINED };
 
 
 class Edge {
