@@ -132,7 +132,7 @@ Vertex *Graph::getVertex(size_t index)
     return nullptr;
 }
 
-Vertex *Graph::findNearestVertex(Coordinates coords)
+Vertex* Graph::findNearestVertex(Coordinates coords)
 {
     double distance = DOUBLE_INF;
     Vertex *vertex = nullptr;
@@ -161,7 +161,7 @@ void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
         vertexSet[i]->setLastEdgeType(UNDEFINED);
     }
 
-    src->setTime(Time("00:00"));
+    src->setTime(Time(0));
     MutablePriorityQueue<Vertex> queue;
 
     queue.insert(src);
@@ -323,7 +323,7 @@ void Graph::A_star(Vertex *src, Vertex *dest)
         vertexSet[i]->setLastEdgeType(WALKING);
     }
 
-    src->setTime(Time("0"));
+    src->setTime(Time(0));
     MutablePriorityQueue<Vertex> queue;
 
     queue.insert(src);

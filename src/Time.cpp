@@ -85,10 +85,15 @@ bool Time::operator>=(Time const &obj) const {
 
 std::string Time::getTimeString() const {
     int hours = floor(time);
-    int mins = floor(time - hours * 60);
+    int mins = floor((time - hours) * 60);
     int secs = floor(time * 3600 - hours * 3600 - mins * 60);
 
-    std::string result = std::to_string(hours) + ":" + std::to_string(mins) + ":" + std::to_string(secs);
+    std::string result = "";
+    std::string sHours = ((hours / 10 > 0) ? "" : "0") + std::to_string(hours);
+    std::string sMins = ((mins / 10 > 0) ? "" : "0") + std::to_string(mins);
+    std::string sSecs = ((secs / 10 > 0) ? "" : "0") + std::to_string(secs);
+    result = sHours + ":" + sMins + ":" + sSecs;
+
     return result;
 }
 
