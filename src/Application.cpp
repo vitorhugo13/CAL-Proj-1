@@ -148,7 +148,7 @@ int Application::start() {
 						std::vector<Coordinates> coord = agenda.getCoords(day);
 
 						if(coord.size()> 1){
-							
+
 							std::vector< Vertex*> vertexs;
 							std::vector<Graph* > graphs; //vector with paths
 							std::vector<Time> travelTimes;
