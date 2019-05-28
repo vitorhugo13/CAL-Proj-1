@@ -220,14 +220,13 @@ int Application::seePaths() {
 
 				std::cout << directions << std::endl;
 				std::cout << travelTime << std::endl;
-
-				viewMap();
 			}
 			else{
 				std::cout << "There isn't path to the vertexs  " << std::endl;
 			}
 			
 		}
+		viewMap();
 		/* table that shows if we going to be on time to the next event */
 		agenda.show(agenda.onTime(travelTimes, day),day);		
 

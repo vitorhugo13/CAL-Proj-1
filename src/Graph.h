@@ -17,12 +17,18 @@ class Graph {
 
 private:
     std::vector<Vertex *> vertexSet;
-    Time travelTime;
 
     bool addVertex(Vertex *vertex);
     bool addEdge(Vertex *vertex, Edge *edge);
 
 public:
+
+    /**
+     * @brief Destroy the Graph object
+     * 
+     */
+    ~Graph();
+    
     /**
      * @brief 
      * 
@@ -94,12 +100,6 @@ public:
      * @return std::string string with the Direction like Id - Type - OtherId
      */
 	std::string getDirections(std::stack<Vertex*> &path, Time &travelTime);
-    /**
-     * @brief Get the Time object
-     * 
-     * @return duraction time of the travel
-     */
-    Time getTime(){ return travelTime; }
 
     /**
      * @brief 

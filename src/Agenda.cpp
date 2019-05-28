@@ -23,10 +23,10 @@ bool Agenda::addActivity(){
 	std::cout << "Activity's date (day-month-year) ? "<< std::endl;
 	std::cin >> date;
 
-	std::cout << "Activity's starting time (hh:mm) ? "<< std::endl;
+	std::cout << "Activity's starting time (hh:mm:ss) ? "<< std::endl;
 	std::cin >> startTime;
 	
-	std::cout << "Activity's ending time (hh:mm)  ? "<< std::endl;
+	std::cout << "Activity's ending time (hh:mm:ss)  ? "<< std::endl;
 	std::cin >> endTime;
 
 	std::cout << "What's the activity x coordinate ? " << std::endl;
@@ -94,12 +94,12 @@ bool Agenda::duplicateActivities(std::string name,Day day){
 bool Agenda::removeActivity(std::string name, Day day){
 
 	int duplicate = duplicateActivities(name, day);
-	Time time("01:00"); //can be init4ialized with any value
+	Time time("00:00:00"); //can be init4ialized with any value
 
 	if(duplicate){
 		show(day);
 		std::string sTime;
-		std::cout << std::endl << "Activity starting hour?" << std::endl;
+		std::cout << std::endl << "Activity starting hour? (hh:mm:ss)" << std::endl;
 		std::cin >> sTime;
 		time.setTime(sTime);
 	}

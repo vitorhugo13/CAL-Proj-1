@@ -6,6 +6,12 @@
 #include "Graph.h"
 #include "MutablePriorityQueue.h"
 
+Graph::~Graph() {
+    for (size_t i = 0; i < vertexSet.size(); i++) {
+        free(vertexSet[i]);
+    }
+}
+
 bool Graph::addEdge(Vertex *vertex, Edge *edge)
 {
     if (findVertex(vertex) == nullptr)
