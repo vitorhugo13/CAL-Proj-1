@@ -51,28 +51,28 @@ public:
     /**
      * @brief Get the Coordinate X
      * 
-     * @return double with X coordinate
+     * @return double  X coordinate
      */
     double getX() const;
 
     /**
      * @brief Get the Coordinate Y
      * 
-     * @return double with Y coordinate
+     * @return double  Y coordinate
      */
     double getY() const;
     
     /**
      * @brief Get the id of the vertex
      * 
-     * @return int with the id
+     * @return int id
      */
     int getID() const;
 
     /**
      * @brief Get the Time of the Vertex
      * 
-     * @return Time 
+     * @return Time time associated
      */
     Time getTime() const;
 
@@ -86,14 +86,14 @@ public:
     /**
      * @brief Get the Last Vertex object
      * 
-     * @return Vertex* wanted
+     * @return Vertex* last vertex
      */
     Vertex* getLastVertex() const;
 
     /**
      * @brief Set the Last Vertex object
      * 
-     * @param vertex 
+     * @param vertex to be set
      */
     void setLastVertex(Vertex* vertex);
 
@@ -137,14 +137,14 @@ public:
     /**
      * @brief method to add a Edge to the vertex, connecting 2 vertexs
      * 
-     * @param edge we want to add
+     * @param edge to be added
      */
     void addEdge(Edge *edge);
 
     /**
      * @brief Get the Num Edges
      * 
-     * @return size_t with the number of Edges
+     * @return size_t number of edges
      */
     size_t getNumEdges();
 
@@ -152,12 +152,12 @@ public:
      * @brief Get the Edge object
      * 
      * @param index we want to look
-     * @return Edge* at that index
+     * @return Edge* edge at that index
      */
     Edge* getEdge(size_t index);
     
     /**
-     * @brief Overload of the operator less
+     * @brief Overload of < operator 
      * 
      * @param vertex we want to compare
      * @return true if less

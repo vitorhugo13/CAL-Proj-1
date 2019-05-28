@@ -27,7 +27,7 @@ public:
      * @brief 
      * 
      * @param filename that we are going to be getting the data
-     * @return int the number of Vertexes loaded
+     * @return int 1 if error, 0 if success
      */
     int loadVertexes(std::string filename);
 
@@ -36,23 +36,23 @@ public:
      * 
      * @param filename of the file we are going to be getting the data
      * @param edgeType 
-     * @return int the number of Edges loaded
+     * @return int 1 if error, 0 if success
      */
     int loadEdges(std::string filename, Type edgeType);	
 
     /**
      * @brief find a Vertex
      * 
-     * @param vertex - a pointer to a vertex
+     * @param vertex a pointer to a vertex
      * @return Vertex* 
      */
     Vertex *findVertex(const Vertex *vertex) const;
 
     /**
-     * @brief we can find a vertex if we have is ID
+     * @brief we can find a vertex if we have its ID
      * 
      * @param vertexID that we want to find
-     * @return Vertex* found with that id
+     * @return Vertex* 
      */
     Vertex *findVertex(const int vertexID) const;
 
@@ -67,7 +67,7 @@ public:
     /**
      * @brief Get the Number of Vertexs loaded
      * 
-     * @return size_t with the number of vertices loaded
+     * @return size_t num of vertex
      */
 	size_t getNumVertex() const { return vertexSet.size(); }
 
@@ -75,7 +75,7 @@ public:
      * @brief 
      * 
      * @param coordinates of the vertex we want to find
-     * @return Vertex* near or in that coordinates
+     * @return Vertex* nearest or in that coordinates
      */
 	Vertex *findNearestVertex(Coordinates coords);
 	
@@ -83,7 +83,7 @@ public:
      * @brief Get the Path object
      * 
      * @param lastVertex of the path
-     * @return std::stack<Vertex*> with the path
+     * @return std::stack<Vertex*> vertexes in the path
      */
 	std::stack<Vertex*> getPath(Vertex* lastVertex);
     /**
@@ -91,7 +91,7 @@ public:
      * 
      * @param path
      * @param travelTime - were we are going to put the final time
-     * @return std::string with the Direction like Id - Type - OtherId
+     * @return std::string string with the Direction like Id - Type - OtherId
      */
 	std::string getDirections(std::stack<Vertex*> &path, Time &travelTime);
     /**
@@ -106,13 +106,13 @@ public:
      * 
      * @param source vertex
      * @param destiny vertex
-     * @return true ifsucessfull
+     * @return true if sucessfull
      * @return false otherwise
      */
 	bool breadthFirstSearch(Vertex* src, Vertex* dest);
 
     /**
-     * @brief Implementation of the dijkstra algorithm to claculate the quickest path between two vertexes
+     * @brief Implementation of the dijkstra algorithm to calculate the quickest path between two vertexes
      * 
      * @param src 	Pointer to the initial vertex
      * @param dest 	Pointer to the final vertex

@@ -56,20 +56,20 @@ public:
     /**
      * @brief Get the Distance object
      * 
-     * @return double 
+     * @return double edge distance
      */
     double getDistance();
     /**
      * @brief Get the Time object
      * 
-     * @return Time 
+     * @return Time edge time
      */
     Time getTime();
 
     /**
      * @brief Get the Edge Type object
      * 
-     * @return Type
+     * @return Type edge type
      */
     Type getEdgeType();
 
