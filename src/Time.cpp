@@ -1,4 +1,5 @@
 #include <cmath>
+#include <algorithm>
 
 #include "Time.h"
 
@@ -13,7 +14,7 @@ Time::Time(double time) {
 }
 
 Time::Time(std::string time) {
-	time.erase(2, 1);
+    time.erase(std::remove(time.begin(), time.end(), ':'), time.end());
 	this->time = stoi(time, nullptr, 10);
 }
 
@@ -26,7 +27,7 @@ unsigned short int Time::getTime() const {
 }
 
 void Time::setTime(std::string time){
-	time.erase(2, 1);
+	time.erase(std::remove(time.begin(), time.end(), ':'), time.end());
 	this->time = stoi(time, nullptr, 10);
 }
 

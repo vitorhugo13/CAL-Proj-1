@@ -2,7 +2,7 @@
 #include "GraphViewer/graphviewer.h"
 
 #include <iomanip>
-
+#include <chrono>
 
 Application:: Application() {
     graph = Graph();
@@ -28,13 +28,13 @@ int Application::loadGraph() {
     if (graph.loadEdges("data/edges_bus.txt", BUS)) {
 		return 1;
 	}
-	std::cout << "Loaded walking edges" << std::endl;
+	std::cout << "Loaded bus edges" << std::endl;
 
 	// load subway edges
     if (graph.loadEdges("data/edges_subway.txt", WALKING)) {
 		return 1;
 	}
-	std::cout << "Loaded walking edges" << std::endl;
+	std::cout << "Loaded subway edges" << std::endl;
 
     return 0;
 }
@@ -137,25 +137,35 @@ int Application::start() {
 
 					case 4:{
 						std::string date;
+
 						std::cout << "What day you want to see the path ? " << std::endl;
 						std::cin.ignore();
 						getline(std::cin,date);
+
 						Day day(date);
 						//coord is a vector with the coordinates of all place in that day
+
 						std::vector<Coordinates> coord = agenda.getCoords(day);
+
 						if(coord.size()> 1){
+
 							std::vector< Vertex*> vertexs;
 							std::vector<Graph* > graphs; //vector with paths
 							std::vector<Time> travelTimes;
 							Graph newGraph;
+
 							for(Coordinates coordinates : coord){
 								Vertex* newVertex = new Vertex();
 								newVertex = newGraph.findNearestVertex(coordinates);													
 								vertexs.push_back(newVertex);
 							}
+
 							for(unsigned int i = 0; i < (vertexs.size() - 1); i++){		
-								Graph* nGraph = new Graph();		
+								Graph* nGraph = new Graph();
+								auto begin = std::chrono::high_resolution_clock::now();			
 								nGraph->dijsktraAlgorithm(vertexs.at(i), vertexs.at(i+1) );
+								auto end = std::chrono::high_resolution_clock::now();  
+    							std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "ms" << std::endl;
 								std::stack<Vertex*> sVer = nGraph->getPath(vertexs.at(i));
 								nGraph->getDirections(sVer);
 								travelTimes.push_back(nGraph->getTime());
@@ -164,7 +174,17 @@ int Application::start() {
 							}
 							/* table that shows if we going to be on time to the next event */
 							agenda.show(agenda.onTime(travelTimes, day),day);
-						} else{
+							
+							for(Graph* gr :graphs){ //free memory
+								delete gr;
+							}
+							for(Vertex* vr : vertexs){
+								delete vr;
+							}				
+
+						} 
+						else{
+
 							std::cout << std::endl << " No paths to see!" << std::endl << std::endl ;
 						}					
 						menu = -2;
