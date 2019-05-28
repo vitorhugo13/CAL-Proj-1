@@ -124,8 +124,6 @@ bool Agenda::removeActivity(std::string name, Day day){
 
 }
 
-
-
 std::vector<Activity> Agenda::activitiesOfTheDay(Day day) const {
 	std::vector<Activity> activitiesOfDay;
 	for (Activity activity : activities){
