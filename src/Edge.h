@@ -14,9 +14,9 @@ class Vertex;
 #define DOUBLE_INF  std::numeric_limits<double>::max()
 
 
-const double BUS_MULTIPLIER = 0.00775;
-const double SUBWAY_MULTIPLIER = 0.0058;
-const double WALKING_MULTIPLIER = 0.019841;
+const double BUS_MULTIPLIER = 0.00003;
+const double SUBWAY_MULTIPLIER = 0.00002;
+const double WALKING_MULTIPLIER = 0.0002;
 
 
 enum Type { WALKING, BUS, SUBWAY, UNDEFINED };
@@ -26,7 +26,7 @@ class Edge {
 
 protected:
 
-    Vertex *destVertex;
+    Vertex *srcVertex, *destVertex;
     
     double distance;
     Time time;
@@ -43,6 +43,15 @@ public:
 	 * @param type the type of transporter of the edge
 	 */
     Edge(Vertex *src, Vertex *dest, Type type);
+
+    /**
+     * @brief Get a pointer to the source vertex of the edge
+     * 
+     * @return Vertex* Returns a pointer to the vertex
+     */
+    Vertex* getSrc() {
+        return srcVertex;
+    }
 
     /**
      * @brief Get the Dest object

@@ -151,14 +151,12 @@ Vertex* Graph::findNearestVertex(Coordinates coords)
 
 void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
 {
-
     //auto begin = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < vertexSet.size(); i++)
     {
         vertexSet[i]->setTime(Time(TIME_LIMIT));
-        vertexSet[i]->setLastVertex(nullptr);
+        vertexSet[i]->setLastEdge(nullptr);
         vertexSet[i]->setVisited(false);
-        vertexSet[i]->setLastEdgeType(UNDEFINED);
     }
 
     src->setTime(Time(0));
@@ -177,19 +175,20 @@ void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
             break;
         }
 
-        Time oldTime, newTime;
         for (size_t i = 0; i < v->getNumEdges(); i++)
         {
-            Edge edge = *v->getEdge(i);
-            w = edge.getDest();
+            Time oldTime, newTime;
+            
+            Edge* edge = v->getEdge(i);
+            w = edge->getDest();
+
             oldTime = w->getTime();
-            newTime = v->getTime() + edge.getTime();
+            newTime = v->getTime() + edge->getTime();
 
             if (oldTime > newTime)
             {
                 w->setTime(newTime);
-                w->setLastVertex(v);
-                w->setLastEdgeType(edge.getEdgeType());
+                w->setLastEdge(edge);
 
                 if (!w->getVisited())
                     queue.insert(w);
@@ -200,11 +199,6 @@ void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
             }
         }
     }
-
-    /*
-    auto end = std::chrono::high_resolution_clock::now();
-    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "ms" << std::endl;
-    */
 }
 
 std::stack<Vertex *> Graph::getPath(Vertex *lastVertex)
@@ -217,7 +211,10 @@ std::stack<Vertex *> Graph::getPath(Vertex *lastVertex)
     while (vertex != nullptr)
     {
         path.push(vertex);
-        vertex = vertex->getLastVertex();
+        if (vertex->getLastEdge() == nullptr) {
+            break;
+        }
+        vertex = vertex->getLastEdge()->getSrc();
     }
 
     return path;
@@ -227,6 +224,7 @@ std::stack<Vertex *> Graph::getPath(Vertex *lastVertex)
 std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
 {
 
+    int somaVE = 0;
     if (path.empty())
     {
         std::cerr << "No path is present!" << std::endl;
@@ -234,19 +232,23 @@ std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
     }
 
     Vertex *v = path.top();
+    somaVE += 1 + v->getNumEdges();
     Vertex *w;
     path.pop();
+
 
     std::string explainedPath = "";
 
     while (!path.empty())
     {
         w = path.top();
+        somaVE += 1 + w->getNumEdges();
         path.pop();
+        travelTime += w->getLastEdge()->getTime();
 
         explainedPath += std::to_string(v->getID()) + "---";
 
-        switch (v->getLastEdgeType())
+        switch (w->getLastEdge()->getEdgeType())
         {
         case WALKING:
             explainedPath += "WALKING";
@@ -265,8 +267,7 @@ std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
 
         v = w;
     }
-    travelTime = w->getTime();
-
+    std::cout << "Numer Of |V| + |E| : " << somaVE << std::endl;
     return explainedPath;
 }
 
@@ -314,13 +315,11 @@ bool Graph::breadthFirstSearch(Vertex *src, Vertex *dest)
 
 void Graph::A_star(Vertex *src, Vertex *dest)
 {
-
     for (size_t i = 0; i < vertexSet.size(); i++)
     {
         vertexSet[i]->setTime(Time(TIME_LIMIT));
-        vertexSet[i]->setLastVertex(nullptr);
+        vertexSet[i]->setLastEdge(nullptr);
         vertexSet[i]->setVisited(false);
-        vertexSet[i]->setLastEdgeType(WALKING);
     }
 
     src->setTime(Time(0));
@@ -343,16 +342,15 @@ void Graph::A_star(Vertex *src, Vertex *dest)
         Time oldTime, newTime;
         for (size_t i = 0; i < v->getNumEdges(); i++)
         {
-            Edge edge = *v->getEdge(i);
-            w = edge.getDest();
+            Edge* edge = v->getEdge(i);
+            w = edge->getDest();
             oldTime = w->getTime();
-            newTime = v->getTime() + edge.getTime() - v->getAverageTime(dest) + w->getAverageTime(dest);
+            newTime = v->getTime() + edge->getTime() - v->getAverageTime(dest) + w->getAverageTime(dest);
 
             if (oldTime > newTime)
             {
                 w->setTime(newTime);
-                w->setLastVertex(v);
-                w->setLastEdgeType(edge.getEdgeType());
+                w->setLastEdge(edge);
 
                 if (!w->getVisited())
                     queue.insert(w);

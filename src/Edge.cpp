@@ -5,6 +5,7 @@
 
 
 Edge::Edge(Vertex *src, Vertex *dest, Type type) {
+    this->srcVertex = src;
     this->destVertex = dest;
     this->type = type;
 

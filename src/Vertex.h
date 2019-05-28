@@ -19,11 +19,9 @@ private:
     std::vector<Edge*> paths;
     
     bool visited = false;
-    Vertex *lastVertex = nullptr;
+    Edge *lastEdge = nullptr;
     int queueIndex = 0;
-    Time time;
-    Type lastEdgeType = WALKING;
-    
+    Time time;    
 
 public:
     /**
@@ -84,18 +82,18 @@ public:
     void setTime(Time newTime);
     
     /**
-     * @brief Get the Last Vertex object
+     * @brief Get the Last Edge
      * 
-     * @return Vertex* wanted
+     * @return Edge* pointer to the edge
      */
-    Vertex* getLastVertex() const;
+    Edge* getLastEdge() const;
 
     /**
-     * @brief Set the Last Vertex object
+     * @brief Set the Last Edge object
      * 
-     * @param vertex 
+     * @param edge
      */
-    void setLastVertex(Vertex* vertex);
+    void setLastEdge(Edge* edge);
 
     /**
      * @brief Get the Visited, important for the implemention of the algorithms
@@ -111,13 +109,6 @@ public:
      * @param boolean with the value we want to set
      */
     void setVisited(bool visited);
-
-    /**
-     * @brief Get the Last Edge Type object
-     * 
-     * @return Type of the last Edge
-     */
-    Type getLastEdgeType() const;
 
     /**
      * @brief Set the Last Edge Type

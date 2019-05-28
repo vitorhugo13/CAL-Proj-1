@@ -136,7 +136,30 @@ int Application::start() {
 					}
 
 					case 4:{
-						std::string date;
+						seePaths();					
+						menu = -2;
+						break;
+					}
+
+					case 5:
+						viewMap();
+						menu = -2;
+						break;
+
+					case 0:
+						return 0;
+						
+					default:
+						return 0;
+				}
+		}
+	}
+    
+	return 0;
+}
+
+int Application::seePaths() {
+	std::string date;
 
 						std::cout << "What day you want to see the path ? " << std::endl;
 						std::cin.ignore();
@@ -159,47 +182,62 @@ int Application::start() {
 							}
 
 							for(size_t i = 0; i < vertexs.size() - 1; i++) {		
-								
-								auto begin = std::chrono::high_resolution_clock::now();	
-								graph.dijsktraAlgorithm(vertexs[i], vertexs[i + 1]);
+								if(graph.breadthFirstSearch(vertexs[i], vertexs[i+1])){
+									
+									std::cout << "Choose the algorithm : " << std::endl;
+									std::cout << "	1. Dijkstra" << std::endl;
+									std::cout << "	2. A*" << std::endl;
+									std::cout << "Option : ";
 
-								//graph.A_star(vertexs[i], vertexs[i + 1]);
-								auto end = std::chrono::high_resolution_clock::now();  
-    							std::cout << "Time of execution :  " << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count()  << "ns" << std::endl;
-								
-								Time travelTime;
-								stack<Vertex*> path = graph.getPath(vertexs[i + 1]);
-								std::string directions = graph.getDirections(path, travelTime);
-								travelTimes.push_back(travelTime);
+									int option;
+									std::cin >> option;
+									std::cin.ignore();
 
-								std::cout << "Travel time to Destiny :   " << travelTime << std::endl << std::endl;
-								std::cout << directions << std::endl;				
+									switch (option) {
+										case 1:
+										{
+											auto begin = std::chrono::high_resolution_clock::now();
+											graph.dijsktraAlgorithm(vertexs[i], vertexs[i + 1]);
+											auto end = std::chrono::high_resolution_clock::now();  
+    										std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "  ms " << std::endl;
+											break;
+										}
+										case 2:
+										{
+											auto begin = std::chrono::high_resolution_clock::now();
+											graph.A_star(vertexs[i], vertexs[i + 1]);
+											auto end = std::chrono::high_resolution_clock::now();  
+    										std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "  ms " << std::endl;
+											break;
+										}
+										default:
+											std::cerr << "Invalid option!" << std::endl;
+											return 1;
+									}
+
+									
+									
+									Time travelTime = Time(0);
+									stack<Vertex*> path = graph.getPath(vertexs[i + 1]);
+									std::string directions = graph.getDirections(path, travelTime);
+									travelTimes.push_back(travelTime);
+
+									std::cout << directions << std::endl;
+									std::cout << travelTime << std::endl;
+								}
+								else{
+									std::cout << "There isn't path to the vertexs  " << std::endl;
+								}
+								
 							}
 							/* table that shows if we going to be on time to the next event */
 							agenda.show(agenda.onTime(travelTimes, day),day);		
 
 						} 
 						else{
-							std::cout << std::endl << " No paths to see!" << std::endl << std::endl ;
-						}					
-						menu = -2;
-						break;
-					}
-
-					case 5:
-						viewMap();
-						menu = -2;
-						break;
-
-					case 0:
-						return 0;
-						
-					default:
-						return 0;
-				}
-		}
-	}
-    
+							std::cout << std::endl << " No paths to see!" << std::endl << std::endl;
+							return 1;
+						}
 	return 0;
 }
 

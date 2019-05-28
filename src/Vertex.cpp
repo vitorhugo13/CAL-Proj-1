@@ -4,7 +4,6 @@
 
 Vertex::Vertex(int id, double x, double y) {
     this->id = id;
-    paths = {};
     coords = Coordinates(x, y);
 
     time = Time(TIME_LIMIT);
@@ -30,12 +29,12 @@ Coordinates Vertex::getCoordinates() const {
     return coords;
 }
 
-Vertex* Vertex::getLastVertex() const {
-    return lastVertex;
+Edge* Vertex::getLastEdge() const {
+    return lastEdge;
 }
 
-void Vertex::setLastVertex(Vertex* vertex) {
-    lastVertex = vertex;
+void Vertex::setLastEdge(Edge* edge) {
+    lastEdge = edge;
 }
     
 bool Vertex::getVisited() const {
@@ -67,15 +66,6 @@ Time Vertex::getTime() const {
 
 void Vertex::setTime(Time newTime) {
     time = newTime;
-}
-
-
-Type Vertex::getLastEdgeType() const {
-    return lastEdgeType;
-}
-
-void Vertex::setLastEdgeType(Type edgeType) {
-    lastEdgeType = edgeType;
 }
 
 Time Vertex::getAverageTime(Vertex const *vertex) const {

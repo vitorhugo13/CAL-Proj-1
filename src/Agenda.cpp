@@ -269,6 +269,7 @@ void Agenda::show(std::vector<bool> onTime, Day day ) const{
 		} else{
 			std::cout<< activities.at(i).getName() << std::setw(20) << "Going to be late "<< std::endl;
 		}
+		std::cout << activities.at(i).getName() << std::endl;
 	}
 }
 

@@ -57,6 +57,14 @@ private:
     int viewMap();
 
 
+    /**
+     * @brief Calculates the paths accordingly to the user's agenda
+     * 
+     * @return int 
+     */
+    int seePaths();
+
+
 
 public:
 
