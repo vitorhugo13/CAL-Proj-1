@@ -151,7 +151,7 @@ Vertex *Graph::findNearestVertex(Coordinates coords)
 void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
 {
 
-    auto begin = std::chrono::high_resolution_clock::now();
+    //auto begin = std::chrono::high_resolution_clock::now();
     for (size_t i = 0; i < vertexSet.size(); i++)
     {
         vertexSet[i]->setTime(Time(TIME_LIMIT));
@@ -160,7 +160,7 @@ void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
         vertexSet[i]->setLastEdgeType(WALKING);
     }
 
-    src->setTime(Time("0"));
+    src->setTime(Time("00:00"));
     MutablePriorityQueue<Vertex> queue;
 
     queue.insert(src);
@@ -199,8 +199,11 @@ void Graph::dijsktraAlgorithm(Vertex *src, Vertex *dest)
             }
         }
     }
+
+    /*
     auto end = std::chrono::high_resolution_clock::now();
     std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "ms" << std::endl;
+    */
 }
 
 std::stack<Vertex *> Graph::getPath(Vertex *lastVertex)
@@ -220,7 +223,7 @@ std::stack<Vertex *> Graph::getPath(Vertex *lastVertex)
 }
 
 // TODO: get travel time - DONE
-std::string Graph::getDirections(std::stack<Vertex *> &path)
+std::string Graph::getDirections(std::stack<Vertex *> &path, Time &travelTime)
 {
 
     if (path.empty())
@@ -229,13 +232,12 @@ std::string Graph::getDirections(std::stack<Vertex *> &path)
         return "No path is present!";
     }
 
-    travelTime.setTime("0");
     Vertex *v = path.top();
-    travelTime += v->getAverageTime(v);
     Vertex *w;
     path.pop();
 
     std::string explainedPath = "";
+    travelTime = v->getTime();
 
     while (!path.empty())
     {

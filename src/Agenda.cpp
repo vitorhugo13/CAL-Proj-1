@@ -3,8 +3,10 @@
 #include <bits/stdc++.h>
 #include <fstream>
 
-
 #include "Agenda.h"
+
+#define PRECISION 20
+
 
 bool Agenda::addActivity(){
 
@@ -164,7 +166,7 @@ void Agenda::loadActivities(){
 
 	mfile.open ("data/agenda.txt");
 
-	long int x, y;
+	double x, y;
 	std::string name, info, date, Stime, Ftime;
 
 	while (!mfile.eof()) {
@@ -217,7 +219,7 @@ void Agenda::saveActivities()const{
 
 	for (Activity activity : activities){
 		mfile << activity.getName() <<std::endl;
-		mfile<< activity.getCoords().getX() << " " << activity.getCoords().getY() << " " <<activity.getDay() << " " << activity.getStartTime() << " " << activity.getEndTime() << " " << activity.getInfo() << std::endl;
+		mfile << std::fixed << std::setprecision(PRECISION) <<activity.getCoords().getX() << " " << activity.getCoords().getY() << " " <<activity.getDay() << " " << activity.getStartTime() << " " << activity.getEndTime() << " " << activity.getInfo() << std::endl;
 	}
 
 	mfile.close();
