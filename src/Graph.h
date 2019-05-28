@@ -36,10 +36,9 @@ public:
 	Vertex *findNearestVertex(Coordinates coords);
 	
 	std::stack<Vertex*> getPath(Vertex* lastVertex);
-	std::string getDirections(std::stack<Vertex*> &path);
+	std::string getDirections(std::stack<Vertex*> &path, Time &travelTime);
     Time getTime(){ return travelTime; }
 
-	bool depthFirstSearch(Vertex* src, Vertex* dest);
 	bool breadthFirstSearch(Vertex* src, Vertex* dest);
 
     /**

@@ -147,40 +147,34 @@ int Application::start() {
 
 						std::vector<Coordinates> coord = agenda.getCoords(day);
 
-						if(coord.size()> 1){
+						if (coord.size()> 1) {
 
 							std::vector< Vertex*> vertexs;
-							std::vector<Graph* > graphs; //vector with paths
 							std::vector<Time> travelTimes;
-							Graph newGraph;
 
-							for(Coordinates coordinates : coord){
-								Vertex* newVertex = new Vertex();
-								newVertex = newGraph.findNearestVertex(coordinates);													
+							for (Coordinates coordinates : coord) {
+								Vertex* newVertex = graph.findNearestVertex(coordinates);
+								std::cout << newVertex->getID() << std::endl;										
 								vertexs.push_back(newVertex);
 							}
 
-							for(unsigned int i = 0; i < (vertexs.size() - 1); i++){		
-								Graph* nGraph = new Graph();
-								auto begin = std::chrono::high_resolution_clock::now();			
-								nGraph->dijsktraAlgorithm(vertexs.at(i), vertexs.at(i+1) );
+							for(size_t i = 0; i < vertexs.size() - 1; i++) {		
+								
+								auto begin = std::chrono::high_resolution_clock::now();	
+								graph.dijsktraAlgorithm(vertexs[i], vertexs[i + 1]);
 								auto end = std::chrono::high_resolution_clock::now();  
-    							std::cout << std::chrono::duration_cast<std::chrono::milliseconds> (end - begin).count()  << "ms" << std::endl;
-								std::stack<Vertex*> sVer = nGraph->getPath(vertexs.at(i));
-								nGraph->getDirections(sVer);
-								travelTimes.push_back(nGraph->getTime());
-								graphs.push_back(nGraph);
-								std::cout << "path made! " << std::endl;
+    							std::cout << std::chrono::duration_cast<std::chrono::nanoseconds> (end - begin).count()  << "ns" << std::endl;
+								
+								Time travelTime;
+								stack<Vertex*> path = graph.getPath(vertexs[i + 1]);
+								std::string directions = graph.getDirections(path, travelTime);
+								travelTimes.push_back(travelTime);
+
+								std::cout << directions << std::endl;
+								std::cout << travelTime << std::endl;
 							}
 							/* table that shows if we going to be on time to the next event */
-							agenda.show(agenda.onTime(travelTimes, day),day);
-							
-							for(Graph* gr :graphs){ //free memory
-								delete gr;
-							}
-							for(Vertex* vr : vertexs){
-								delete vr;
-							}				
+							agenda.show(agenda.onTime(travelTimes, day),day);		
 
 						} 
 						else{
